@@ -8,7 +8,7 @@ export default function HomePage() {
         <p className="text-fd-muted-foreground">
           Composable React components for building user-facing roadmaps.
         </p>
-        <div className="mt-8 flex h-[500px] w-full bg-white rounded-xl border">
+        <div className="mt-8 flex flex-col overflow-clip h-[500px] w-full bg-white rounded-xl border">
           <GanttExample />
         </div>
       </div>

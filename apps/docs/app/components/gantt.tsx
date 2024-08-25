@@ -31,21 +31,23 @@ export const GanttExample: FC = () => {
       zoom={100}
     >
       <Gantt.Sidebar />
-      <Gantt.Header />
-      <Gantt.FeatureList>
-        {Object.entries(sortedGroupedFeatures).map(([group, features]) => (
-          <Gantt.FeatureListGroup key={group}>
-            {features.map((feature) => (
-              <Gantt.FeatureItem key={feature.id} {...feature} />
-            ))}
-          </Gantt.FeatureListGroup>
+      <Gantt.Timeline>
+        <Gantt.Header />
+        <Gantt.FeatureList>
+          {Object.entries(sortedGroupedFeatures).map(([group, features]) => (
+            <Gantt.FeatureListGroup key={group}>
+              {features.map((feature) => (
+                <Gantt.FeatureItem key={feature.id} {...feature} />
+              ))}
+            </Gantt.FeatureListGroup>
+          ))}
+        </Gantt.FeatureList>
+        {exampleMarkers.map((marker) => (
+          <Gantt.Marker key={marker.id} {...marker} onRemove={console.log} />
         ))}
-      </Gantt.FeatureList>
-      {exampleMarkers.map((marker) => (
-        <Gantt.Marker key={marker.id} {...marker} onRemove={console.log} />
-      ))}
-      <Gantt.Today />
-      <Gantt.CreateMarkerTrigger />
+        <Gantt.Today />
+        <Gantt.CreateMarkerTrigger />
+      </Gantt.Timeline>
     </Gantt.Provider>
   );
 };

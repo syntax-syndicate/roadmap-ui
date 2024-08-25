@@ -7,3 +7,4 @@ export { FeatureList } from './components/feature-list';
 export { CreateMarkerTrigger } from './components/create-marker-trigger';
 export { FeatureItem } from './components/feature-item';
 export { FeatureListGroup } from './components/feature-list-group';
+export { Timeline } from './components/timeline';
