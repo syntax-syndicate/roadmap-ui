@@ -1,15 +1,24 @@
 import type { MarkerProps } from '@repo/gantt/components/marker';
 import type { ProviderProperties } from '@repo/gantt/components/provider';
+import tailwind from '@repo/tailwind-config/tailwind';
 import { addMonths, endOfMonth, startOfMonth, subMonths } from 'date-fns';
 
 const today = new Date();
+
+const exampleStatuses = [
+  { name: 'Done', color: tailwind.theme.colors.emerald[500] },
+  { name: 'In Review', color: tailwind.theme.colors.blue[500] },
+  { name: 'In Progress', color: tailwind.theme.colors.amber[500] },
+  { name: 'Planned', color: tailwind.theme.colors.gray[500] },
+];
+
 export const exampleFeatures: ProviderProperties['features'] = [
   {
     id: '1',
     name: 'AI Scene Analysis',
     startAt: startOfMonth(subMonths(today, 6)),
     endAt: endOfMonth(subMonths(today, 5)),
-    status: { name: 'done', color: 'green' },
+    status: exampleStatuses[0], // Done
     group: { id: '1', name: 'Core AI Features' },
     product: { id: '1', name: 'Video Editor Pro' },
     owner: {
@@ -25,7 +34,7 @@ export const exampleFeatures: ProviderProperties['features'] = [
     name: 'Collaborative Editing',
     startAt: startOfMonth(subMonths(today, 5)),
     endAt: endOfMonth(subMonths(today, 3)),
-    status: { name: 'in_progress', color: 'blue' },
+    status: exampleStatuses[0], // Done
     group: { id: '2', name: 'Collaboration Tools' },
     product: { id: '1', name: 'Video Editor Pro' },
     owner: {
@@ -41,7 +50,7 @@ export const exampleFeatures: ProviderProperties['features'] = [
     name: 'AI-Powered Color Grading',
     startAt: startOfMonth(subMonths(today, 4)),
     endAt: endOfMonth(subMonths(today, 3)),
-    status: { name: 'planned', color: 'orange' },
+    status: exampleStatuses[0], // Done
     group: { id: '1', name: 'Core AI Features' },
     product: { id: '1', name: 'Video Editor Pro' },
     owner: {
@@ -57,7 +66,7 @@ export const exampleFeatures: ProviderProperties['features'] = [
     name: 'Real-time Video Chat',
     startAt: startOfMonth(subMonths(today, 3)),
     endAt: endOfMonth(subMonths(today, 2)),
-    status: { name: 'planned', color: 'orange' },
+    status: exampleStatuses[2], // In Progress
     group: { id: '2', name: 'Collaboration Tools' },
     product: { id: '1', name: 'Video Editor Pro' },
     owner: {
@@ -73,7 +82,7 @@ export const exampleFeatures: ProviderProperties['features'] = [
     name: 'AI Voice-to-Text Subtitles',
     startAt: startOfMonth(subMonths(today, 2)),
     endAt: endOfMonth(subMonths(today, 1)),
-    status: { name: 'planned', color: 'orange' },
+    status: exampleStatuses[1], // In Review
     group: { id: '1', name: 'Core AI Features' },
     product: { id: '1', name: 'Video Editor Pro' },
     owner: {
@@ -89,7 +98,7 @@ export const exampleFeatures: ProviderProperties['features'] = [
     name: 'Cloud Asset Management',
     startAt: startOfMonth(subMonths(today, 1)),
     endAt: endOfMonth(today),
-    status: { name: 'planned', color: 'orange' },
+    status: exampleStatuses[2], // In Progress
     group: { id: '3', name: 'Cloud Infrastructure' },
     product: { id: '1', name: 'Video Editor Pro' },
     owner: {
@@ -105,7 +114,7 @@ export const exampleFeatures: ProviderProperties['features'] = [
     name: 'AI-Assisted Video Transitions',
     startAt: startOfMonth(today),
     endAt: endOfMonth(addMonths(today, 1)),
-    status: { name: 'planned', color: 'orange' },
+    status: exampleStatuses[2], // In Progress
     group: { id: '1', name: 'Core AI Features' },
     product: { id: '1', name: 'Video Editor Pro' },
     owner: {
@@ -121,7 +130,7 @@ export const exampleFeatures: ProviderProperties['features'] = [
     name: 'Version Control System',
     startAt: startOfMonth(addMonths(today, 1)),
     endAt: endOfMonth(addMonths(today, 2)),
-    status: { name: 'planned', color: 'orange' },
+    status: exampleStatuses[1], // In Review
     group: { id: '2', name: 'Collaboration Tools' },
     product: { id: '1', name: 'Video Editor Pro' },
     owner: {
@@ -137,7 +146,7 @@ export const exampleFeatures: ProviderProperties['features'] = [
     name: 'AI Content-Aware Fill',
     startAt: startOfMonth(addMonths(today, 2)),
     endAt: endOfMonth(addMonths(today, 3)),
-    status: { name: 'planned', color: 'orange' },
+    status: exampleStatuses[2], // In Progress
     group: { id: '1', name: 'Core AI Features' },
     product: { id: '1', name: 'Video Editor Pro' },
     owner: {
@@ -153,7 +162,7 @@ export const exampleFeatures: ProviderProperties['features'] = [
     name: 'Multi-User Permissions',
     startAt: startOfMonth(addMonths(today, 3)),
     endAt: endOfMonth(addMonths(today, 4)),
-    status: { name: 'planned', color: 'orange' },
+    status: exampleStatuses[1], // In Review
     group: { id: '2', name: 'Collaboration Tools' },
     product: { id: '1', name: 'Video Editor Pro' },
     owner: {
@@ -169,7 +178,7 @@ export const exampleFeatures: ProviderProperties['features'] = [
     name: 'AI-Powered Audio Enhancement',
     startAt: startOfMonth(addMonths(today, 4)),
     endAt: endOfMonth(addMonths(today, 5)),
-    status: { name: 'planned', color: 'orange' },
+    status: exampleStatuses[2], // In Progress
     group: { id: '1', name: 'Core AI Features' },
     product: { id: '1', name: 'Video Editor Pro' },
     owner: {
@@ -185,7 +194,7 @@ export const exampleFeatures: ProviderProperties['features'] = [
     name: 'Real-time Project Analytics',
     startAt: startOfMonth(addMonths(today, 5)),
     endAt: endOfMonth(addMonths(today, 6)),
-    status: { name: 'planned', color: 'orange' },
+    status: exampleStatuses[1], // In Review
     group: { id: '3', name: 'Cloud Infrastructure' },
     product: { id: '1', name: 'Video Editor Pro' },
     owner: {
@@ -201,7 +210,7 @@ export const exampleFeatures: ProviderProperties['features'] = [
     name: 'AI Scene Recommendations',
     startAt: startOfMonth(addMonths(today, 6)),
     endAt: endOfMonth(addMonths(today, 7)),
-    status: { name: 'planned', color: 'orange' },
+    status: exampleStatuses[2], // In Progress
     group: { id: '1', name: 'Core AI Features' },
     product: { id: '1', name: 'Video Editor Pro' },
     owner: {
@@ -217,7 +226,7 @@ export const exampleFeatures: ProviderProperties['features'] = [
     name: 'Collaborative Storyboarding',
     startAt: startOfMonth(addMonths(today, 7)),
     endAt: endOfMonth(addMonths(today, 8)),
-    status: { name: 'planned', color: 'orange' },
+    status: exampleStatuses[1], // In Review
     group: { id: '2', name: 'Collaboration Tools' },
     product: { id: '1', name: 'Video Editor Pro' },
     owner: {
@@ -233,7 +242,7 @@ export const exampleFeatures: ProviderProperties['features'] = [
     name: 'AI-Driven Video Compression',
     startAt: startOfMonth(addMonths(today, 8)),
     endAt: endOfMonth(addMonths(today, 9)),
-    status: { name: 'planned', color: 'orange' },
+    status: exampleStatuses[2], // In Progress
     group: { id: '1', name: 'Core AI Features' },
     product: { id: '1', name: 'Video Editor Pro' },
     owner: {
@@ -249,7 +258,7 @@ export const exampleFeatures: ProviderProperties['features'] = [
     name: 'Global CDN Integration',
     startAt: startOfMonth(addMonths(today, 9)),
     endAt: endOfMonth(addMonths(today, 10)),
-    status: { name: 'planned', color: 'orange' },
+    status: exampleStatuses[3], // Planned
     group: { id: '3', name: 'Cloud Infrastructure' },
     product: { id: '1', name: 'Video Editor Pro' },
     owner: {
@@ -265,7 +274,7 @@ export const exampleFeatures: ProviderProperties['features'] = [
     name: 'AI Object Tracking',
     startAt: startOfMonth(addMonths(today, 10)),
     endAt: endOfMonth(addMonths(today, 11)),
-    status: { name: 'planned', color: 'orange' },
+    status: exampleStatuses[3], // Planned
     group: { id: '1', name: 'Core AI Features' },
     product: { id: '1', name: 'Video Editor Pro' },
     owner: {
@@ -281,7 +290,7 @@ export const exampleFeatures: ProviderProperties['features'] = [
     name: 'Real-time Language Translation',
     startAt: startOfMonth(addMonths(today, 11)),
     endAt: endOfMonth(addMonths(today, 12)),
-    status: { name: 'planned', color: 'orange' },
+    status: exampleStatuses[3], // Planned
     group: { id: '2', name: 'Collaboration Tools' },
     product: { id: '1', name: 'Video Editor Pro' },
     owner: {
@@ -297,7 +306,7 @@ export const exampleFeatures: ProviderProperties['features'] = [
     name: 'AI-Powered Video Summarization',
     startAt: startOfMonth(addMonths(today, 12)),
     endAt: endOfMonth(addMonths(today, 13)),
-    status: { name: 'planned', color: 'orange' },
+    status: exampleStatuses[3], // Planned
     group: { id: '1', name: 'Core AI Features' },
     product: { id: '1', name: 'Video Editor Pro' },
     owner: {
@@ -313,7 +322,7 @@ export const exampleFeatures: ProviderProperties['features'] = [
     name: 'Blockchain-based Asset Licensing',
     startAt: startOfMonth(addMonths(today, 13)),
     endAt: endOfMonth(addMonths(today, 14)),
-    status: { name: 'planned', color: 'orange' },
+    status: exampleStatuses[3], // Planned
     group: { id: '3', name: 'Cloud Infrastructure' },
     product: { id: '1', name: 'Video Editor Pro' },
     owner: {
@@ -326,35 +335,44 @@ export const exampleFeatures: ProviderProperties['features'] = [
   },
 ];
 
-export const exampleMarkers: Pick<MarkerProps, 'id' | 'date' | 'label'>[] = [
+export const exampleMarkers: Pick<
+  MarkerProps,
+  'id' | 'date' | 'label' | 'color'
+>[] = [
   {
     id: '1',
     date: startOfMonth(subMonths(today, 3)),
     label: 'Project Kickoff',
+    color: tailwind.theme.colors.blue[500],
   },
   {
     id: '2',
     date: subMonths(endOfMonth(today), 2),
     label: 'Phase 1 Completion',
+    color: tailwind.theme.colors.green[500],
   },
   {
     id: '3',
     date: startOfMonth(addMonths(today, 3)),
     label: 'Beta Release',
+    color: tailwind.theme.colors.purple[500],
   },
   {
     id: '4',
     date: endOfMonth(addMonths(today, 6)),
     label: 'Version 1.0 Launch',
+    color: tailwind.theme.colors.red[500],
   },
   {
     id: '5',
     date: startOfMonth(addMonths(today, 9)),
     label: 'User Feedback Review',
+    color: tailwind.theme.colors.orange[500],
   },
   {
     id: '6',
     date: endOfMonth(addMonths(today, 12)),
     label: 'Annual Performance Evaluation',
+    color: tailwind.theme.colors.teal[500],
   },
 ];

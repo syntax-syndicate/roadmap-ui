@@ -37,10 +37,17 @@ export type MarkerProps = {
   id: string;
   date: Date;
   label: string;
+  color?: string;
   onRemove?: (id: string) => void;
 };
 
-export const Marker: FC<MarkerProps> = ({ label, date, id, onRemove }) => {
+export const Marker: FC<MarkerProps> = ({
+  label,
+  date,
+  id,
+  onRemove,
+  color,
+}) => {
   const gantt = useContext(GanttContext);
   const differenceIn = getDifferenceIn(gantt.range);
   const timelineStartDate = new Date(gantt.timelineData[0].year, 0, 1);
@@ -62,7 +69,10 @@ export const Marker: FC<MarkerProps> = ({ label, date, id, onRemove }) => {
     >
       <ContextMenu>
         <ContextMenuTrigger asChild>
-          <div className="group pointer-events-auto sticky top-0 flex select-auto flex-col flex-nowrap items-center justify-center whitespace-nowrap rounded-b-md bg-primary px-2 py-1 text-white text-xs">
+          <div
+            className="group pointer-events-auto sticky top-0 flex select-auto flex-col flex-nowrap items-center justify-center whitespace-nowrap rounded-b-md bg-primary px-2 py-1 text-white text-xs"
+            style={{ backgroundColor: color }}
+          >
             {label}
             <span className="max-h-[0] overflow-hidden text-white/80 transition-all group-hover:max-h-[2rem]">
               {formatDate(date, 'MMM dd, yyyy')}
@@ -81,7 +91,10 @@ export const Marker: FC<MarkerProps> = ({ label, date, id, onRemove }) => {
           ) : null}
         </ContextMenuContent>
       </ContextMenu>
-      <div className="h-full w-px bg-primary" />
+      <div
+        className="h-full w-px bg-primary"
+        style={{ backgroundColor: color }}
+      />
     </div>
   );
 };
