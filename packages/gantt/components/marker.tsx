@@ -37,7 +37,7 @@ export type MarkerProps = {
   id: string;
   date: Date;
   label: string;
-  onRemove: (id: string) => void;
+  onRemove?: (id: string) => void;
 };
 
 export const Marker: FC<MarkerProps> = ({ label, date, id, onRemove }) => {
@@ -70,7 +70,7 @@ export const Marker: FC<MarkerProps> = ({ label, date, id, onRemove }) => {
           </div>
         </ContextMenuTrigger>
         <ContextMenuContent>
-          {gantt.editable && gantt.onRemoveMarker ? (
+          {gantt.editable && onRemove ? (
             <ContextMenuItem
               className="flex items-center gap-2 text-destructive"
               onClick={handleRemove}
