@@ -380,6 +380,7 @@ export const GanttExample: FC = () => (
     <Gantt.Sidebar />
     <Gantt.Timeline>
       <Gantt.Header />
+      <Gantt.FeatureList />
       {exampleMarkers.map((marker) => (
         <Gantt.Marker key={marker.id} {...marker} onRemove={console.log} />
       ))}
