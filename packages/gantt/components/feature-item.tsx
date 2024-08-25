@@ -1,7 +1,6 @@
 import { DndContext, MouseSensor, useSensor } from '@dnd-kit/core';
 import { restrictToHorizontalAxis } from '@dnd-kit/modifiers';
 import { addDays, getDate, getDaysInMonth, isSameDay } from 'date-fns';
-import {} from 'lucide-react';
 import { type FC, useContext, useRef, useState } from 'react';
 import { GanttContext } from '../contexts/gantt-context';
 import { useMouseRef } from '../hooks/use-mouse-ref';

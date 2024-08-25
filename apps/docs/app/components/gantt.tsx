@@ -2,7 +2,11 @@
 
 import * as Gantt from '@repo/gantt';
 import type { Feature } from '@repo/gantt/types/types';
-import { Avatar } from '@repo/shadcn-ui/components/ui/avatar';
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from '@repo/shadcn-ui/components/ui/avatar';
 import {
   ContextMenu,
   ContextMenuContent,
@@ -103,11 +107,12 @@ export const GanttExample: FC = () => {
                     <Separator />
                     {feature.owner && (
                       <div className="flex items-center gap-2">
-                        <Avatar
-                          size={16}
-                          src={feature.owner.image}
-                          fallback={feature.owner.name?.slice(0, 2)}
-                        />
+                        <Avatar>
+                          <AvatarImage src={feature.owner.image} />
+                          <AvatarFallback>
+                            {feature.owner.name?.slice(0, 2)}
+                          </AvatarFallback>
+                        </Avatar>
                         <p className="text-xs">{feature.owner.name}</p>
                       </div>
                     )}
