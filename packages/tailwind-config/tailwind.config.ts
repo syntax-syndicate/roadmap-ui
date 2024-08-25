@@ -1,5 +1,5 @@
-import { createPreset } from 'fumadocs-ui/tailwind-plugin';
 import type { Config } from 'tailwindcss';
+import animate from 'tailwindcss-animate';
 
 const config = {
   darkMode: ['class'],
@@ -81,7 +81,7 @@ const config = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate'), createPreset()],
+  plugins: [animate],
 } satisfies Config;
 
 export default config;
