@@ -1,3 +1,5 @@
-export { GanttProvider as Provider } from './components/provider';
-export { GanttSidebar as Sidebar } from './components/sidebar';
-export { GanttTimeline as Timeline } from './components/timeline';
+export { Provider } from './components/provider';
+export { Sidebar } from './components/sidebar';
+export { Timeline } from './components/timeline';
+export { MarkerComponent as Marker } from './components/marker';
+export { Today } from './components/today';

@@ -3,7 +3,7 @@ import { GanttContext } from '../contexts/gantt-context';
 import { SidebarHeader } from './sidebar-header';
 import { GanttSidebarItem } from './sidebar-item';
 
-export const GanttSidebar: FC = () => {
+export const Sidebar: FC = () => {
   const gantt = useContext(GanttContext);
 
   return (

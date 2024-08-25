@@ -1,6 +1,7 @@
 'use client';
 
 import * as Gantt from '@repo/gantt';
+import type { ProviderProperties } from '@repo/gantt/components/provider';
 import { addMonths, endOfMonth, startOfMonth, subMonths } from 'date-fns';
 import type { FC } from 'react';
 
@@ -328,7 +329,7 @@ const exampleFeatures: GanttProperties['features'] = [
   },
 ];
 
-const exampleMarkers: GanttProperties['markers'] = [
+const exampleMarkers: ProviderProperties['markers'] = [
   {
     id: '1',
     date: startOfMonth(subMonths(today, 3)),
@@ -378,6 +379,11 @@ export const GanttExample: FC = () => (
     zoom={100}
   >
     <Gantt.Sidebar />
-    <Gantt.Timeline />
+    <Gantt.Timeline>
+      {exampleMarkers.map((marker) => (
+        <Gantt.Marker key={marker.id} {...marker} />
+      ))}
+      <Gantt.Today />
+    </Gantt.Timeline>
   </Gantt.Provider>
 );

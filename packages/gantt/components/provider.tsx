@@ -23,7 +23,7 @@ import type {
   TimelineData,
 } from '../types/types';
 
-export type GanttProviderProperties = {
+export type ProviderProperties = {
   features: Feature[];
   markers: Marker[];
   range?: Range;
@@ -41,7 +41,7 @@ export type GanttProviderProperties = {
   className?: string;
 };
 
-export const GanttProvider: FC<GanttProviderProperties> = ({
+export const Provider: FC<ProviderProperties> = ({
   onSelectItem,
   features,
   markers,

@@ -1,13 +1,11 @@
-import { type FC, useContext } from 'react';
+import { type FC, type ReactNode, useContext } from 'react';
 import { GanttContext } from '../contexts/gantt-context';
 import type { Range } from '../types/types';
 import { FeatureItem } from './feature-item';
 import { DailyHeader } from './headers/daily';
 import { MonthlyHeader } from './headers/monthly';
 import { QuarterlyHeader } from './headers/quarterly';
-import { MarkerComponent } from './marker';
 import { NewMarkerTrigger } from './new-marker-trigger';
-import { Today } from './today';
 
 const headers: Record<Range, FC> = {
   daily: DailyHeader,
@@ -15,7 +13,11 @@ const headers: Record<Range, FC> = {
   quarterly: QuarterlyHeader,
 };
 
-export const GanttTimeline: FC = () => {
+type TimelineProperties = {
+  children: ReactNode;
+};
+
+export const Timeline: FC<TimelineProperties> = ({ children }) => {
   const gantt = useContext(GanttContext);
   const Header = headers[gantt.range];
 
@@ -49,11 +51,8 @@ export const GanttTimeline: FC = () => {
           </div>
         ))}
       </div>
-      {gantt.markers.map((marker) => (
-        <MarkerComponent key={marker.id} {...marker} />
-      ))}
-      <Today />
       {gantt.onAddMarker && gantt.editable ? <NewMarkerTrigger /> : null}
+      {children}
     </>
   );
 };
