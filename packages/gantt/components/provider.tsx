@@ -2,23 +2,20 @@
 
 import { cn } from '@repo/shadcn-ui/lib/utils';
 import { getDaysInMonth } from 'date-fns';
-import groupBy from 'lodash.groupby';
 import throttle from 'lodash.throttle';
 import {
   type CSSProperties,
   type ReactNode,
   useCallback,
   useEffect,
-  useMemo,
   useState,
 } from 'react';
 import { type FC, useRef } from 'react';
 import { GanttContext } from '../contexts/gantt-context';
 import { createInitialTimelineData } from '../lib/data';
-import type { Feature, Grouping, Range, TimelineData } from '../types/types';
+import type { Grouping, Range, TimelineData } from '../types/types';
 
 export type ProviderProperties = {
-  features: Feature[];
   range?: Range;
   zoom?: number;
   grouping?: Grouping;
@@ -29,7 +26,6 @@ export type ProviderProperties = {
 };
 
 export const Provider: FC<ProviderProperties> = ({
-  features,
   zoom = 100,
   range = 'monthly',
   grouping = 'feature',
@@ -42,20 +38,6 @@ export const Provider: FC<ProviderProperties> = ({
   const [timelineData, setTimelineData] = useState<TimelineData>(
     createInitialTimelineData(new Date())
   );
-
-  const groups = useMemo(() => {
-    let groupedFeatures: Record<string, Feature[]> = { features };
-
-    if (grouping !== 'feature') {
-      groupedFeatures = groupBy(features, (feature) => feature[grouping]?.name);
-    }
-
-    return Object.fromEntries(
-      Object.entries(groupedFeatures).sort(([nameA], [nameB]) =>
-        nameA.localeCompare(nameB)
-      )
-    );
-  }, [features, grouping]);
 
   const headerHeight = 60;
   const sidebarWidth = 300;
@@ -163,7 +145,6 @@ export const Provider: FC<ProviderProperties> = ({
         columnWidth,
         rowHeight,
         onAddItem,
-        groups,
         timelineData,
         placeholderLength: 2,
         editable,

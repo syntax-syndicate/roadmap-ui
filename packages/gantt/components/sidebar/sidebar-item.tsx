@@ -1,13 +1,13 @@
 import { addDays, formatDistance, isSameDay } from 'date-fns';
 import type { FC, KeyboardEventHandler, MouseEventHandler } from 'react';
-import type { Feature } from '../types/types';
+import type { Feature } from '../../types/types';
 
-type GanttSidebarProperties = {
+type SidebarItemProperties = {
   feature: Feature;
   onSelectItem: (id: string) => void;
 };
 
-export const GanttSidebarItem: FC<GanttSidebarProperties> = ({
+export const SidebarItem: FC<SidebarItemProperties> = ({
   feature,
   onSelectItem,
 }) => {
@@ -51,7 +51,7 @@ export const GanttSidebarItem: FC<GanttSidebarProperties> = ({
           backgroundColor: feature.status.color,
         }}
       />
-      <p className="pointer-events-none flex-1 truncate font-medium">
+      <p className="pointer-events-none text-left flex-1 truncate font-medium">
         {feature.name}
       </p>
       <p className="pointer-events-none text-muted-foreground">{duration}</p>

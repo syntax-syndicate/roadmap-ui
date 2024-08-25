@@ -9,7 +9,6 @@ export const GanttContext = createContext<GanttContextProps>({
   headerHeight: 60,
   rowHeight: 36,
   onAddItem: undefined,
-  groups: {},
   placeholderLength: 2,
   timelineData: [],
   editable: false,

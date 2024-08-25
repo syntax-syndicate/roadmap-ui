@@ -59,7 +59,6 @@ export type GanttContextProps = {
   headerHeight: number;
   rowHeight: number;
   onAddItem: ((date: Date) => void) | undefined;
-  groups: Record<string, Feature[]>;
   placeholderLength: number;
   timelineData: TimelineData;
   editable: boolean;

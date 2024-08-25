@@ -8,3 +8,5 @@ export { CreateMarkerTrigger } from './components/create-marker-trigger';
 export { FeatureItem } from './components/feature-item';
 export { FeatureListGroup } from './components/feature-list-group';
 export { Timeline } from './components/timeline';
+export { SidebarGroup } from './components/sidebar/sidebar-group';
+export { SidebarItem } from './components/sidebar/sidebar-item';

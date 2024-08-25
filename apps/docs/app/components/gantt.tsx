@@ -60,14 +60,25 @@ export const GanttExample: FC = () => {
 
   return (
     <Gantt.Provider
-      features={exampleFeatures}
       editable
       grouping="feature"
       onAddItem={handleAddFeature}
       range="monthly"
       zoom={100}
     >
-      <Gantt.Sidebar onSelectItem={handleViewFeature} />
+      <Gantt.Sidebar>
+        {Object.entries(sortedGroupedFeatures).map(([group, features]) => (
+          <Gantt.SidebarGroup key={group} name={group}>
+            {features.map((feature) => (
+              <Gantt.SidebarItem
+                key={feature.id}
+                feature={feature}
+                onSelectItem={handleViewFeature}
+              />
+            ))}
+          </Gantt.SidebarGroup>
+        ))}
+      </Gantt.Sidebar>
       <Gantt.Timeline>
         <Gantt.Header />
         <Gantt.FeatureList>
