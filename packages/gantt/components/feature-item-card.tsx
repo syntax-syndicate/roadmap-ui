@@ -1,7 +1,7 @@
 import { useDraggable } from '@dnd-kit/core';
 import { Avatar } from '@repo/design-system/components/avatar';
 import { Card } from '@repo/design-system/components/card';
-import { cn } from '@repo/design-system/lib/utils';
+import { cn } from '@repo/lib/cn';
 import { type FC, useContext, useEffect } from 'react';
 import { GanttContext } from '../contexts/gantt-context';
 import { useGantt } from '../hooks/use-gantt';

@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@repo/design-system/lib/utils';
+import { cn } from '@repo/lib/cn';
 import { getDaysInMonth } from 'date-fns';
 import groupBy from 'lodash.groupby';
 import throttle from 'lodash.throttle';

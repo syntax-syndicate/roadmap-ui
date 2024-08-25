@@ -1,4 +1,4 @@
-import { cn } from '@repo/design-system/lib/utils';
+import { cn } from '@repo/lib/cn';
 import { type FC, useContext, useRef, useState } from 'react';
 import { GanttContext } from '../contexts/gantt-context';
 import { useGantt } from '../hooks/use-gantt';
