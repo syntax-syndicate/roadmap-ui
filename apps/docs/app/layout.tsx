@@ -5,6 +5,7 @@ import { RootProvider } from 'fumadocs-ui/provider';
 import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
 import type { ReactNode } from 'react';
+import { Navbar } from './components/navbar';
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
@@ -18,6 +19,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       suppressHydrationWarning
     >
       <body>
+        <Navbar />
         <RootProvider>{children}</RootProvider>
         <Toaster />
       </body>
