@@ -6,3 +6,4 @@ export { Header } from './components/header/index';
 export { FeatureList } from './components/feature-list';
 export { CreateMarkerTrigger } from './components/create-marker-trigger';
 export { FeatureItem } from './components/feature-item';
+export { FeatureListGroup } from './components/feature-list-group';
