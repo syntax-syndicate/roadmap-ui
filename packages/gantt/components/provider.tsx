@@ -39,7 +39,6 @@ export const Provider: FC<ProviderProperties> = ({
   className,
 }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
   const [timelineData, setTimelineData] = useState<TimelineData>(
     createInitialTimelineData(new Date())
   );
@@ -168,7 +167,7 @@ export const Provider: FC<ProviderProperties> = ({
         timelineData,
         placeholderLength: 2,
         editable,
-        ref: contentRef,
+        ref: scrollRef,
       }}
     >
       <div
