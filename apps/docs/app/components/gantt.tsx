@@ -1,7 +1,7 @@
 'use client';
 
 import * as Gantt from '@repo/gantt';
-import type { ProviderProperties } from '@repo/gantt/components/provider';
+import type { MarkerProps } from '@repo/gantt/components/marker';
 import { addMonths, endOfMonth, startOfMonth, subMonths } from 'date-fns';
 import type { FC } from 'react';
 
@@ -329,7 +329,7 @@ const exampleFeatures: GanttProperties['features'] = [
   },
 ];
 
-const exampleMarkers: ProviderProperties['markers'] = [
+const exampleMarkers: MarkerProps[] = [
   {
     id: '1',
     date: startOfMonth(subMonths(today, 3)),
@@ -365,7 +365,6 @@ const exampleMarkers: ProviderProperties['markers'] = [
 export const GanttExample: FC = () => (
   <Gantt.Provider
     features={exampleFeatures}
-    markers={exampleMarkers}
     editable
     grouping="feature"
     onAddItem={console.log}

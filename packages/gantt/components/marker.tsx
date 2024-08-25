@@ -15,7 +15,7 @@ import {
   getInnerDifferenceIn,
   getStartOf,
 } from '../lib/range-fns';
-import type { Marker, Range } from '../types/types';
+import type { Range } from '../types/types';
 
 const calculateInnerOffset = (
   date: Date,
@@ -33,7 +33,13 @@ const calculateInnerOffset = (
   return (dayOfMonth / totalRangeDays) * columnWidth;
 };
 
-export const MarkerComponent: FC<Marker> = ({ label, date, id }) => {
+export type MarkerProps = {
+  id: string;
+  date: Date;
+  label: string;
+};
+
+export const Marker: FC<MarkerProps> = ({ label, date, id }) => {
   const gantt = useContext(GanttContext);
   const differenceIn = getDifferenceIn(gantt.range);
   const timelineStartDate = new Date(gantt.timelineData[0].year, 0, 1);

@@ -32,12 +32,6 @@ export type Feature = {
   };
 };
 
-export type Marker = {
-  id: string;
-  date: Date;
-  label: string;
-};
-
 export type Range = 'daily' | 'monthly' | 'quarterly';
 
 export type Grouping =
@@ -74,7 +68,6 @@ export type GanttContextProps = {
   onRemoveItem: ((id: string) => void) | undefined;
   onRemoveMarker: ((id: string) => void) | undefined;
   groups: Record<string, Feature[]>;
-  markers: Marker[];
   placeholderLength: number;
   timelineData: TimelineData;
   editable: boolean;
