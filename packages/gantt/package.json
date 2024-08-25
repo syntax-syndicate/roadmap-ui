@@ -4,7 +4,6 @@
   "private": true,
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
-    "@types/lodash.groupby": "^4.6.9",
     "@types/lodash.throttle": "^4.1.9",
     "@types/react": "^18.3.4",
     "typescript": "^5.5.4"
@@ -17,7 +16,6 @@
     "@dnd-kit/modifiers": "^7.0.0",
     "@repo/shadcn-ui": "workspace:*",
     "date-fns": "^3.6.0",
-    "lodash.groupby": "^4.6.0",
     "lodash.throttle": "^4.1.1",
     "lucide-react": "^0.435.0",
     "zustand": "^4.5.5"

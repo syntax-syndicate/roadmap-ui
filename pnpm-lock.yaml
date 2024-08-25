@@ -102,9 +102,6 @@ importers:
       date-fns:
         specifier: ^3.6.0
         version: 3.6.0
-      lodash.groupby:
-        specifier: ^4.6.0
-        version: 4.6.0
       lodash.throttle:
         specifier: ^4.1.1
         version: 4.1.1
@@ -121,9 +118,6 @@ importers:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
-      '@types/lodash.groupby':
-        specifier: ^4.6.9
-        version: 4.6.9
       '@types/lodash.throttle':
         specifier: ^4.1.9
         version: 4.1.9
@@ -1002,9 +996,6 @@ packages:
   '@types/hast@3.0.4':
     resolution: {integrity: sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ==}
 
-  '@types/lodash.groupby@4.6.9':
-    resolution: {integrity: sha512-z2xtCX2ko7GrqORnnYea4+ksT7jZNAvaOcLd6mP9M7J09RHvJs06W8BGdQQAX8ARef09VQLdeRilSOcfHlDQJQ==}
-
   '@types/lodash.throttle@4.1.9':
     resolution: {integrity: sha512-PCPVfpfueguWZQB7pJQK890F2scYKoDUL3iM522AptHWn7d5NQmeS/LTEHIcLr5PaTzl3dK2Z0xSUHHTHwaL5g==}
 
@@ -1493,9 +1484,6 @@ packages:
 
   lodash.castarray@4.4.0:
     resolution: {integrity: sha512-aVx8ztPv7/2ULbArGJ2Y42bG1mEQ5mGjpdvrbJcJFU3TbYybe+QlLS4pst9zV52ymy2in1KpFPiZnAOATxD4+Q==}
-
-  lodash.groupby@4.6.0:
-    resolution: {integrity: sha512-5dcWxm23+VAoz+awKmBaiBvzox8+RqMgFhi7UvX9DHZr2HdxHXM/Wrf8cfKpsW37RNrvtPn6hSwNqurSILbmJw==}
 
   lodash.isplainobject@4.0.6:
     resolution: {integrity: sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==}
@@ -3220,10 +3208,6 @@ snapshots:
     dependencies:
       '@types/unist': 3.0.3
 
-  '@types/lodash.groupby@4.6.9':
-    dependencies:
-      '@types/lodash': 4.17.7
-
   '@types/lodash.throttle@4.1.9':
     dependencies:
       '@types/lodash': 4.17.7
@@ -3745,8 +3729,6 @@ snapshots:
   lines-and-columns@1.2.4: {}
 
   lodash.castarray@4.4.0: {}
-
-  lodash.groupby@4.6.0: {}
 
   lodash.isplainobject@4.0.6: {}
 
