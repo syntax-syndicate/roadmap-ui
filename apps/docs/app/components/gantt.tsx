@@ -2,11 +2,12 @@
 
 import * as Gantt from '@repo/gantt';
 import type { MarkerProps } from '@repo/gantt/components/marker';
+import type { ProviderProperties } from '@repo/gantt/components/provider';
 import { addMonths, endOfMonth, startOfMonth, subMonths } from 'date-fns';
 import type { FC } from 'react';
 
 const today = new Date();
-const exampleFeatures: GanttProperties['features'] = [
+const exampleFeatures: ProviderProperties['features'] = [
   {
     id: '1',
     name: 'AI Scene Analysis',

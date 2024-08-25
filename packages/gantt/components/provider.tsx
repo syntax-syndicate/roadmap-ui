@@ -15,17 +15,10 @@ import {
 import { type FC, useRef } from 'react';
 import { GanttContext } from '../contexts/gantt-context';
 import { createInitialTimelineData } from '../lib/data';
-import type {
-  Feature,
-  Grouping,
-  Marker,
-  Range,
-  TimelineData,
-} from '../types/types';
+import type { Feature, Grouping, Range, TimelineData } from '../types/types';
 
 export type ProviderProperties = {
   features: Feature[];
-  markers: Marker[];
   range?: Range;
   zoom?: number;
   grouping?: Grouping;
@@ -44,7 +37,6 @@ export type ProviderProperties = {
 export const Provider: FC<ProviderProperties> = ({
   onSelectItem,
   features,
-  markers,
   zoom = 100,
   range = 'monthly',
   grouping = 'feature',
@@ -188,7 +180,6 @@ export const Provider: FC<ProviderProperties> = ({
         onMoveItem,
         onAddMarker,
         groups,
-        markers,
         timelineData,
         placeholderLength: 2,
         onCopyItemLink,
