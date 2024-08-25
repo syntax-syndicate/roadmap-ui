@@ -36,7 +36,7 @@ export const GanttExample: FC = () => {
   );
 
   const handleViewFeature = (id: string) =>
-    toast.success(`View feature: ${id}`);
+    toast.success(`Feature selected: ${id}`);
 
   const handleCopyLink = (id: string) => toast.success(`Copy link: ${id}`);
 
@@ -55,14 +55,11 @@ export const GanttExample: FC = () => {
       editable
       grouping="feature"
       onAddItem={console.log}
-      onCopyItemLink={console.log}
       onMoveItem={console.log}
-      onRemoveItem={console.log}
-      onSelectItem={console.log}
       range="monthly"
       zoom={100}
     >
-      <Gantt.Sidebar />
+      <Gantt.Sidebar onSelectItem={handleViewFeature} />
       <Gantt.Timeline>
         <Gantt.Header />
         <Gantt.FeatureList>

@@ -3,7 +3,11 @@ import { GanttContext } from '../contexts/gantt-context';
 import { SidebarHeader } from './sidebar-header';
 import { GanttSidebarItem } from './sidebar-item';
 
-export const Sidebar: FC = () => {
+type SidebarProperties = {
+  onSelectItem: (id: string) => void;
+};
+
+export const Sidebar: FC<SidebarProperties> = ({ onSelectItem }) => {
   const gantt = useContext(GanttContext);
 
   return (
@@ -24,7 +28,11 @@ export const Sidebar: FC = () => {
             )}
             <div className="divide-y divide-border/50">
               {features.map((feature) => (
-                <GanttSidebarItem feature={feature} key={feature.id} />
+                <GanttSidebarItem
+                  feature={feature}
+                  key={feature.id}
+                  onSelectItem={onSelectItem}
+                />
               ))}
             </div>
           </div>

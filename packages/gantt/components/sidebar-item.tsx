@@ -1,19 +1,16 @@
 import { addDays, formatDistance, isSameDay } from 'date-fns';
-import {
-  type FC,
-  type KeyboardEventHandler,
-  type MouseEventHandler,
-  useContext,
-} from 'react';
-import { GanttContext } from '../contexts/gantt-context';
+import type { FC, KeyboardEventHandler, MouseEventHandler } from 'react';
 import type { Feature } from '../types/types';
 
 type GanttSidebarProperties = {
   feature: Feature;
+  onSelectItem: (id: string) => void;
 };
 
-export const GanttSidebarItem: FC<GanttSidebarProperties> = ({ feature }) => {
-  const gantt = useContext(GanttContext);
+export const GanttSidebarItem: FC<GanttSidebarProperties> = ({
+  feature,
+  onSelectItem,
+}) => {
   const tempEndAt =
     feature.endAt && isSameDay(feature.startAt, feature.endAt)
       ? addDays(feature.endAt, 1)
@@ -24,13 +21,13 @@ export const GanttSidebarItem: FC<GanttSidebarProperties> = ({ feature }) => {
 
   const handleClick: MouseEventHandler<HTMLDivElement> = (event) => {
     if (event.target === event.currentTarget) {
-      gantt.onSelectItem?.(feature.id);
+      onSelectItem(feature.id);
     }
   };
 
   const handleKeyDown: KeyboardEventHandler<HTMLDivElement> = (event) => {
     if (event.key === 'Enter') {
-      gantt.onSelectItem?.(feature.id);
+      onSelectItem(feature.id);
     }
   };
 

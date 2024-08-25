@@ -22,26 +22,20 @@ export type ProviderProperties = {
   range?: Range;
   zoom?: number;
   grouping?: Grouping;
-  onSelectItem?: (id: string) => void;
   onAddItem?: (date: Date) => void;
   onMoveItem?: (id: string, startDate: Date, endDate: Date | null) => void;
-  onCopyItemLink?: (id: string) => void;
-  onRemoveItem?: (id: string) => void;
   editable?: boolean;
   children: ReactNode;
   className?: string;
 };
 
 export const Provider: FC<ProviderProperties> = ({
-  onSelectItem,
   features,
   zoom = 100,
   range = 'monthly',
   grouping = 'feature',
   onAddItem,
   onMoveItem,
-  onCopyItemLink,
-  onRemoveItem,
   editable = false,
   children,
   className,
@@ -171,14 +165,11 @@ export const Provider: FC<ProviderProperties> = ({
         headerHeight,
         columnWidth,
         rowHeight,
-        onSelectItem,
         onAddItem,
         onMoveItem,
         groups,
         timelineData,
         placeholderLength: 2,
-        onCopyItemLink,
-        onRemoveItem,
         editable,
         ref: contentRef,
       }}

@@ -58,13 +58,10 @@ export type GanttContextProps = {
   columnWidth: number;
   headerHeight: number;
   rowHeight: number;
-  onSelectItem: ((id: string) => void) | undefined;
   onAddItem: ((date: Date) => void) | undefined;
   onMoveItem:
     | ((id: string, startDate: Date, endDate: Date | null) => void)
     | undefined;
-  onCopyItemLink: ((id: string) => void) | undefined;
-  onRemoveItem: ((id: string) => void) | undefined;
   groups: Record<string, Feature[]>;
   placeholderLength: number;
   timelineData: TimelineData;
