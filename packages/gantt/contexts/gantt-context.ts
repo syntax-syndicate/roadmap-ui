@@ -11,7 +11,6 @@ export const GanttContext = createContext<GanttContextProps>({
   onSelectItem: undefined,
   onAddItem: undefined,
   onMoveItem: undefined,
-  onAddMarker: undefined,
   onCopyItemLink: undefined,
   onRemoveItem: undefined,
   groups: {},

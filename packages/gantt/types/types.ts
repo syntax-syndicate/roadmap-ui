@@ -63,7 +63,6 @@ export type GanttContextProps = {
   onMoveItem:
     | ((id: string, startDate: Date, endDate: Date | null) => void)
     | undefined;
-  onAddMarker: ((date: Date) => void) | undefined;
   onCopyItemLink: ((id: string) => void) | undefined;
   onRemoveItem: ((id: string) => void) | undefined;
   groups: Record<string, Feature[]>;

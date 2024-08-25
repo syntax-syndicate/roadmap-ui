@@ -22,7 +22,6 @@ export const GanttExample: FC = () => {
       editable
       grouping="feature"
       onAddItem={console.log}
-      onAddMarker={console.log}
       onCopyItemLink={console.log}
       onMoveItem={console.log}
       onRemoveItem={console.log}
@@ -46,7 +45,7 @@ export const GanttExample: FC = () => {
           <Gantt.Marker key={marker.id} {...marker} onRemove={console.log} />
         ))}
         <Gantt.Today />
-        <Gantt.CreateMarkerTrigger />
+        <Gantt.CreateMarkerTrigger onCreateMarker={console.log} />
       </Gantt.Timeline>
     </Gantt.Provider>
   );

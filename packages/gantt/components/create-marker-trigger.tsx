@@ -5,14 +5,20 @@ import { GanttContext } from '../contexts/gantt-context';
 import { useMouse } from '../hooks/use-mouse';
 import { getDateByMousePosition } from '../lib/utils';
 
-export const CreateMarkerTrigger: FC = () => {
+type CreateMarkerTriggerProps = {
+  onCreateMarker: (date: Date) => void;
+};
+
+export const CreateMarkerTrigger: FC<CreateMarkerTriggerProps> = ({
+  onCreateMarker,
+}) => {
   const gantt = useContext(GanttContext);
   const ref = useRef<HTMLDivElement>(null);
   const mouse = useMouse(ref);
   const date = getDateByMousePosition(gantt, mouse.x);
 
   const handleClick = () => {
-    gantt.onAddMarker?.(date);
+    onCreateMarker(date);
   };
 
   return (

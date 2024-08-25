@@ -25,7 +25,6 @@ export type ProviderProperties = {
   onSelectItem?: (id: string) => void;
   onAddItem?: (date: Date) => void;
   onMoveItem?: (id: string, startDate: Date, endDate: Date | null) => void;
-  onAddMarker?: (date: Date) => void;
   onCopyItemLink?: (id: string) => void;
   onRemoveItem?: (id: string) => void;
   editable?: boolean;
@@ -41,7 +40,6 @@ export const Provider: FC<ProviderProperties> = ({
   grouping = 'feature',
   onAddItem,
   onMoveItem,
-  onAddMarker,
   onCopyItemLink,
   onRemoveItem,
   editable = false,
@@ -176,7 +174,6 @@ export const Provider: FC<ProviderProperties> = ({
         onSelectItem,
         onAddItem,
         onMoveItem,
-        onAddMarker,
         groups,
         timelineData,
         placeholderLength: 2,
