@@ -82,7 +82,11 @@ const getWidth = (
   );
 };
 
-export const FeatureItem: FC<Feature> = (feature) => {
+export const FeatureItem: FC<
+  Feature & {
+    onMove: (id: string, startDate: Date, endDate: Date | null) => void;
+  }
+> = ({ onMove, ...feature }) => {
   const gantt = useContext(GanttContext);
   const timelineStartDate = new Date(gantt.timelineData[0].year, 0, 1);
   const [startAt, setStartAt] = useState(feature.startAt);
@@ -123,7 +127,7 @@ export const FeatureItem: FC<Feature> = (feature) => {
     setEndAt(newEndDate);
   };
 
-  const onDragEnd = () => gantt.onMoveItem?.(feature.id, startAt, endAt);
+  const onDragEnd = () => onMove(feature.id, startAt, endAt);
   const handleLeftDragMove = () =>
     setStartAt(getDateByMousePosition(gantt, mouse.x));
   const handleRightDragMove = () =>

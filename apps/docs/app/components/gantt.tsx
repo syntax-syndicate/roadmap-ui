@@ -49,13 +49,18 @@ export const GanttExample: FC = () => {
   const handleCreateMarker = (date: Date) =>
     toast.success(`Create marker: ${date.toISOString()}`);
 
+  const handleMoveFeature = (
+    id: string,
+    startDate: Date,
+    endDate: Date | null
+  ) => toast.success(`Move feature: ${id} from ${startDate} to ${endDate}`);
+
   return (
     <Gantt.Provider
       features={exampleFeatures}
       editable
       grouping="feature"
       onAddItem={console.log}
-      onMoveItem={console.log}
       range="monthly"
       zoom={100}
     >
@@ -75,7 +80,11 @@ export const GanttExample: FC = () => {
                             type="button"
                             onClick={() => handleViewFeature(feature.id)}
                           >
-                            <Gantt.FeatureItem key={feature.id} {...feature} />
+                            <Gantt.FeatureItem
+                              key={feature.id}
+                              {...feature}
+                              onMove={handleMoveFeature}
+                            />
                           </button>
                         </ContextMenuTrigger>
                         <ContextMenuContent>

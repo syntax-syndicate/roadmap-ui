@@ -23,7 +23,6 @@ export type ProviderProperties = {
   zoom?: number;
   grouping?: Grouping;
   onAddItem?: (date: Date) => void;
-  onMoveItem?: (id: string, startDate: Date, endDate: Date | null) => void;
   editable?: boolean;
   children: ReactNode;
   className?: string;
@@ -35,7 +34,6 @@ export const Provider: FC<ProviderProperties> = ({
   range = 'monthly',
   grouping = 'feature',
   onAddItem,
-  onMoveItem,
   editable = false,
   children,
   className,
@@ -166,7 +164,6 @@ export const Provider: FC<ProviderProperties> = ({
         columnWidth,
         rowHeight,
         onAddItem,
-        onMoveItem,
         groups,
         timelineData,
         placeholderLength: 2,
