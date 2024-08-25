@@ -21,6 +21,7 @@ import {
 import { Separator } from '@repo/shadcn-ui/components/ui/separator';
 import { EyeIcon, LinkIcon, TrashIcon } from 'lucide-react';
 import type { FC } from 'react';
+import { toast } from 'sonner';
 import { exampleFeatures, exampleMarkers } from '../lib/content';
 
 export const GanttExample: FC = () => {
@@ -33,6 +34,20 @@ export const GanttExample: FC = () => {
       nameA.localeCompare(nameB)
     )
   );
+
+  const handleViewFeature = (id: string) =>
+    toast.success(`View feature: ${id}`);
+
+  const handleCopyLink = (id: string) => toast.success(`Copy link: ${id}`);
+
+  const handleRemoveFeature = (id: string) =>
+    toast.success(`Remove feature: ${id}`);
+
+  const handleRemoveMarker = (id: string) =>
+    toast.success(`Remove marker: ${id}`);
+
+  const handleCreateMarker = (date: Date) =>
+    toast.success(`Create marker: ${date.toISOString()}`);
 
   return (
     <Gantt.Provider
@@ -59,14 +74,17 @@ export const GanttExample: FC = () => {
                     <div>
                       <ContextMenu>
                         <ContextMenuTrigger asChild>
-                          <button type="button" onClick={console.log}>
+                          <button
+                            type="button"
+                            onClick={() => handleViewFeature(feature.id)}
+                          >
                             <Gantt.FeatureItem key={feature.id} {...feature} />
                           </button>
                         </ContextMenuTrigger>
                         <ContextMenuContent>
                           <ContextMenuItem
                             className="flex items-center gap-2"
-                            onClick={console.log}
+                            onClick={() => handleViewFeature(feature.id)}
                           >
                             <EyeIcon
                               size={16}
@@ -76,7 +94,7 @@ export const GanttExample: FC = () => {
                           </ContextMenuItem>
                           <ContextMenuItem
                             className="flex items-center gap-2"
-                            onClick={console.log}
+                            onClick={() => handleCopyLink(feature.id)}
                           >
                             <LinkIcon
                               size={16}
@@ -86,7 +104,7 @@ export const GanttExample: FC = () => {
                           </ContextMenuItem>
                           <ContextMenuItem
                             className="flex items-center gap-2 text-destructive"
-                            onClick={console.log}
+                            onClick={() => handleRemoveFeature(feature.id)}
                           >
                             <TrashIcon size={16} />
                             Remove from roadmap
@@ -123,10 +141,14 @@ export const GanttExample: FC = () => {
           ))}
         </Gantt.FeatureList>
         {exampleMarkers.map((marker) => (
-          <Gantt.Marker key={marker.id} {...marker} onRemove={console.log} />
+          <Gantt.Marker
+            key={marker.id}
+            {...marker}
+            onRemove={handleRemoveMarker}
+          />
         ))}
         <Gantt.Today />
-        <Gantt.CreateMarkerTrigger onCreateMarker={console.log} />
+        <Gantt.CreateMarkerTrigger onCreateMarker={handleCreateMarker} />
       </Gantt.Timeline>
     </Gantt.Provider>
   );
