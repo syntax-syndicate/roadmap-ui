@@ -29,6 +29,9 @@ importers:
       '@repo/gantt':
         specifier: workspace:*
         version: link:../../packages/gantt
+      '@repo/shadcn-ui':
+        specifier: workspace:*
+        version: link:../../packages/shadcn-ui
       '@repo/tailwind-config':
         specifier: workspace:*
         version: link:../../packages/tailwind-config
@@ -44,6 +47,9 @@ importers:
       fumadocs-ui:
         specifier: 13.3.2
         version: 13.3.2(@types/react-dom@18.3.0)(@types/react@18.3.4)(next@14.2.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.10(ts-node@10.9.1(@types/node@22.3.0)(typescript@5.5.4)))
+      lucide-react:
+        specifier: ^0.435.0
+        version: 0.435.0(react@18.3.1)
       next:
         specifier: ^14.2.5
         version: 14.2.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
