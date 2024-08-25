@@ -378,13 +378,12 @@ export const GanttExample: FC = () => (
     zoom={100}
   >
     <Gantt.Sidebar />
-    <Gantt.Timeline>
-      <Gantt.Header />
-      <Gantt.FeatureList />
-      {exampleMarkers.map((marker) => (
-        <Gantt.Marker key={marker.id} {...marker} onRemove={console.log} />
-      ))}
-      <Gantt.Today />
-    </Gantt.Timeline>
+    <Gantt.Header />
+    <Gantt.FeatureList />
+    {exampleMarkers.map((marker) => (
+      <Gantt.Marker key={marker.id} {...marker} onRemove={console.log} />
+    ))}
+    <Gantt.Today />
+    <Gantt.CreateMarkerTrigger />
   </Gantt.Provider>
 );

@@ -5,7 +5,7 @@ import { GanttContext } from '../contexts/gantt-context';
 import { useMouse } from '../hooks/use-mouse';
 import { getDateByMousePosition } from '../lib/utils';
 
-export const NewMarkerTrigger: FC = () => {
+export const CreateMarkerTrigger: FC = () => {
   const gantt = useContext(GanttContext);
   const ref = useRef<HTMLDivElement>(null);
   const mouse = useMouse(ref);
