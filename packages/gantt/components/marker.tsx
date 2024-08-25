@@ -37,9 +37,10 @@ export type MarkerProps = {
   id: string;
   date: Date;
   label: string;
+  onRemove: (id: string) => void;
 };
 
-export const Marker: FC<MarkerProps> = ({ label, date, id }) => {
+export const Marker: FC<MarkerProps> = ({ label, date, id, onRemove }) => {
   const gantt = useContext(GanttContext);
   const differenceIn = getDifferenceIn(gantt.range);
   const timelineStartDate = new Date(gantt.timelineData[0].year, 0, 1);
@@ -49,7 +50,7 @@ export const Marker: FC<MarkerProps> = ({ label, date, id }) => {
     gantt.range,
     (gantt.columnWidth * gantt.zoom) / 100
   );
-  const handleRemove = () => gantt.onRemoveMarker?.(id);
+  const handleRemove = () => onRemove?.(id);
 
   return (
     <div

@@ -28,7 +28,6 @@ export type ProviderProperties = {
   onAddMarker?: (date: Date) => void;
   onCopyItemLink?: (id: string) => void;
   onRemoveItem?: (id: string) => void;
-  onRemoveMarker?: (id: string) => void;
   editable?: boolean;
   children: ReactNode;
   className?: string;
@@ -45,7 +44,6 @@ export const Provider: FC<ProviderProperties> = ({
   onAddMarker,
   onCopyItemLink,
   onRemoveItem,
-  onRemoveMarker,
   editable = false,
   children,
   className,
@@ -184,7 +182,6 @@ export const Provider: FC<ProviderProperties> = ({
         placeholderLength: 2,
         onCopyItemLink,
         onRemoveItem,
-        onRemoveMarker,
         editable,
         ref: contentRef,
       }}

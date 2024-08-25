@@ -66,7 +66,6 @@ export type GanttContextProps = {
   onAddMarker: ((date: Date) => void) | undefined;
   onCopyItemLink: ((id: string) => void) | undefined;
   onRemoveItem: ((id: string) => void) | undefined;
-  onRemoveMarker: ((id: string) => void) | undefined;
   groups: Record<string, Feature[]>;
   placeholderLength: number;
   timelineData: TimelineData;

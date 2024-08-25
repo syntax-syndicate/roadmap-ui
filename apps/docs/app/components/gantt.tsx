@@ -373,7 +373,6 @@ export const GanttExample: FC = () => (
     onCopyItemLink={console.log}
     onMoveItem={console.log}
     onRemoveItem={console.log}
-    onRemoveMarker={console.log}
     onSelectItem={console.log}
     range="monthly"
     zoom={100}
@@ -381,7 +380,7 @@ export const GanttExample: FC = () => (
     <Gantt.Sidebar />
     <Gantt.Timeline>
       {exampleMarkers.map((marker) => (
-        <Gantt.Marker key={marker.id} {...marker} />
+        <Gantt.Marker key={marker.id} {...marker} onRemove={console.log} />
       ))}
       <Gantt.Today />
     </Gantt.Timeline>
