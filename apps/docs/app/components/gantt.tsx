@@ -20,7 +20,11 @@ export const GanttExample: FC = () => (
   >
     <Gantt.Sidebar />
     <Gantt.Header />
-    <Gantt.FeatureList />
+    <Gantt.FeatureList>
+      {exampleFeatures.map((feature) => (
+        <Gantt.FeatureItem key={feature.id} {...feature} />
+      ))}
+    </Gantt.FeatureList>
     {exampleMarkers.map((marker) => (
       <Gantt.Marker key={marker.id} {...marker} onRemove={console.log} />
     ))}

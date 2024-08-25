@@ -5,3 +5,4 @@ export { Today } from './components/today';
 export { Header } from './components/header/index';
 export { FeatureList } from './components/feature-list';
 export { CreateMarkerTrigger } from './components/create-marker-trigger';
+export { FeatureItem } from './components/feature-item';

@@ -1,13 +1,13 @@
 import { cn } from '@repo/shadcn-ui/lib/utils';
-import { type FC, useContext } from 'react';
+import { type FC, type ReactNode, useContext } from 'react';
 import { GanttContext } from '../contexts/gantt-context';
-import { FeatureItem } from './feature-item';
 
 type FeatureListProps = {
   className?: string;
+  children: ReactNode;
 };
 
-export const FeatureList: FC<FeatureListProps> = ({ className }) => {
+export const FeatureList: FC<FeatureListProps> = ({ className, children }) => {
   const gantt = useContext(GanttContext);
 
   return (
@@ -24,9 +24,7 @@ export const FeatureList: FC<FeatureListProps> = ({ className }) => {
               gantt.grouping === 'feature' ? 0 : 'var(--gantt-row-height)',
           }}
         >
-          {features.map((feature) => (
-            <FeatureItem key={feature.id} {...feature} />
-          ))}
+          {children}
         </div>
       ))}
     </div>
