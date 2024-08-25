@@ -1,7 +1,8 @@
 import Image from 'next/image';
-import { GanttExample } from './components/gantt';
+import { GanttExample } from '../components/gantt';
 
 import { CopyIcon } from 'lucide-react';
+import EververseLogo from './eververse.png';
 import GanttLogo from './gantt.svg';
 import GithubLogo from './github.svg';
 import ReactLogo from './react.svg';
@@ -29,8 +30,19 @@ export default function HomePage() {
           />{' '}
           roadmaps.
         </h1>
-        <p className="mt-6 max-w-[750px] text-center text-lg text-muted-foreground sm:text-xl text-pretty">
-          Accessible, customizable, perormant and open source.
+        <p className="mt-6 max-w-lg text-center text-lg text-muted-foreground sm:text-xl text-pretty">
+          A collection of accessible, customizable, performant and open source
+          components built for{' '}
+          <a href="https://www.eververse.ai" target="_blank" rel="noreferrer">
+            <Image
+              src={EververseLogo}
+              alt=""
+              width={16}
+              height={16}
+              className="inline-block align-baseline"
+            />{' '}
+            Eververse.
+          </a>
         </p>
         <div className="flex w-full items-center justify-center space-x-4 py-4 md:pb-10">
           <div className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
