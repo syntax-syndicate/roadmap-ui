@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 import { type FC, useContext } from 'react';
 import { GanttContext } from '../../contexts/gantt-context';
 import { Columns } from '../columns';
-import { GanttContentHeader } from '../header';
+import { GanttContentHeader } from './header';
 
 export const MonthlyHeader: FC = () => {
   const gantt = useContext(GanttContext);

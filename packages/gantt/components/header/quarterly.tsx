@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import type { FC } from 'react';
 import { GanttContext } from '../../contexts/gantt-context';
 import { Columns } from '../columns';
-import { GanttContentHeader } from '../header';
+import { GanttContentHeader } from './header';
 
 export const QuarterlyHeader: FC = () => {
   const gantt = useContext(GanttContext);

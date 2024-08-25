@@ -2,7 +2,7 @@ import { addDays, format } from 'date-fns';
 import { type FC, useContext } from 'react';
 import { GanttContext } from '../../contexts/gantt-context';
 import { Columns } from '../columns';
-import { GanttContentHeader } from '../header';
+import { GanttContentHeader } from './header';
 
 export const DailyHeader: FC = () => {
   const gantt = useContext(GanttContext);
