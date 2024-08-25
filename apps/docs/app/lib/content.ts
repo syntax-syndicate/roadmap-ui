@@ -334,7 +334,7 @@ export const exampleMarkers: Pick<MarkerProps, 'id' | 'date' | 'label'>[] = [
   },
   {
     id: '2',
-    date: endOfMonth(today),
+    date: subMonths(endOfMonth(today), 2),
     label: 'Phase 1 Completion',
   },
   {
