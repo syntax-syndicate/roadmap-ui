@@ -148,117 +148,122 @@ export const FeatureItem: FC<Feature> = (feature) => {
   const handleRemove = () => gantt.onRemoveItem?.(feature.id);
 
   return (
-    <HoverCard>
-      <HoverCardTrigger asChild>
-        <div ref={ref}>
-          <ContextMenu>
-            <ContextMenuTrigger asChild>
-              <button
-                type="button"
-                className="pointer-events-auto absolute top-0.5"
-                style={{
-                  height: 'calc(var(--gantt-row-height) - 4px)',
-                  width: Math.round(width),
-                  left: Math.round(offset),
-                }}
-                onClick={handleClick}
-              >
-                {gantt.editable && (
-                  <DndContext
-                    sensors={[mouseSensor]}
-                    modifiers={[restrictToHorizontalAxis]}
-                    onDragMove={handleLeftDragMove}
-                    onDragEnd={onDragEnd}
-                  >
-                    <FeatureDragHelper
-                      direction="left"
-                      featureId={feature.id}
-                      date={startAt}
-                    />
-                  </DndContext>
-                )}
-                <DndContext
-                  sensors={[mouseSensor]}
-                  modifiers={[restrictToHorizontalAxis]}
-                  onDragStart={handleItemDragStart}
-                  onDragMove={handleItemDragMove}
-                  onDragEnd={onDragEnd}
-                >
-                  <FeatureItemCard
-                    id={feature.id}
-                    owner={feature.owner}
-                    name={feature.name}
-                  />
-                </DndContext>
-                {gantt.editable && (
-                  <DndContext
-                    sensors={[mouseSensor]}
-                    modifiers={[restrictToHorizontalAxis]}
-                    onDragMove={handleRightDragMove}
-                    onDragEnd={onDragEnd}
-                  >
-                    <FeatureDragHelper
-                      direction="right"
-                      featureId={feature.id}
-                      date={endAt ?? addRange(startAt, 2)}
-                    />
-                  </DndContext>
-                )}
-              </button>
-            </ContextMenuTrigger>
-            <ContextMenuContent>
-              {gantt.onSelectItem ? (
-                <ContextMenuItem
-                  className="flex items-center gap-2"
+    <div
+      className="relative flex w-max min-w-full py-0.5"
+      style={{ height: 'var(--gantt-row-height)' }}
+    >
+      <HoverCard>
+        <HoverCardTrigger asChild>
+          <div ref={ref}>
+            <ContextMenu>
+              <ContextMenuTrigger asChild>
+                <button
+                  type="button"
+                  className="pointer-events-auto absolute top-0.5"
+                  style={{
+                    height: 'calc(var(--gantt-row-height) - 4px)',
+                    width: Math.round(width),
+                    left: Math.round(offset),
+                  }}
                   onClick={handleClick}
                 >
-                  <EyeIcon size={16} className="text-muted-foreground" />
-                  View feature
-                </ContextMenuItem>
-              ) : null}
-              {gantt.onCopyItemLink ? (
-                <ContextMenuItem
-                  className="flex items-center gap-2"
-                  onClick={handleCopyLink}
-                >
-                  <LinkIcon size={16} className="text-muted-foreground" />
-                  Copy link
-                </ContextMenuItem>
-              ) : null}
-              {gantt.editable && gantt.onRemoveItem ? (
-                <ContextMenuItem
-                  className="flex items-center gap-2 text-destructive"
-                  onClick={handleRemove}
-                >
-                  <TrashIcon size={16} />
-                  Remove from roadmap
-                </ContextMenuItem>
-              ) : null}
-            </ContextMenuContent>
-          </ContextMenu>
-        </div>
-      </HoverCardTrigger>
-      <HoverCardContent align="start" className="space-y-1">
-        <p className="font-medium text-xs">{feature.name}</p>
-        <div className="flex items-center gap-2">
-          <div
-            className="h-2 w-2 rounded-full"
-            style={{ backgroundColor: feature.status.color }}
-          />
-          <p className="text-xs">{feature.status.name}</p>
-        </div>
-        <Separator />
-        {feature.owner && (
-          <div className="flex items-center gap-2">
-            <Avatar
-              size={16}
-              src={feature.owner.image}
-              fallback={feature.owner.name?.slice(0, 2)}
-            />
-            <p className="text-xs">{feature.owner.name}</p>
+                  {gantt.editable && (
+                    <DndContext
+                      sensors={[mouseSensor]}
+                      modifiers={[restrictToHorizontalAxis]}
+                      onDragMove={handleLeftDragMove}
+                      onDragEnd={onDragEnd}
+                    >
+                      <FeatureDragHelper
+                        direction="left"
+                        featureId={feature.id}
+                        date={startAt}
+                      />
+                    </DndContext>
+                  )}
+                  <DndContext
+                    sensors={[mouseSensor]}
+                    modifiers={[restrictToHorizontalAxis]}
+                    onDragStart={handleItemDragStart}
+                    onDragMove={handleItemDragMove}
+                    onDragEnd={onDragEnd}
+                  >
+                    <FeatureItemCard
+                      id={feature.id}
+                      owner={feature.owner}
+                      name={feature.name}
+                    />
+                  </DndContext>
+                  {gantt.editable && (
+                    <DndContext
+                      sensors={[mouseSensor]}
+                      modifiers={[restrictToHorizontalAxis]}
+                      onDragMove={handleRightDragMove}
+                      onDragEnd={onDragEnd}
+                    >
+                      <FeatureDragHelper
+                        direction="right"
+                        featureId={feature.id}
+                        date={endAt ?? addRange(startAt, 2)}
+                      />
+                    </DndContext>
+                  )}
+                </button>
+              </ContextMenuTrigger>
+              <ContextMenuContent>
+                {gantt.onSelectItem ? (
+                  <ContextMenuItem
+                    className="flex items-center gap-2"
+                    onClick={handleClick}
+                  >
+                    <EyeIcon size={16} className="text-muted-foreground" />
+                    View feature
+                  </ContextMenuItem>
+                ) : null}
+                {gantt.onCopyItemLink ? (
+                  <ContextMenuItem
+                    className="flex items-center gap-2"
+                    onClick={handleCopyLink}
+                  >
+                    <LinkIcon size={16} className="text-muted-foreground" />
+                    Copy link
+                  </ContextMenuItem>
+                ) : null}
+                {gantt.editable && gantt.onRemoveItem ? (
+                  <ContextMenuItem
+                    className="flex items-center gap-2 text-destructive"
+                    onClick={handleRemove}
+                  >
+                    <TrashIcon size={16} />
+                    Remove from roadmap
+                  </ContextMenuItem>
+                ) : null}
+              </ContextMenuContent>
+            </ContextMenu>
           </div>
-        )}
-      </HoverCardContent>
-    </HoverCard>
+        </HoverCardTrigger>
+        <HoverCardContent align="start" className="space-y-1">
+          <p className="font-medium text-xs">{feature.name}</p>
+          <div className="flex items-center gap-2">
+            <div
+              className="h-2 w-2 rounded-full"
+              style={{ backgroundColor: feature.status.color }}
+            />
+            <p className="text-xs">{feature.status.name}</p>
+          </div>
+          <Separator />
+          {feature.owner && (
+            <div className="flex items-center gap-2">
+              <Avatar
+                size={16}
+                src={feature.owner.image}
+                fallback={feature.owner.name?.slice(0, 2)}
+              />
+              <p className="text-xs">{feature.owner.name}</p>
+            </div>
+          )}
+        </HoverCardContent>
+      </HoverCard>
+    </div>
   );
 };

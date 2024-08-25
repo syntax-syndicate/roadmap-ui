@@ -25,13 +25,7 @@ export const FeatureList: FC<FeatureListProps> = ({ className }) => {
           }}
         >
           {features.map((feature) => (
-            <div
-              className="relative flex w-max min-w-full py-0.5"
-              style={{ height: 'var(--gantt-row-height)' }}
-              key={feature.id}
-            >
-              <FeatureItem {...feature} />
-            </div>
+            <FeatureItem key={feature.id} {...feature} />
           ))}
         </div>
       ))}
