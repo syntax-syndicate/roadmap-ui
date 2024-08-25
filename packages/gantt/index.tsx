@@ -24,7 +24,7 @@ import type {
   TimelineData,
 } from './types/types';
 
-type GanttProperties = {
+export type GanttProperties = {
   features: Feature[];
   markers: Marker[];
   range?: Range;
