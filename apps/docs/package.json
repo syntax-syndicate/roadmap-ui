@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@repo/gantt": "workspace:*",
+    "@repo/tailwind-config": "workspace:*",
     "date-fns": "^3.6.0",
     "fumadocs-core": "13.3.2",
     "fumadocs-mdx": "9.0.2",

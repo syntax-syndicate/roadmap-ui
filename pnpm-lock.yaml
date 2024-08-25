@@ -29,6 +29,9 @@ importers:
       '@repo/gantt':
         specifier: workspace:*
         version: link:../../packages/gantt
+      '@repo/tailwind-config':
+        specifier: workspace:*
+        version: link:../../packages/tailwind-config
       date-fns:
         specifier: ^3.6.0
         version: 3.6.0
