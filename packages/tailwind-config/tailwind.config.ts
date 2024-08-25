@@ -1,198 +1,80 @@
-import typography from '@tailwindcss/typography';
-import type { Config } from 'tailwindcss';
-import animate from 'tailwindcss-animate';
-import defaultTheme from 'tailwindcss/defaultTheme';
+import type { Config } from "tailwindcss"
 
-const config: Config = {
-  darkMode: ['class'],
+const config = {
+  darkMode: ["class"],
   content: [
-    './app/**/*.{ts,tsx}',
+    './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
-    './lib/**/*.{ts,tsx}',
-    './providers/**/*.{ts,tsx}',
-
-    '../../packages/*/app/**/*.{ts,tsx}',
-    '../../packages/*/components/**/*.{ts,tsx}',
-    '../../packages/*/lib/**/*.{ts,tsx}',
-    '../../packages/*/providers/**/*.{ts,tsx}',
-    '../../packages/*/src/**/*.{ts,tsx}',
-  ],
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
+	],
+  prefix: "",
   theme: {
     container: {
       center: true,
-      padding: '2rem',
+      padding: "2rem",
       screens: {
-        '2xl': '1400px',
+        "2xl": "1400px",
       },
     },
     extend: {
       colors: {
-        border: 'hsl(var(--border) / <alpha-value>)',
-        input: 'hsl(var(--input) / <alpha-value>)',
-        ring: 'hsl(var(--ring) / <alpha-value>)',
-        background: 'hsl(var(--background) / <alpha-value>)',
-        foreground: 'hsl(var(--foreground) / <alpha-value>)',
-        backdrop: 'hsl(var(--backdrop) / <alpha-value>)',
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: 'hsl(var(--primary) / <alpha-value>)',
-          foreground: 'hsl(var(--primary-foreground) / <alpha-value>)',
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
-          DEFAULT: 'hsl(var(--secondary) / <alpha-value>)',
-          foreground: 'hsl(var(--secondary-foreground) / <alpha-value>)',
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
         },
         destructive: {
-          DEFAULT: 'hsl(var(--destructive) / <alpha-value>)',
-          foreground: 'hsl(var(--destructive-foreground) / <alpha-value>)',
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
         },
         muted: {
-          DEFAULT: 'hsl(var(--muted) / <alpha-value>)',
-          foreground: 'hsl(var(--muted-foreground) / <alpha-value>)',
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
-          DEFAULT: 'hsl(var(--accent) / <alpha-value>)',
-          foreground: 'hsl(var(--accent-foreground) / <alpha-value>)',
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
         },
         popover: {
-          DEFAULT: 'hsl(var(--popover) / <alpha-value>)',
-          foreground: 'hsl(var(--popover-foreground) / <alpha-value>)',
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
         },
         card: {
-          DEFAULT: 'hsl(var(--card) / <alpha-value>)',
-          foreground: 'hsl(var(--card-foreground) / <alpha-value>)',
-        },
-        success: {
-          DEFAULT: 'hsl(var(--success) / <alpha-value>)',
-          foreground: 'hsl(var(--success-foreground) / <alpha-value>)',
-        },
-        warning: {
-          DEFAULT: 'hsl(var(--warning) / <alpha-value>)',
-          foreground: 'hsl(var(--warning-foreground) / <alpha-value>)',
-        },
-        brand: {
-          DEFAULT: 'hsl(var(--primary) / <alpha-value>)',
-          foreground: 'hsl(var(--primary-foreground) / <alpha-value>)',
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
         },
       },
       borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
-      },
-      fontFamily: {
-        sans: ['var(--font-geist-sans)', ...defaultTheme.fontFamily.sans],
-        mono: ['var(--font-geist-mono)', ...defaultTheme.fontFamily.mono],
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
-        'accordion-down': {
-          from: { height: '0' },
-          to: { height: 'var(--radix-accordion-content-height)' },
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
-        'accordion-up': {
-          from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: '0' },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
       animation: {
-        'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out',
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
-      typography: (theme: (path: string) => string) => ({
-        DEFAULT: {
-          css: {
-            ':first-child': {
-              marginTop: theme('margin.0'),
-            },
-            'h1, h2, h3, h4, h5, h6': {
-              fontWeight: theme('fontWeight.semibold'),
-              letterSpacing: theme('letterSpacing.tight'),
-              marginBottom: theme('margin.4'),
-
-              '+ h1, + h2, + h3, + h4, + h5, + h6': {
-                marginTop: theme('margin.0'),
-              },
-            },
-            h1: {
-              fontSize: theme('fontSize.3xl'),
-              marginTop: theme('margin.16'),
-            },
-            h2: {
-              fontSize: theme('fontSize.2xl'),
-            },
-            h3: {
-              fontSize: theme('fontSize.xl'),
-            },
-            h4: {
-              fontSize: theme('fontSize.lg'),
-            },
-            h5: {
-              fontSize: theme('fontSize.base'),
-            },
-            h6: {
-              fontSize: theme('fontSize.base'),
-            },
-            table: {
-              boxShadow: `0 0 0 1px ${theme('colors.gray.200')}`,
-              borderRadius: theme('borderRadius.md'),
-              overflow: 'hidden',
-              p: {
-                margin: 0,
-              },
-              th: {
-                paddingTop: '0.5714286em',
-                paddingRight: '0.5714286em',
-                paddingBottom: '0.5714286em',
-                paddingLeft: '0.5714286em',
-                backgroundColor: theme('colors.gray.100'),
-                '&:not(:last-child)': {
-                  borderRightWidth: '1px',
-                  borderRightColor: theme('colors.gray.200'),
-                },
-              },
-              'tbody td, tfoot td': {
-                paddingLeft: '0.5714286em',
-                '&:not(:last-child)': {
-                  borderRightWidth: '1px',
-                  borderRightColor: theme('colors.gray.200'),
-                },
-              },
-            },
-            code: {
-              '&::before, &::after': {
-                display: 'none',
-              },
-            },
-            pre: {
-              borderWidth: 1,
-              borderColor: theme('colors.gray.200'),
-            },
-          },
-        },
-        invert: {
-          css: {
-            table: {
-              boxShadow: `0 0 0 1px ${theme('colors.gray.700')}`,
-              th: {
-                backgroundColor: theme('colors.gray.800'),
-                '&:not(:last-child)': {
-                  borderRightColor: theme('colors.gray.700'),
-                },
-              },
-              'tbody td, tfoot td': {
-                '&:not(:last-child)': {
-                  borderRightColor: theme('colors.gray.700'),
-                },
-              },
-            },
-            pre: {
-              borderColor: theme('colors.gray.800'),
-            },
-          },
-        },
-      }),
     },
   },
-  plugins: [animate, typography],
-};
+  plugins: [require("tailwindcss-animate")],
+} satisfies Config
 
-export default config;
+export default config
