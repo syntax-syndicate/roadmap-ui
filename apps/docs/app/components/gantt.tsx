@@ -55,12 +55,15 @@ export const GanttExample: FC = () => {
     endDate: Date | null
   ) => toast.success(`Move feature: ${id} from ${startDate} to ${endDate}`);
 
+  const handleAddFeature = (date: Date) =>
+    toast.success(`Add feature: ${date.toISOString()}`);
+
   return (
     <Gantt.Provider
       features={exampleFeatures}
       editable
       grouping="feature"
-      onAddItem={console.log}
+      onAddItem={handleAddFeature}
       range="monthly"
       zoom={100}
     >
