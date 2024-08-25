@@ -1,5 +1,9 @@
 import { useDraggable } from '@dnd-kit/core';
-import { Avatar } from '@repo/shadcn-ui/components/ui/avatar';
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from '@repo/shadcn-ui/components/ui/avatar';
 import { Card } from '@repo/shadcn-ui/components/ui/card';
 import { cn } from '@repo/shadcn-ui/lib/utils';
 import { type FC, useContext, useEffect } from 'react';
@@ -37,11 +41,10 @@ export const FeatureItemCard: FC<FeatureItemCardProps> = ({
       >
         <p className="flex-1 truncate text-xs">{name}</p>
         {owner && (
-          <Avatar
-            size={16}
-            src={owner.image}
-            fallback={owner.name?.slice(0, 2)}
-          />
+          <Avatar className="h-4 w-4">
+            <AvatarImage src={owner.image} />
+            <AvatarFallback>{owner.name?.slice(0, 2)}</AvatarFallback>
+          </Avatar>
         )}
       </div>
     </Card>
