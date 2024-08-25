@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { GanttExample } from '../components/gantt';
 
 import { CopyIcon } from 'lucide-react';
+import BunLogo from './bun.svg';
 import EververseLogo from './eververse.png';
 import GanttLogo from './gantt.svg';
 import GithubLogo from './github.svg';
@@ -45,9 +46,10 @@ export default function HomePage() {
           </a>
         </p>
         <div className="flex w-full items-center justify-center space-x-4 py-4 md:pb-10">
-          <div className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
-            <div className="text-muted-foreground pr-1">
-              <span className="text-foreground">pnpm</span> add roadmap-ui
+          <div className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 gap-2">
+            <Image src={BunLogo} alt="Bun" width={16} height={16} />
+            <div className="text-muted-foreground">
+              <span className="text-foreground">bun</span> add roadmap-ui
             </div>
             <button
               className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 relative z-10 h-6 w-6 hover:bg-zinc-700 hover:text-zinc-50"
