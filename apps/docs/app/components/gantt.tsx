@@ -1,6 +1,6 @@
 'use client';
 
-import { Gantt, type GanttProperties } from '@repo/gantt';
+import * as Gantt from '@repo/gantt';
 import { addMonths, endOfMonth, startOfMonth, subMonths } from 'date-fns';
 import type { FC } from 'react';
 
@@ -362,7 +362,7 @@ const exampleMarkers: GanttProperties['markers'] = [
 ];
 
 export const GanttExample: FC = () => (
-  <Gantt
+  <Gantt.Provider
     features={exampleFeatures}
     markers={exampleMarkers}
     editable
@@ -376,5 +376,8 @@ export const GanttExample: FC = () => (
     onSelectItem={console.log}
     range="monthly"
     zoom={100}
-  />
+  >
+    <Gantt.Sidebar />
+    <Gantt.Timeline />
+  </Gantt.Provider>
 );

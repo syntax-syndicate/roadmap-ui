@@ -15,7 +15,7 @@ const headers: Record<Range, FC> = {
   quarterly: QuarterlyHeader,
 };
 
-export const GanttContent: FC = () => {
+export const GanttTimeline: FC = () => {
   const gantt = useContext(GanttContext);
   const Header = headers[gantt.range];
 
