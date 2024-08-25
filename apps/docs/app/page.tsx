@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { GanttExample } from './components/gantt';
 
 import { CopyIcon } from 'lucide-react';
+import GanttLogo from './gantt.svg';
 import GithubLogo from './github.svg';
 import ReactLogo from './react.svg';
 
@@ -13,12 +14,20 @@ export default function HomePage() {
           Composable{' '}
           <Image
             src={ReactLogo}
-            alt="React"
+            alt=""
             width={48}
             height={48}
-            className="inline-block"
+            className="inline-block align-baseline"
           />{' '}
-          React components for building interactive roadmaps.
+          React components for building interactive{' '}
+          <Image
+            src={GanttLogo}
+            alt=""
+            width={48}
+            height={48}
+            className="inline-block align-baseline -rotate-6 ml-2 translate-y-1"
+          />{' '}
+          roadmaps.
         </h1>
         <p className="mt-6 max-w-[750px] text-center text-lg text-muted-foreground sm:text-xl text-pretty">
           Accessible, customizable, perormant and open source.
