@@ -1,5 +1,5 @@
 import { useDraggable } from '@dnd-kit/core';
-import { cn } from '@repo/lib/cn';
+import { cn } from '@repo/shadcn-ui/lib/utils';
 import { format } from 'date-fns';
 import type { FC } from 'react';
 import { useContext, useEffect } from 'react';

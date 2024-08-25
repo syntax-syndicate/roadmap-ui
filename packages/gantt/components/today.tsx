@@ -3,7 +3,7 @@ import {
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuTrigger,
-} from '@repo/design-system/components/context-menu';
+} from '@repo/shadcn-ui/components/ui/context-menu';
 import { formatDate } from 'date-fns';
 import { TrashIcon } from 'lucide-react';
 import type { FC } from 'react';

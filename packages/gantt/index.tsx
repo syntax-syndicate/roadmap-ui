@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@repo/lib/cn';
+import { cn } from '@repo/shadcn-ui/lib/utils';
 import { getDaysInMonth } from 'date-fns';
 import groupBy from 'lodash.groupby';
 import throttle from 'lodash.throttle';

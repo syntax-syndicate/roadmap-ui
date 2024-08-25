@@ -1,18 +1,18 @@
 import { DndContext, MouseSensor, useSensor } from '@dnd-kit/core';
 import { restrictToHorizontalAxis } from '@dnd-kit/modifiers';
-import { Avatar } from '@repo/design-system/components/avatar';
+import { Avatar } from '@repo/shadcn-ui/components/ui/avatar';
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuTrigger,
-} from '@repo/design-system/components/context-menu';
+} from '@repo/shadcn-ui/components/ui/context-menu';
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from '@repo/design-system/components/hover-card';
-import { Separator } from '@repo/design-system/components/separator';
+} from '@repo/shadcn-ui/components/ui/hover-card';
+import { Separator } from '@repo/shadcn-ui/components/ui/separator';
 import { addDays, getDate, getDaysInMonth, isSameDay } from 'date-fns';
 import { EyeIcon, LinkIcon, TrashIcon } from 'lucide-react';
 import { type FC, useContext, useRef, useState } from 'react';
