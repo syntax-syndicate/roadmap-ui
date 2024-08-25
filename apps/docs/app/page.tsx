@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Gantt } from '@repo/gantt';
 
 export default function HomePage() {
   return (
@@ -14,6 +15,21 @@ export default function HomePage() {
         </Link>{' '}
         and see the documentation.
       </p>
+      <Gantt
+        features={[]}
+        markers={[]}
+        editable
+        grouping="feature"
+        onAddItem={console.log}
+        onAddMarker={console.log}
+        onCopyItemLink={console.log}
+        onMoveItem={console.log}
+        onRemoveItem={console.log}
+        onRemoveMarker={console.log}
+        onSelectItem={console.log}
+        range="monthly"
+        zoom={100}
+      />
     </main>
   );
 }

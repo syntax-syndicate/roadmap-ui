@@ -1,5 +1,5 @@
 {
-  "name": "@repo/roadmap-views",
+  "name": "@repo/gantt",
   "version": "0.0.0",
   "private": true,
   "devDependencies": {
