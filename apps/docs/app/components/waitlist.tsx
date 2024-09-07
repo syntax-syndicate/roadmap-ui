@@ -17,7 +17,7 @@ const SubmitButton: FC = () => {
       type="submit"
       disabled={pending}
     >
-      Subscribe
+      Join the waitlist
     </button>
   );
 };
