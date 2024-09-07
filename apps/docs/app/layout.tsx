@@ -1,17 +1,27 @@
-import './global.css';
+import '@repo/tailwind-config/globals.css';
+import { Toaster } from '@repo/shadcn-ui/components/ui/sonner';
+import { cn } from '@repo/shadcn-ui/lib/utils';
 import { RootProvider } from 'fumadocs-ui/provider';
-import { Inter } from 'next/font/google';
+import { GeistMono } from 'geist/font/mono';
+import { GeistSans } from 'geist/font/sans';
 import type { ReactNode } from 'react';
-
-const inter = Inter({
-  subsets: ['latin'],
-});
+import { Navbar } from '../../docs/app/components/navbar';
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={inter.className} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={cn(
+        'font-sans antialiased',
+        GeistSans.variable,
+        GeistMono.variable
+      )}
+      suppressHydrationWarning
+    >
       <body>
+        <Navbar />
         <RootProvider>{children}</RootProvider>
+        <Toaster />
       </body>
     </html>
   );

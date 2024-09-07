@@ -9,6 +9,7 @@
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
+    "@repo/tailwind-config": "workspace:*",
     "next": "^14.2.8",
     "fumadocs-ui": "13.4.7",
     "fumadocs-core": "13.4.7",
