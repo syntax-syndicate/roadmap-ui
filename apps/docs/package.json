@@ -9,12 +9,13 @@
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
-    "@repo/tailwind-config": "workspace:*",
     "@repo/shadcn-ui": "workspace:*",
+    "@repo/tailwind-config": "workspace:*",
     "fumadocs-core": "13.4.7",
     "fumadocs-mdx": "10.0.1",
     "fumadocs-ui": "13.4.7",
     "geist": "^1.3.1",
+    "lucide-react": "^0.439.0",
     "next": "^14.2.8",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
