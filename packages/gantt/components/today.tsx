@@ -49,7 +49,7 @@ export const Today: FC = () => {
     >
       <div className="group pointer-events-auto sticky top-0 flex select-auto flex-col flex-nowrap items-center justify-center whitespace-nowrap rounded-b-md bg-card px-2 py-1 text-foreground text-xs">
         {label}
-        <span className="max-h-[0] overflow-hidden text-white/80 transition-all group-hover:max-h-[2rem]">
+        <span className="max-h-[0] overflow-hidden opacity-80 transition-all group-hover:max-h-[2rem]">
           {formatDate(date, 'MMM dd, yyyy')}
         </span>
       </div>
