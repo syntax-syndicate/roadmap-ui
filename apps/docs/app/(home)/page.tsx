@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import { GanttExample } from '../components/gantt';
 import { Waitlist } from '../components/waitlist';
@@ -5,10 +6,19 @@ import EververseLogo from './eververse.png';
 import GanttLogo from './gantt.svg';
 import ReactLogo from './react.svg';
 
+export const metadata: Metadata = {
+  title: 'Roadmap UI',
+  description:
+    'A collection of accessible, customizable, performant and open source components built for Eververse.',
+};
+
 export default function HomePage() {
   return (
     <div className="h-screen overflow-hidden">
       <section className="container mx-auto max-w-5xl flex flex-col items-center gap-2 py-8 md:py-12 lg:py-16">
+        <div className="mb-8 inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-primary text-primary">
+          Coming Soon
+        </div>
         <h1 className="text-center text-3xl font-bold leading-tight tracking-tighter md:text-6xl lg:leading-[1.1]">
           Composable{' '}
           <Image
