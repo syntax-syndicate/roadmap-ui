@@ -32,6 +32,8 @@ export type Feature = {
   };
 };
 
+export type FeatureProps = Feature;
+
 export type Range = 'daily' | 'monthly' | 'quarterly';
 
 export type Grouping =

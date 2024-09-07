@@ -1,5 +1,5 @@
 import type { MarkerProps } from '@repo/gantt/components/marker';
-import type { ProviderProperties } from '@repo/gantt/components/provider';
+import type { FeatureProps } from '@repo/gantt/types/types';
 import tailwind from '@repo/tailwind-config/tailwind';
 import { addMonths, endOfMonth, startOfMonth, subMonths } from 'date-fns';
 
@@ -12,7 +12,7 @@ const exampleStatuses = [
   { name: 'Planned', color: tailwind.theme.colors.gray[500] },
 ];
 
-export const exampleFeatures: ProviderProperties['features'] = [
+export const exampleFeatures: FeatureProps[] = [
   {
     id: '1',
     name: 'AI Scene Analysis',

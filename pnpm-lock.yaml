@@ -35,6 +35,9 @@ importers:
       '@repo/tailwind-config':
         specifier: workspace:*
         version: link:../../packages/tailwind-config
+      date-fns:
+        specifier: ^3.6.0
+        version: 3.6.0
       fumadocs-core:
         specifier: 13.4.7
         version: 13.4.7(@types/react@18.3.5)(next@14.2.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
