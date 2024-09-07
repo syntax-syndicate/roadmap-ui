@@ -37,7 +37,8 @@ export type MarkerProps = {
   id: string;
   date: Date;
   label: string;
-  color?: string;
+  backgroundColor?: string;
+  textColor?: string;
   onRemove?: (id: string) => void;
 };
 
@@ -46,7 +47,8 @@ export const Marker: FC<MarkerProps> = ({
   date,
   id,
   onRemove,
-  color,
+  backgroundColor,
+  textColor,
 }) => {
   const gantt = useContext(GanttContext);
   const differenceIn = getDifferenceIn(gantt.range);
@@ -70,11 +72,11 @@ export const Marker: FC<MarkerProps> = ({
       <ContextMenu>
         <ContextMenuTrigger asChild>
           <div
-            className="group pointer-events-auto sticky top-0 flex select-auto flex-col flex-nowrap items-center justify-center whitespace-nowrap rounded-b-md bg-primary px-2 py-1 text-white text-xs"
-            style={{ backgroundColor: color }}
+            className="group pointer-events-auto sticky top-0 flex select-auto flex-col flex-nowrap items-center justify-center whitespace-nowrap rounded-b-md bg-primary text-white px-2 py-1 text-xs"
+            style={{ backgroundColor, color: textColor }}
           >
             {label}
-            <span className="max-h-[0] overflow-hidden text-white/80 transition-all group-hover:max-h-[2rem]">
+            <span className="max-h-[0] overflow-hidden opacity-80 transition-all group-hover:max-h-[2rem]">
               {formatDate(date, 'MMM dd, yyyy')}
             </span>
           </div>
@@ -91,10 +93,7 @@ export const Marker: FC<MarkerProps> = ({
           ) : null}
         </ContextMenuContent>
       </ContextMenu>
-      <div
-        className="h-full w-px bg-primary"
-        style={{ backgroundColor: color }}
-      />
+      <div className="h-full w-px bg-primary" style={{ backgroundColor }} />
     </div>
   );
 };

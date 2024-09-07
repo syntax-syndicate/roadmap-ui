@@ -337,42 +337,48 @@ export const exampleFeatures: ProviderProperties['features'] = [
 
 export const exampleMarkers: Pick<
   MarkerProps,
-  'id' | 'date' | 'label' | 'color'
+  'id' | 'date' | 'label' | 'backgroundColor' | 'textColor'
 >[] = [
   {
     id: '1',
     date: startOfMonth(subMonths(today, 3)),
     label: 'Project Kickoff',
-    color: tailwind.theme.colors.blue[500],
+    backgroundColor: tailwind.theme.colors.blue[200],
+    textColor: tailwind.theme.colors.blue[900],
   },
   {
     id: '2',
     date: subMonths(endOfMonth(today), 2),
     label: 'Phase 1 Completion',
-    color: tailwind.theme.colors.green[500],
+    backgroundColor: tailwind.theme.colors.green[200],
+    textColor: tailwind.theme.colors.green[900],
   },
   {
     id: '3',
     date: startOfMonth(addMonths(today, 3)),
     label: 'Beta Release',
-    color: tailwind.theme.colors.purple[500],
+    backgroundColor: tailwind.theme.colors.purple[200],
+    textColor: tailwind.theme.colors.purple[900],
   },
   {
     id: '4',
     date: endOfMonth(addMonths(today, 6)),
     label: 'Version 1.0 Launch',
-    color: tailwind.theme.colors.red[500],
+    backgroundColor: tailwind.theme.colors.red[200],
+    textColor: tailwind.theme.colors.red[900],
   },
   {
     id: '5',
     date: startOfMonth(addMonths(today, 9)),
     label: 'User Feedback Review',
-    color: tailwind.theme.colors.orange[500],
+    backgroundColor: tailwind.theme.colors.orange[200],
+    textColor: tailwind.theme.colors.orange[900],
   },
   {
     id: '6',
     date: endOfMonth(addMonths(today, 12)),
     label: 'Annual Performance Evaluation',
-    color: tailwind.theme.colors.teal[500],
+    backgroundColor: tailwind.theme.colors.teal[200],
+    textColor: tailwind.theme.colors.teal[900],
   },
 ];
