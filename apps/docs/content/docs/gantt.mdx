@@ -1,0 +1,352 @@
+---
+title: Gantt
+description: The Gantt chart is a powerful tool for visualizing project schedules and tracking the progress of tasks. It provides a clear, hierarchical view of tasks, allowing you to easily identify manage project timelines.
+icon: SquareChartGantt
+---
+
+<div className="not-prose w-full bg-white border rounded-xl overflow-hidden" style={{ height: '32rem' }}>
+  <Gantt.Basic />
+</div>
+
+## Features
+
+- Resizable and draggable timeline items
+- Markers to highlight important dates
+- Today marker to highlight the current date
+- Create marker trigger to create a new marker
+- Grouping of features
+
+## Subcomponents
+
+The Gantt chart is made up of the following subcomponents:
+
+| Subcomponent | Description |
+| ------- | ----------- |
+| Provider | The provider of the Gantt chart containing the drag-and-drop context. |
+| Sidebar | A container for the sidebar header and items. |
+| SidebarHeader | The header of the sidebar. |
+| SidebarGroup | A group of sidebar items. |
+| SidebarItem | A single item in the sidebar. |
+| Timeline | A container for the timeline and its content. |
+| Header | The header of the timeline with the columns. |
+| FeatureList | A container for the groups of features. |
+| FeatureListGroup | A logical group of features. |
+| FeatureItem | A single feature. |
+| Marker | A marker on the timeline e.g. a milestone. |
+| Today | A visual cue for the current date. |
+| Create Marker Trigger | A button to create a marker on the timeline. |
+
+## Usage
+
+### Basic Example
+
+This example shows a basic Gantt chart with a sidebar, timeline, header, and features.
+
+<div className="not-prose w-full bg-white border rounded-xl overflow-hidden" style={{ height: '32rem' }}>
+  <Gantt.Basic />
+</div>
+
+```tsx
+'use client';
+
+import * as Gantt from '@repo/gantt';
+import type { Feature } from '@repo/gantt/types/types';
+import type { FC } from 'react';
+import { toast } from 'sonner';
+import { exampleFeatures, exampleMarkers } from '../../lib/content';
+
+export const GanttExample: FC = () => {
+  const groupedFeatures: Record<string, Feature[]> = {
+    features: exampleFeatures,
+  };
+
+  const sortedGroupedFeatures = Object.fromEntries(
+    Object.entries(groupedFeatures).sort(([nameA], [nameB]) =>
+      nameA.localeCompare(nameB)
+    )
+  );
+
+  const handleViewFeature = (id: string) =>
+    toast.success(`Feature selected: ${id}`);
+
+  const handleCopyLink = (id: string) => toast.success(`Copy link: ${id}`);
+
+  const handleRemoveFeature = (id: string) =>
+    toast.success(`Remove feature: ${id}`);
+
+  const handleRemoveMarker = (id: string) =>
+    toast.success(`Remove marker: ${id}`);
+
+  const handleCreateMarker = (date: Date) =>
+    toast.success(`Create marker: ${date.toISOString()}`);
+
+  const handleMoveFeature = (id: string, startAt: Date, endAt: Date | null) => {
+    if (!endAt) {
+      return;
+    }
+
+    setFeatures((prev) =>
+      prev.map((feature) =>
+        feature.id === id ? { ...feature, startAt, endAt } : feature
+      )
+    );
+
+    toast.success(`Move feature: ${id} from ${startAt} to ${endAt}`);
+  };
+
+  const handleAddFeature = (date: Date) =>
+    toast.success(`Add feature: ${date.toISOString()}`);
+
+  return (
+    <Gantt.Provider
+      editable
+      grouping="feature"
+      onAddItem={handleAddFeature}
+      range="monthly"
+      zoom={100}
+    >
+      <Gantt.Sidebar>
+        {Object.entries(sortedGroupedFeatures).map(([group, features]) => (
+          <Gantt.SidebarGroup key={group} name={group}>
+            {features.map((feature) => (
+              <Gantt.SidebarItem
+                key={feature.id}
+                feature={feature}
+                onSelectItem={handleViewFeature}
+              />
+            ))}
+          </Gantt.SidebarGroup>
+        ))}
+      </Gantt.Sidebar>
+      <Gantt.Timeline>
+        <Gantt.Header />
+        <Gantt.FeatureList>
+          {Object.entries(sortedGroupedFeatures).map(([group, features]) => (
+            <Gantt.FeatureListGroup key={group}>
+              {features.map((feature) => (
+                <Gantt.FeatureItem
+                  key={feature.id}
+                  {...feature}
+                  onMove={handleMoveFeature}
+                />
+              ))}
+            </Gantt.FeatureListGroup>
+          ))}
+        </Gantt.FeatureList>
+        {exampleMarkers.map((marker) => (
+          <Gantt.Marker
+            key={marker.id}
+            {...marker}
+            onRemove={handleRemoveMarker}
+          />
+        ))}
+        <Gantt.Today />
+        <Gantt.CreateMarkerTrigger onCreateMarker={handleCreateMarker} />
+      </Gantt.Timeline>
+    </Gantt.Provider>
+  );
+};
+```
+
+### Complex Example
+
+This example shows a more complex Gantt chart with a sidebar, timeline, header, and features. It also uses Shadcn UI for the context menu and hover card. Try hovering over the features to see the hover card, or right-click an item to open the context menu. It also renders the owner of the feature in the hover card.
+
+<div className="not-prose w-full bg-white border rounded-xl overflow-hidden" style={{ height: '32rem' }}>
+  <Gantt.Custom />
+</div>
+
+```tsx
+'use client';
+
+import * as Gantt from '@repo/gantt';
+import type { Feature } from '@repo/gantt/types/types';
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from '@repo/shadcn-ui/components/ui/avatar';
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from '@repo/shadcn-ui/components/ui/context-menu';
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from '@repo/shadcn-ui/components/ui/hover-card';
+import { Separator } from '@repo/shadcn-ui/components/ui/separator';
+import { EyeIcon, LinkIcon, TrashIcon } from 'lucide-react';
+import type { FC } from 'react';
+import { toast } from 'sonner';
+import { exampleFeatures, exampleMarkers } from '../../lib/content';
+
+export const GanttExample: FC = () => {
+  const groupedFeatures: Record<string, Feature[]> = {
+    features: exampleFeatures,
+  };
+
+  const sortedGroupedFeatures = Object.fromEntries(
+    Object.entries(groupedFeatures).sort(([nameA], [nameB]) =>
+      nameA.localeCompare(nameB)
+    )
+  );
+
+  const handleViewFeature = (id: string) =>
+    toast.success(`Feature selected: ${id}`);
+
+  const handleCopyLink = (id: string) => toast.success(`Copy link: ${id}`);
+
+  const handleRemoveFeature = (id: string) =>
+    toast.success(`Remove feature: ${id}`);
+
+  const handleRemoveMarker = (id: string) =>
+    toast.success(`Remove marker: ${id}`);
+
+  const handleCreateMarker = (date: Date) =>
+    toast.success(`Create marker: ${date.toISOString()}`);
+
+  const handleMoveFeature = (id: string, startAt: Date, endAt: Date | null) => {
+    if (!endAt) {
+      return;
+    }
+
+    setFeatures((prev) =>
+      prev.map((feature) =>
+        feature.id === id ? { ...feature, startAt, endAt } : feature
+      )
+    );
+
+    toast.success(`Move feature: ${id} from ${startAt} to ${endAt}`);
+  };
+
+  const handleAddFeature = (date: Date) =>
+    toast.success(`Add feature: ${date.toISOString()}`);
+
+  return (
+    <Gantt.Provider
+      editable
+      grouping="feature"
+      onAddItem={handleAddFeature}
+      range="monthly"
+      zoom={100}
+    >
+      <Gantt.Sidebar>
+        {Object.entries(sortedGroupedFeatures).map(([group, features]) => (
+          <Gantt.SidebarGroup key={group} name={group}>
+            {features.map((feature) => (
+              <Gantt.SidebarItem
+                key={feature.id}
+                feature={feature}
+                onSelectItem={handleViewFeature}
+              />
+            ))}
+          </Gantt.SidebarGroup>
+        ))}
+      </Gantt.Sidebar>
+      <Gantt.Timeline>
+        <Gantt.Header />
+        <Gantt.FeatureList>
+          {Object.entries(sortedGroupedFeatures).map(([group, features]) => (
+            <Gantt.FeatureListGroup key={group}>
+              {features.map((feature) => (
+                <HoverCard key={feature.id}>
+                  <HoverCardTrigger asChild>
+                    <div>
+                      <ContextMenu>
+                        <ContextMenuTrigger asChild>
+                          <button
+                            type="button"
+                            onClick={() => handleViewFeature(feature.id)}
+                          >
+                            <Gantt.FeatureItem
+                              key={feature.id}
+                              {...feature}
+                              onMove={handleMoveFeature}
+                            />
+                          </button>
+                        </ContextMenuTrigger>
+                        <ContextMenuContent>
+                          <ContextMenuItem
+                            className="flex items-center gap-2"
+                            onClick={() => handleViewFeature(feature.id)}
+                          >
+                            <EyeIcon
+                              size={16}
+                              className="text-muted-foreground"
+                            />
+                            View feature
+                          </ContextMenuItem>
+                          <ContextMenuItem
+                            className="flex items-center gap-2"
+                            onClick={() => handleCopyLink(feature.id)}
+                          >
+                            <LinkIcon
+                              size={16}
+                              className="text-muted-foreground"
+                            />
+                            Copy link
+                          </ContextMenuItem>
+                          <ContextMenuItem
+                            className="flex items-center gap-2 text-destructive"
+                            onClick={() => handleRemoveFeature(feature.id)}
+                          >
+                            <TrashIcon size={16} />
+                            Remove from roadmap
+                          </ContextMenuItem>
+                        </ContextMenuContent>
+                      </ContextMenu>
+                    </div>
+                  </HoverCardTrigger>
+                  <HoverCardContent align="start" className="space-y-1">
+                    <p className="font-medium text-xs">{feature.name}</p>
+                    <div className="flex items-center gap-2">
+                      <div
+                        className="h-2 w-2 rounded-full"
+                        style={{ backgroundColor: feature.status.color }}
+                      />
+                      <p className="text-xs">{feature.status.name}</p>
+                    </div>
+                    <Separator />
+                    {feature.owner && (
+                      <div className="flex items-center gap-2">
+                        <Avatar>
+                          <AvatarImage src={feature.owner.image} />
+                          <AvatarFallback>
+                            {feature.owner.name?.slice(0, 2)}
+                          </AvatarFallback>
+                        </Avatar>
+                        <p className="text-xs">{feature.owner.name}</p>
+                      </div>
+                    )}
+                  </HoverCardContent>
+                </HoverCard>
+              ))}
+            </Gantt.FeatureListGroup>
+          ))}
+        </Gantt.FeatureList>
+        {exampleMarkers.map((marker) => (
+          <Gantt.Marker
+            key={marker.id}
+            {...marker}
+            onRemove={handleRemoveMarker}
+          />
+        ))}
+        <Gantt.Today />
+        <Gantt.CreateMarkerTrigger onCreateMarker={handleCreateMarker} />
+      </Gantt.Timeline>
+    </Gantt.Provider>
+  );
+};
+```
+
+### Simple Example
+
+This example shows a simple Gantt chart with a timeline, header, and features (no sidebar). It also removes the markers and create marker trigger.
+
+<div className="not-prose w-full bg-white border rounded-xl overflow-hidden" style={{ height: '32rem' }}>
+  <Gantt.Simple />
+</div>
+

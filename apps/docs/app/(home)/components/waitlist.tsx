@@ -1,6 +1,6 @@
 'use client';
 
-import { subscribe } from '@/app/actions/subscribe';
+import { subscribe } from '@/app/(home)/actions/subscribe';
 import { cn } from '@repo/shadcn-ui/lib/utils';
 import type { FC } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';

@@ -1,7 +1,6 @@
 'use client';
 
 import * as Gantt from '@repo/gantt';
-import type { Feature } from '@repo/gantt/types/types';
 import {
   Avatar,
   AvatarFallback,
@@ -19,14 +18,108 @@ import {
   HoverCardTrigger,
 } from '@repo/shadcn-ui/components/ui/hover-card';
 import { Separator } from '@repo/shadcn-ui/components/ui/separator';
+// import { toast } from 'sonner';
+import type { Feature } from '@repo/types';
 import { EyeIcon, LinkIcon, TrashIcon } from 'lucide-react';
-import type { FC } from 'react';
-import { toast } from 'sonner';
+import { type FC, useState } from 'react';
 import { exampleFeatures, exampleMarkers } from '../../lib/content';
 
-export const GanttExample: FC = () => {
+const toast = {
+  success: (message: string) => console.log(message),
+};
+
+export const GanttExampleBasic: FC = () => {
+  const [features, setFeatures] = useState(exampleFeatures);
   const groupedFeatures: Record<string, Feature[]> = {
-    features: exampleFeatures,
+    features,
+  };
+
+  const sortedGroupedFeatures = Object.fromEntries(
+    Object.entries(groupedFeatures).sort(([nameA], [nameB]) =>
+      nameA.localeCompare(nameB)
+    )
+  );
+
+  const handleViewFeature = (id: string) =>
+    toast.success(`Feature selected: ${id}`);
+
+  const handleRemoveMarker = (id: string) =>
+    toast.success(`Remove marker: ${id}`);
+
+  const handleCreateMarker = (date: Date) =>
+    toast.success(`Create marker: ${date.toISOString()}`);
+
+  const handleMoveFeature = (id: string, startAt: Date, endAt: Date | null) => {
+    if (!endAt) {
+      return;
+    }
+
+    setFeatures((prev) =>
+      prev.map((feature) =>
+        feature.id === id ? { ...feature, startAt, endAt } : feature
+      )
+    );
+
+    toast.success(`Move feature: ${id} from ${startAt} to ${endAt}`);
+  };
+
+  const handleAddFeature = (date: Date) =>
+    toast.success(`Add feature: ${date.toISOString()}`);
+
+  return (
+    <Gantt.Provider
+      editable
+      onAddItem={handleAddFeature}
+      range="monthly"
+      zoom={100}
+    >
+      <Gantt.Sidebar>
+        {Object.entries(sortedGroupedFeatures).map(([group, features]) => (
+          <Gantt.SidebarGroup key={group} name="Features">
+            {features.map((feature) => (
+              <Gantt.SidebarItem
+                key={feature.id}
+                feature={feature}
+                onSelectItem={handleViewFeature}
+              />
+            ))}
+          </Gantt.SidebarGroup>
+        ))}
+      </Gantt.Sidebar>
+      <Gantt.Timeline>
+        <Gantt.Header />
+        <Gantt.FeatureList>
+          {Object.entries(sortedGroupedFeatures).map(([group, features]) => (
+            <Gantt.FeatureListGroup key={group}>
+              {features.map((feature) => (
+                <Gantt.FeatureItem
+                  key={feature.id}
+                  onMove={handleMoveFeature}
+                  {...feature}
+                />
+              ))}
+            </Gantt.FeatureListGroup>
+          ))}
+        </Gantt.FeatureList>
+        {exampleMarkers.map((marker) => (
+          <Gantt.Marker
+            key={marker.id}
+            {...marker}
+            onRemove={handleRemoveMarker}
+          />
+        ))}
+        <Gantt.Today />
+        <Gantt.CreateMarkerTrigger onCreateMarker={handleCreateMarker} />
+      </Gantt.Timeline>
+    </Gantt.Provider>
+  );
+};
+
+export const GanttExampleCustom: FC = () => {
+  const [features, setFeatures] = useState(exampleFeatures);
+
+  const groupedFeatures: Record<string, typeof exampleFeatures> = {
+    features,
   };
 
   const sortedGroupedFeatures = Object.fromEntries(
@@ -41,7 +134,7 @@ export const GanttExample: FC = () => {
   const handleCopyLink = (id: string) => toast.success(`Copy link: ${id}`);
 
   const handleRemoveFeature = (id: string) =>
-    toast.success(`Remove feature: ${id}`);
+    setFeatures((prev) => prev.filter((feature) => feature.id !== id));
 
   const handleRemoveMarker = (id: string) =>
     toast.success(`Remove marker: ${id}`);
@@ -49,11 +142,19 @@ export const GanttExample: FC = () => {
   const handleCreateMarker = (date: Date) =>
     toast.success(`Create marker: ${date.toISOString()}`);
 
-  const handleMoveFeature = (
-    id: string,
-    startDate: Date,
-    endDate: Date | null
-  ) => toast.success(`Move feature: ${id} from ${startDate} to ${endDate}`);
+  const handleMoveFeature = (id: string, startAt: Date, endAt: Date | null) => {
+    if (!endAt) {
+      return;
+    }
+
+    setFeatures((prev) =>
+      prev.map((feature) =>
+        feature.id === id ? { ...feature, startAt, endAt } : feature
+      )
+    );
+
+    toast.success(`Move feature: ${id} from ${startAt} to ${endAt}`);
+  };
 
   const handleAddFeature = (date: Date) =>
     toast.success(`Add feature: ${date.toISOString()}`);
@@ -61,14 +162,13 @@ export const GanttExample: FC = () => {
   return (
     <Gantt.Provider
       editable
-      grouping="feature"
       onAddItem={handleAddFeature}
       range="monthly"
       zoom={100}
     >
       <Gantt.Sidebar>
         {Object.entries(sortedGroupedFeatures).map(([group, features]) => (
-          <Gantt.SidebarGroup key={group} name={group}>
+          <Gantt.SidebarGroup key={group} name="Features">
             {features.map((feature) => (
               <Gantt.SidebarItem
                 key={feature.id}
@@ -96,9 +196,21 @@ export const GanttExample: FC = () => {
                           >
                             <Gantt.FeatureItem
                               key={feature.id}
-                              {...feature}
                               onMove={handleMoveFeature}
-                            />
+                              {...feature}
+                            >
+                              <p className="flex-1 truncate text-xs">
+                                {feature.name}
+                              </p>
+                              {feature.owner && (
+                                <Avatar className="h-4 w-4">
+                                  <AvatarImage src={feature.owner.image} />
+                                  <AvatarFallback>
+                                    {feature.owner.name?.slice(0, 2)}
+                                  </AvatarFallback>
+                                </Avatar>
+                              )}
+                            </Gantt.FeatureItem>
                           </button>
                         </ContextMenuTrigger>
                         <ContextMenuContent>
@@ -169,6 +281,64 @@ export const GanttExample: FC = () => {
         ))}
         <Gantt.Today />
         <Gantt.CreateMarkerTrigger onCreateMarker={handleCreateMarker} />
+      </Gantt.Timeline>
+    </Gantt.Provider>
+  );
+};
+
+export const GanttExampleSimple: FC = () => {
+  const [features, setFeatures] = useState(exampleFeatures);
+
+  const groupedFeatures: Record<string, Feature[]> = {
+    features,
+  };
+
+  const sortedGroupedFeatures = Object.fromEntries(
+    Object.entries(groupedFeatures).sort(([nameA], [nameB]) =>
+      nameA.localeCompare(nameB)
+    )
+  );
+
+  const handleMoveFeature = (id: string, startAt: Date, endAt: Date | null) => {
+    if (!endAt) {
+      return;
+    }
+
+    setFeatures((prev) =>
+      prev.map((feature) =>
+        feature.id === id ? { ...feature, startAt, endAt } : feature
+      )
+    );
+
+    toast.success(`Move feature: ${id} from ${startAt} to ${endAt}`);
+  };
+
+  const handleAddFeature = (date: Date) =>
+    toast.success(`Add feature: ${date.toISOString()}`);
+
+  return (
+    <Gantt.Provider
+      editable
+      onAddItem={handleAddFeature}
+      range="monthly"
+      zoom={100}
+    >
+      <Gantt.Timeline>
+        <Gantt.Header />
+        <Gantt.FeatureList>
+          {Object.entries(sortedGroupedFeatures).map(([group, features]) => (
+            <Gantt.FeatureListGroup key={group}>
+              {features.map((feature) => (
+                <Gantt.FeatureItem
+                  key={feature.id}
+                  onMove={handleMoveFeature}
+                  {...feature}
+                />
+              ))}
+            </Gantt.FeatureListGroup>
+          ))}
+        </Gantt.FeatureList>
+        <Gantt.Today />
       </Gantt.Timeline>
     </Gantt.Provider>
   );

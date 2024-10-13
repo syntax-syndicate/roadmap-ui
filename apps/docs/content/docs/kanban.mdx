@@ -1,0 +1,157 @@
+---
+title: Kanban
+description: A kanban board is a visual tool that helps you manage and visualize your work. It is a board with columns, and each column represents a status, e.g. "Backlog", "In Progress", "Done".
+icon: SquareKanban
+---
+
+<div className="not-prose w-full">
+  <Kanban.Basic />
+</div>
+
+## Usage
+
+### Basic Example
+
+This example shows a basic kanban board with a list of features.
+
+<div className="not-prose w-full">
+  <Kanban.Basic />
+</div>
+
+```tsx
+'use client';
+
+import { exampleFeatures, exampleStatuses } from '@/lib/content';
+import type { DragEndEvent } from '@repo/kanban';
+import * as Kanban from '@repo/kanban';
+import { type FC, useState } from 'react';
+
+export const KanbanExample: FC = () => {
+  const [features, setFeatures] = useState(exampleFeatures);
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (!over) {
+      return;
+    }
+
+    const status = exampleStatuses.find((status) => status.name === over.id);
+
+    if (!status) {
+      return;
+    }
+
+    setFeatures(
+      features.map((feature) => {
+        if (feature.id === active.id) {
+          return { ...feature, status };
+        }
+
+        return feature;
+      })
+    );
+  };
+
+  return (
+    <Kanban.KanbanProvider onDragEnd={handleDragEnd}>
+      {exampleStatuses.map((status) => (
+        <Kanban.KanbanBoard
+          key={status.name}
+          id={status.name}
+          name={status.name}
+          color={status.color}
+        >
+          {features
+            .filter((feature) => feature.status.name === status.name)
+            .map((feature, index) => (
+              <Kanban.KanbanCard
+                key={feature.id}
+                id={feature.id}
+                name={feature.name}
+                parent={status.name}
+                index={index}
+              />
+            ))}
+        </Kanban.KanbanBoard>
+      ))}
+    </Kanban.KanbanProvider>
+  );
+};
+```
+
+### Custom Example
+
+This example shows a custom kanban board with a list of features. The card contents are rendered using a custom component, including a colored dot to represent the status and an owner avatar.
+
+<div className="not-prose w-full">
+  <Kanban.Custom />
+</div>
+
+```tsx
+'use client';
+
+import { exampleFeatures, exampleStatuses } from '@/lib/content';
+import type { DragEndEvent } from '@repo/kanban';
+import * as Kanban from '@repo/kanban';
+import { type FC, useState } from 'react';
+
+export const KanbanExample: FC = () => {
+  const [features, setFeatures] = useState(exampleFeatures);
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (!over) {
+      return;
+    }
+
+    const status = exampleStatuses.find((status) => status.name === over.id);
+
+    if (!status) {
+      return;
+    }
+
+    setFeatures(
+      features.map((feature) => {
+        if (feature.id === active.id) {
+          return { ...feature, status };
+        }
+
+        return feature;
+      })
+    );
+  };
+
+  return (
+    <Kanban.KanbanProvider onDragEnd={handleDragEnd}>
+      {exampleStatuses.map((status) => (
+        <Kanban.KanbanBoard
+          key={status.name}
+          id={status.name}
+          name={status.name}
+          color={status.color}
+        >
+          {features
+            .filter((feature) => feature.status.name === status.name)
+            .map((feature, index) => (
+              <Kanban.KanbanCard
+                key={feature.id}
+                id={feature.id}
+                name={feature.name}
+                parent={status.name}
+                index={index}
+              >
+              <div
+                  className="h-2 w-2 shrink-0 rounded-full"
+                  style={{ backgroundColor: feature.status.color }}
+                />
+                <p className="m-0 font-medium text-sm">{feature.name}</p>
+              </Kanban.KanbanCard>
+            ))}
+        </Kanban.KanbanBoard>
+      ))}
+    </Kanban.KanbanProvider>
+  );
+};
+```

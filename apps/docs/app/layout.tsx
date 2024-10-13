@@ -1,27 +1,35 @@
 import '@repo/tailwind-config/globals.css';
 import { Toaster } from '@repo/shadcn-ui/components/ui/sonner';
+import { TooltipProvider } from '@repo/shadcn-ui/components/ui/tooltip';
 import { cn } from '@repo/shadcn-ui/lib/utils';
-import { RootProvider } from 'fumadocs-ui/provider';
+import { Analytics } from '@vercel/analytics/react';
 import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
-import type { ReactNode } from 'react';
+import type { FC, ReactNode } from 'react';
+import { ThemeProvider } from './components/theme-provider';
 
-export default function Layout({ children }: { children: ReactNode }) {
-  return (
-    <html
-      lang="en"
-      className={cn(
-        'font-sans antialiased',
-        GeistSans.variable,
-        GeistMono.variable
-      )}
-      suppressHydrationWarning
-    >
-      <body>
-        {/* <Navbar /> */}
-        <RootProvider>{children}</RootProvider>
+type LayoutProps = {
+  children: ReactNode;
+};
+
+const Layout: FC<LayoutProps> = ({ children }) => (
+  <html
+    lang="en"
+    className={cn(
+      'font-sans antialiased',
+      GeistSans.variable,
+      GeistMono.variable
+    )}
+    suppressHydrationWarning
+  >
+    <body>
+      <ThemeProvider>
+        <TooltipProvider>{children}</TooltipProvider>
         <Toaster />
-      </body>
-    </html>
-  );
-}
+      </ThemeProvider>
+      <Analytics />
+    </body>
+  </html>
+);
+
+export default Layout;

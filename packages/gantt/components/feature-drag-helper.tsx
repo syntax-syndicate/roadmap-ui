@@ -1,11 +1,11 @@
 import { useDraggable } from '@dnd-kit/core';
 import { cn } from '@repo/shadcn-ui/lib/utils';
+import type { Feature } from '@repo/types';
 import { format } from 'date-fns';
 import type { FC } from 'react';
 import { useContext, useEffect } from 'react';
 import { GanttContext } from '../contexts/gantt-context';
 import { useGantt } from '../hooks/use-gantt';
-import type { Feature } from '../types/types';
 
 type FeatureDragHelperProps = {
   featureId: Feature['id'];
@@ -32,7 +32,7 @@ export const FeatureDragHelper: FC<FeatureDragHelperProps> = ({
   return (
     <div
       className={cn(
-        'group -translate-y-1/2 absolute top-1/2 z-[3] h-full w-6 cursor-col-resize rounded-md outline-none',
+        'group -translate-y-1/2 !cursor-col-resize absolute top-1/2 z-[3] h-full w-6 rounded-md outline-none',
         direction === 'left' ? '-left-2.5' : '-right-2.5'
       )}
       ref={setNodeRef}

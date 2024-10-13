@@ -12,13 +12,13 @@ import {
 } from 'react';
 import { type FC, useRef } from 'react';
 import { GanttContext } from '../contexts/gantt-context';
+import { useGantt } from '../hooks/use-gantt';
 import { createInitialTimelineData } from '../lib/data';
-import type { Grouping, Range, TimelineData } from '../types/types';
+import type { Range, TimelineData } from '../types/types';
 
 export type ProviderProperties = {
   range?: Range;
   zoom?: number;
-  grouping?: Grouping;
   onAddItem?: (date: Date) => void;
   editable?: boolean;
   children: ReactNode;
@@ -28,7 +28,6 @@ export type ProviderProperties = {
 export const Provider: FC<ProviderProperties> = ({
   zoom = 100,
   range = 'monthly',
-  grouping = 'feature',
   onAddItem,
   editable = false,
   children,
@@ -38,9 +37,13 @@ export const Provider: FC<ProviderProperties> = ({
   const [timelineData, setTimelineData] = useState<TimelineData>(
     createInitialTimelineData(new Date())
   );
+  const { setScrollX } = useGantt();
+  const sidebarElement = scrollRef.current?.querySelector(
+    '[data-roadmap-ui="gantt-sidebar"]'
+  );
 
   const headerHeight = 60;
-  const sidebarWidth = 300;
+  const sidebarWidth = sidebarElement ? 300 : 0;
   const rowHeight = 36;
   let columnWidth = 50;
 
@@ -63,8 +66,9 @@ export const Provider: FC<ProviderProperties> = ({
     if (scrollRef.current) {
       scrollRef.current.scrollLeft =
         scrollRef.current.scrollWidth / 2 - scrollRef.current.clientWidth / 2;
+      setScrollX(scrollRef.current.scrollLeft);
     }
-  }, [range, zoom]);
+  }, [range, zoom, setScrollX]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: "Throttled"
   const handleScroll = useCallback(
@@ -74,14 +78,19 @@ export const Provider: FC<ProviderProperties> = ({
       }
 
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      setScrollX(scrollLeft);
 
       if (scrollLeft === 0) {
         // Extend timelineData to the past
-        const firstYear = timelineData[0].year - 1;
+        const firstYear = timelineData[0]?.year;
+
+        if (!firstYear) {
+          return;
+        }
 
         const newTimelineData: TimelineData = [...timelineData];
         newTimelineData.unshift({
-          year: firstYear,
+          year: firstYear - 1,
           quarters: new Array(4).fill(null).map((_, quarterIndex) => ({
             months: new Array(3).fill(null).map((_, monthIndex) => {
               const month = quarterIndex * 3 + monthIndex;
@@ -96,13 +105,18 @@ export const Provider: FC<ProviderProperties> = ({
 
         // Scroll a bit forward so it's not at the very start
         scrollRef.current.scrollLeft = scrollRef.current.clientWidth;
+        setScrollX(scrollRef.current.scrollLeft);
       } else if (scrollLeft + clientWidth >= scrollWidth) {
         // Extend timelineData to the future
-        const lastYear = timelineData[timelineData.length - 1].year + 1;
+        const lastYear = timelineData[timelineData.length - 1]?.year;
+
+        if (!lastYear) {
+          return;
+        }
 
         const newTimelineData: TimelineData = [...timelineData];
         newTimelineData.push({
-          year: lastYear,
+          year: lastYear + 1,
           quarters: new Array(4).fill(null).map((_, quarterIndex) => ({
             months: new Array(3).fill(null).map((_, monthIndex) => {
               const month = quarterIndex * 3 + monthIndex;
@@ -118,9 +132,10 @@ export const Provider: FC<ProviderProperties> = ({
         // Scroll a bit back so it's not at the very end
         scrollRef.current.scrollLeft =
           scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
+        setScrollX(scrollRef.current.scrollLeft);
       }
     }, 100),
-    [timelineData]
+    [timelineData, setScrollX]
   );
 
   useEffect(() => {
@@ -140,9 +155,9 @@ export const Provider: FC<ProviderProperties> = ({
       value={{
         zoom,
         range,
-        grouping,
         headerHeight,
         columnWidth,
+        sidebarWidth,
         rowHeight,
         onAddItem,
         timelineData,

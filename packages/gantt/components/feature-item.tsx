@@ -1,9 +1,11 @@
 import { DndContext, MouseSensor, useSensor } from '@dnd-kit/core';
 import { restrictToHorizontalAxis } from '@dnd-kit/modifiers';
+import type { Feature } from '@repo/types';
+import { useMouse } from '@uidotdev/usehooks';
 import { addDays, getDate, getDaysInMonth, isSameDay } from 'date-fns';
-import { type FC, useContext, useRef, useState } from 'react';
+import { type FC, type ReactNode, useContext, useState } from 'react';
 import { GanttContext } from '../contexts/gantt-context';
-import { useMouseRef } from '../hooks/use-mouse-ref';
+import { useGantt } from '../hooks/use-gantt';
 import {
   getAddRange,
   getDifferenceIn,
@@ -11,7 +13,7 @@ import {
   getStartOf,
 } from '../lib/range-fns';
 import { getDateByMousePosition } from '../lib/utils';
-import type { Feature, GanttContextProps } from '../types/types';
+import type { GanttContextProps } from '../types/types';
 import { FeatureDragHelper } from './feature-drag-helper';
 import { FeatureItemCard } from './feature-item-card';
 
@@ -85,17 +87,18 @@ const getWidth = (
 export const FeatureItem: FC<
   Feature & {
     onMove: (id: string, startDate: Date, endDate: Date | null) => void;
+    children?: ReactNode;
   }
-> = ({ onMove, ...feature }) => {
+> = ({ onMove, children, ...feature }) => {
+  const { scrollX } = useGantt();
   const gantt = useContext(GanttContext);
-  const timelineStartDate = new Date(gantt.timelineData[0].year, 0, 1);
-  const [startAt, setStartAt] = useState(feature.startAt);
-  const [endAt, setEndAt] = useState(feature.endAt);
+  const timelineStartDate = new Date(gantt.timelineData.at(0)?.year ?? 0, 0, 1);
+  const [startAt, setStartAt] = useState<Date>(feature.startAt);
+  const [endAt, setEndAt] = useState<Date | null>(feature.endAt);
   const width = getWidth(startAt, endAt, gantt);
   const offset = getOffset(startAt, timelineStartDate, gantt);
   const addRange = getAddRange(gantt.range);
-  const ref = useRef<HTMLDivElement>(null);
-  const mouse = useMouseRef(ref);
+  const [mousePosition] = useMouse<HTMLDivElement>();
 
   const [previousMouseX, setPreviousMouseX] = useState(0);
   const [previousStartAt, setPreviousStartAt] = useState(startAt);
@@ -108,13 +111,13 @@ export const FeatureItem: FC<
   });
 
   const handleItemDragStart = () => {
-    setPreviousMouseX(mouse.x);
+    setPreviousMouseX(mousePosition.x);
     setPreviousStartAt(startAt);
     setPreviousEndAt(endAt);
   };
 
   const handleItemDragMove = () => {
-    const currentDate = getDateByMousePosition(gantt, mouse.x);
+    const currentDate = getDateByMousePosition(gantt, mousePosition.x);
     const originalDate = getDateByMousePosition(gantt, previousMouseX);
     const delta =
       gantt.range === 'daily'
@@ -128,10 +131,22 @@ export const FeatureItem: FC<
   };
 
   const onDragEnd = () => onMove(feature.id, startAt, endAt);
-  const handleLeftDragMove = () =>
-    setStartAt(getDateByMousePosition(gantt, mouse.x));
-  const handleRightDragMove = () =>
-    setEndAt(getDateByMousePosition(gantt, mouse.x));
+  const handleLeftDragMove = () => {
+    const ganttRect = gantt.ref?.current?.getBoundingClientRect();
+    const x =
+      mousePosition.x - (ganttRect?.left ?? 0) + scrollX - gantt.sidebarWidth;
+    const newStartAt = getDateByMousePosition(gantt, x);
+
+    setStartAt(newStartAt);
+  };
+  const handleRightDragMove = () => {
+    const ganttRect = gantt.ref?.current?.getBoundingClientRect();
+    const x =
+      mousePosition.x - (ganttRect?.left ?? 0) + scrollX - gantt.sidebarWidth;
+    const newEndAt = getDateByMousePosition(gantt, x);
+
+    setEndAt(newEndAt);
+  };
 
   return (
     <div
@@ -139,7 +154,6 @@ export const FeatureItem: FC<
       style={{ height: 'var(--gantt-row-height)' }}
     >
       <div
-        ref={ref}
         className="pointer-events-auto absolute top-0.5"
         style={{
           height: 'calc(var(--gantt-row-height) - 4px)',
@@ -168,11 +182,11 @@ export const FeatureItem: FC<
           onDragMove={handleItemDragMove}
           onDragEnd={onDragEnd}
         >
-          <FeatureItemCard
-            id={feature.id}
-            owner={feature.owner}
-            name={feature.name}
-          />
+          <FeatureItemCard id={feature.id}>
+            {children ?? (
+              <p className="flex-1 truncate text-xs">{feature.name}</p>
+            )}
+          </FeatureItemCard>
         </DndContext>
         {gantt.editable && (
           <DndContext
