@@ -1,6 +1,6 @@
 {
   "name": "roadmap-ui",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
@@ -8,7 +8,7 @@
     "bump-deps": "npx npm-check-updates -u --deep && pnpm install",
     "package:build": "tsup",
     "package:dev": "tsup --watch",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run package:build"
   },
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
@@ -22,11 +22,9 @@
     "typescript": "^5.6.3",
     "ultracite": "4.1.4"
   },
-  "dependencies": {
-    "react": "^18.3.1"
-  },
   "peerDependencies": {
-    "react": "^18.3.1"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "packageManager": "pnpm@9.12.1",
   "engines": {
