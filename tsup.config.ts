@@ -13,6 +13,7 @@ export default defineConfig({
     '.ts': 'tsx',
   },
   external: [
+    ...Object.keys(ganttPackage.peerDependencies),
     ...Object.keys(typesPackage.devDependencies),
     ...Object.keys(typesPackage.devDependencies),
   ],
