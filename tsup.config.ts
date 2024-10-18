@@ -9,6 +9,6 @@ export default defineConfig({
   loader: {
     '.ts': 'tsx',
   },
-  external: ['react'],
-  noExternal: [],
+  external: ['@repo/shadcn-ui', 'react'],
+  noExternal: ['@repo/types'],
 });

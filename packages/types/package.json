@@ -2,12 +2,8 @@
   "name": "@repo/types",
   "version": "0.0.0",
   "private": true,
-  "scripts": {
-    "build": "tsup"
-  },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
-    "tsup": "^8.3.0",
     "typescript": "^5.6.3"
   }
 }
