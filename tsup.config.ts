@@ -16,5 +16,9 @@ export default defineConfig({
     ...Object.keys(typesPackage.devDependencies),
     ...Object.keys(typesPackage.devDependencies),
   ],
-  noExternal: ['@repo/types', ...Object.keys(ganttPackage.dependencies)],
+  noExternal: [
+    '@repo/types',
+    '@repo/shadcn-ui',
+    ...Object.keys(ganttPackage.dependencies),
+  ],
 });

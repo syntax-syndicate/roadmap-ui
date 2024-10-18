@@ -18,6 +18,10 @@
     "moduleResolution": "Bundler",
     "allowJs": true,
     "jsx": "react-jsx",
-    "noEmit": true
+    "noEmit": true,
+    "baseUrl": "./",
+    "paths": {
+      "@repo/*": ["./packages/*"]
+    }
   }
 }
