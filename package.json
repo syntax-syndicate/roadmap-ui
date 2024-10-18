@@ -1,19 +1,11 @@
 {
   "name": "roadmap-ui",
-  "version": "0.0.10",
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "bump-deps": "npx npm-check-updates -u --deep && pnpm install",
-    "package:build": "tsup",
-    "package:dev": "tsup --watch",
-    "prepublishOnly": "npm run package:build"
+    "bump-deps": "npx npm-check-updates -u --deep && pnpm install"
   },
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
-  "files": ["dist"],
   "devDependencies": {
     "@biomejs/biome": "1.9.3",
     "@types/react": "^18.3.3",
