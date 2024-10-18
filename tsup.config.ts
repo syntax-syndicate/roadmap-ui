@@ -13,9 +13,8 @@ export default defineConfig({
     '.ts': 'tsx',
   },
   external: [
-    ...Object.keys(ganttPackage.dependencies),
     ...Object.keys(typesPackage.devDependencies),
     ...Object.keys(typesPackage.devDependencies),
   ],
-  noExternal: ['@repo/types'],
+  noExternal: ['@repo/types', ...Object.keys(ganttPackage.dependencies)],
 });
