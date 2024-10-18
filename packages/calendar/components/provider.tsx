@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@repo/shadcn-ui/lib/utils';
+import { cn } from '@roadmap-ui/shadcn-ui/lib/utils';
 import type { FC, ReactNode } from 'react';
 
 type CalendarProviderProps = {

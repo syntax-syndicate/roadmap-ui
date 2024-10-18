@@ -1,5 +1,5 @@
-import tailwind from '@repo/tailwind-config/tailwind';
-import type { Feature, Marker, Status } from '@repo/types';
+import tailwind from '@roadmap-ui/tailwind-config/tailwind';
+import type { Feature, Marker, Status } from '@roadmap-ui/types';
 import { addMonths, endOfMonth, startOfMonth, subMonths } from 'date-fns';
 
 const today = new Date();

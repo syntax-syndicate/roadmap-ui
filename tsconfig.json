@@ -21,7 +21,7 @@
     "noEmit": true,
     "baseUrl": "./",
     "paths": {
-      "@repo/*": ["./packages/*"]
+      "@roadmap-ui/*": ["./packages/*"]
     }
   }
 }

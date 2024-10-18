@@ -1,13 +1,13 @@
 'use client';
 
 import { exampleFeatures, exampleStatuses } from '@/lib/content';
-import type { DragEndEvent } from '@repo/kanban';
-import * as Kanban from '@repo/kanban';
+import type { DragEndEvent } from '@roadmap-ui/kanban';
+import * as Kanban from '@roadmap-ui/kanban';
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from '@repo/shadcn-ui/components/ui/avatar';
+} from '@roadmap-ui/shadcn-ui/components/ui/avatar';
 import { type FC, useState } from 'react';
 
 export const KanbanExampleBasic: FC = () => {

@@ -16,7 +16,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@repo/shadcn-ui/components/ui/table';
+} from '@roadmap-ui/shadcn-ui/components/ui/table';
 import { useState } from 'react';
 
 // biome-ignore lint/style/useNamingConvention: Table generics

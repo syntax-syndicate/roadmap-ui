@@ -1,25 +1,25 @@
 'use client';
 
-import * as Gantt from '@repo/gantt';
+import * as Gantt from '@roadmap-ui/gantt';
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from '@repo/shadcn-ui/components/ui/avatar';
+} from '@roadmap-ui/shadcn-ui/components/ui/avatar';
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuTrigger,
-} from '@repo/shadcn-ui/components/ui/context-menu';
+} from '@roadmap-ui/shadcn-ui/components/ui/context-menu';
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from '@repo/shadcn-ui/components/ui/hover-card';
-import { Separator } from '@repo/shadcn-ui/components/ui/separator';
+} from '@roadmap-ui/shadcn-ui/components/ui/hover-card';
+import { Separator } from '@roadmap-ui/shadcn-ui/components/ui/separator';
 // import { toast } from 'sonner';
-import type { Feature } from '@repo/types';
+import type { Feature } from '@roadmap-ui/types';
 import { EyeIcon, LinkIcon, TrashIcon } from 'lucide-react';
 import { type FC, useState } from 'react';
 import { exampleFeatures, exampleMarkers } from '../../lib/content';

@@ -6,15 +6,15 @@ import {
   EyeOffIcon,
 } from 'lucide-react';
 
-import { Button } from '@repo/shadcn-ui/components/ui/button';
+import { Button } from '@roadmap-ui/shadcn-ui/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@repo/shadcn-ui/components/ui/dropdown-menu';
-import { cn } from '@repo/shadcn-ui/lib/utils';
+} from '@roadmap-ui/shadcn-ui/components/ui/dropdown-menu';
+import { cn } from '@roadmap-ui/shadcn-ui/lib/utils';
 import type { HTMLAttributes } from 'react';
 
 interface TableHeaderProps<TData, TValue>

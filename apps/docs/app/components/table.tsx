@@ -1,7 +1,7 @@
 'use client';
 
 import { exampleFeatures } from '@/lib/content';
-import * as Table from '@repo/table';
+import * as Table from '@roadmap-ui/table';
 import { type FC, useState } from 'react';
 
 export const TableExampleBasic: FC = () => {
