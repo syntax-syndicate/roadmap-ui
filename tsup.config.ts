@@ -1,7 +1,7 @@
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
-  entry: ['index.tsx'],
+  entry: ['index.ts'],
   sourcemap: false,
   minify: true,
   dts: true,
@@ -9,5 +9,6 @@ export default defineConfig({
   loader: {
     '.ts': 'tsx',
   },
-  noExternal: ['@repo/gantt', '@repo/types', '@repo/shadcn-ui'],
+  external: ['@repo/shadcn-ui'],
+  noExternal: ['@repo/types'],
 });
