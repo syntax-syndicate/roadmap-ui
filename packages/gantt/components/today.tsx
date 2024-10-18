@@ -1,3 +1,4 @@
+import { cn } from '@roadmap-ui/shadcn-ui/lib/utils';
 import { formatDate } from 'date-fns';
 import type { FC } from 'react';
 import { useContext } from 'react';
@@ -26,7 +27,11 @@ const calculateInnerOffset = (
   return (dayOfMonth / totalRangeDays) * columnWidth;
 };
 
-export const Today: FC = () => {
+type TodayProps = {
+  className?: string;
+};
+
+export const Today: FC<TodayProps> = ({ className }) => {
   const label = 'Today';
   const date = new Date();
   const gantt = useContext(GanttContext);
@@ -47,13 +52,18 @@ export const Today: FC = () => {
         transform: `translateX(calc(var(--gantt-column-width) * ${offset} + ${innerOffset}px))`,
       }}
     >
-      <div className="group pointer-events-auto sticky top-0 flex select-auto flex-col flex-nowrap items-center justify-center whitespace-nowrap rounded-b-md bg-card px-2 py-1 text-foreground text-xs">
+      <div
+        className={cn(
+          'group pointer-events-auto sticky top-0 flex select-auto flex-col flex-nowrap items-center justify-center whitespace-nowrap rounded-b-md bg-card px-2 py-1 text-foreground text-xs',
+          className
+        )}
+      >
         {label}
         <span className="max-h-[0] overflow-hidden opacity-80 transition-all group-hover:max-h-[2rem]">
           {formatDate(date, 'MMM dd, yyyy')}
         </span>
       </div>
-      <div className="h-full w-px bg-card" />
+      <div className={cn('h-full w-px bg-card', className)} />
     </div>
   );
 };

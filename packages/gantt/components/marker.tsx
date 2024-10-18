@@ -4,6 +4,7 @@ import {
   ContextMenuItem,
   ContextMenuTrigger,
 } from '@roadmap-ui/shadcn-ui/components/ui/context-menu';
+import { cn } from '@roadmap-ui/shadcn-ui/lib/utils';
 import type { Marker as MarkerType } from '@roadmap-ui/types';
 import { formatDate } from 'date-fns';
 import { TrashIcon } from 'lucide-react';
@@ -37,8 +38,9 @@ const calculateInnerOffset = (
 export const Marker: FC<
   MarkerType & {
     onRemove?: (id: string) => void;
+    className?: string;
   }
-> = ({ label, date, id, onRemove, backgroundColor, textColor }) => {
+> = ({ label, date, id, onRemove, className }) => {
   const gantt = useContext(GanttContext);
   const differenceIn = getDifferenceIn(gantt.range);
   const timelineStartDate = new Date(gantt.timelineData.at(0)?.year ?? 0, 0, 1);
@@ -61,8 +63,10 @@ export const Marker: FC<
       <ContextMenu>
         <ContextMenuTrigger asChild>
           <div
-            className="group pointer-events-auto sticky top-0 flex select-auto flex-col flex-nowrap items-center justify-center whitespace-nowrap rounded-b-md bg-primary px-2 py-1 text-white text-xs"
-            style={{ backgroundColor, color: textColor }}
+            className={cn(
+              'group pointer-events-auto sticky top-0 flex select-auto flex-col flex-nowrap items-center justify-center whitespace-nowrap rounded-b-md bg-primary px-2 py-1 text-white text-xs',
+              className
+            )}
           >
             {label}
             <span className="max-h-[0] overflow-hidden opacity-80 transition-all group-hover:max-h-[2rem]">
@@ -82,7 +86,7 @@ export const Marker: FC<
           ) : null}
         </ContextMenuContent>
       </ContextMenu>
-      <div className="h-full w-px bg-primary" style={{ backgroundColor }} />
+      <div className={cn('h-full w-px bg-primary', className)} />
     </div>
   );
 };
