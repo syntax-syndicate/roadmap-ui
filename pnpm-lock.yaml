@@ -186,7 +186,7 @@ importers:
         specifier: ^0.452.0
         version: 0.452.0(react@18.3.1)
       react:
-        specifier: 18.3.1
+        specifier: ^18.3.1
         version: 18.3.1
       zustand:
         specifier: ^4.5.5

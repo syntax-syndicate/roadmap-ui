@@ -9,5 +9,7 @@ export default defineConfig({
   loader: {
     '.ts': 'tsx',
   },
+  external: ['react', 'react-dom'],
   noExternal: ['@roadmap-ui/types', '@roadmap-ui/shadcn-ui'],
+  platform: 'browser',
 });
