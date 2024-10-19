@@ -1,3 +1,5 @@
+'use client';
+
 export { KanbanProvider } from './components/provider';
 export { KanbanBoard } from './components/board';
 export { KanbanHeader } from './components/header';

@@ -1,5 +1,3 @@
-'use client';
-
 import type { Status } from '@roadmap-ui/types';
 import type { FC, ReactNode } from 'react';
 

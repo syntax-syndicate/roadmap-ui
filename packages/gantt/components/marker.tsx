@@ -64,7 +64,7 @@ export const Marker: FC<
         <ContextMenuTrigger asChild>
           <div
             className={cn(
-              'group pointer-events-auto sticky top-0 flex select-auto flex-col flex-nowrap items-center justify-center whitespace-nowrap rounded-b-md bg-primary px-2 py-1 text-white text-xs',
+              'group pointer-events-auto sticky top-0 flex select-auto flex-col flex-nowrap items-center justify-center whitespace-nowrap rounded-b-md bg-card px-2 py-1 text-foreground text-xs',
               className
             )}
           >
@@ -86,7 +86,7 @@ export const Marker: FC<
           ) : null}
         </ContextMenuContent>
       </ContextMenu>
-      <div className={cn('h-full w-px bg-primary', className)} />
+      <div className={cn('h-full w-px bg-card', className)} />
     </div>
   );
 };

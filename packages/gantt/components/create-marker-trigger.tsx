@@ -24,9 +24,7 @@ export const CreateMarkerTrigger: FC<CreateMarkerTriggerProps> = ({
 
   const date = getDateByMousePosition(gantt, x);
 
-  const handleClick = () => {
-    onCreateMarker(date);
-  };
+  const handleClick = () => onCreateMarker(date);
 
   return (
     <div

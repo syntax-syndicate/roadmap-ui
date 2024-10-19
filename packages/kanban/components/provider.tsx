@@ -1,5 +1,3 @@
-'use client';
-
 import { DndContext, rectIntersection } from '@dnd-kit/core';
 import type { DragEndEvent } from '@dnd-kit/core';
 import { cn } from '@roadmap-ui/shadcn-ui/lib/utils';
