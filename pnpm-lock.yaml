@@ -220,7 +220,7 @@ importers:
         specifier: workspace:*
         version: link:../shadcn-ui
       react:
-        specifier: 18.3.1
+        specifier: ^18.3.1
         version: 18.3.1
     devDependencies:
       '@roadmap-ui/types':

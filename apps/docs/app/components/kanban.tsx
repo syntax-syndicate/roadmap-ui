@@ -42,7 +42,7 @@ export const KanbanExampleBasic: FC = () => {
       {exampleStatuses.map((status) => (
         <Kanban.KanbanBoard key={status.id} id={status.name}>
           <Kanban.KanbanHeader name={status.name} color={status.color} />
-          <Kanban.KanbanCards id={status.name}>
+          <Kanban.KanbanCards>
             {features
               .filter((feature) => feature.status.name === status.name)
               .map((feature, index) => (
@@ -93,7 +93,7 @@ export const KanbanExampleCustom: FC = () => {
       {exampleStatuses.map((status) => (
         <Kanban.KanbanBoard key={status.name} id={status.name}>
           <Kanban.KanbanHeader name={status.name} color={status.color} />
-          <Kanban.KanbanCards id={status.name}>
+          <Kanban.KanbanCards>
             {features
               .filter((feature) => feature.status.name === status.name)
               .map((feature, index) => (
