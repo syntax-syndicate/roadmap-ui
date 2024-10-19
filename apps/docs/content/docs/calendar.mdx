@@ -41,7 +41,10 @@ import type { FC } from 'react';
 
 export const Calendar: FC = () => (
   <Calendar.CalendarProvider>
-    <Calendar.CalendarMonth />
+    <Calendar.CalendarDate>
+      <Calendar.CalendarDateLabel />
+      <Calendar.CalendarDatePagination />
+    </Calendar.CalendarDate>
     <Calendar.CalendarHeader />
     <Calendar.CalendarBody features={[]} />
   </Calendar.CalendarProvider>
