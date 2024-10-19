@@ -40,23 +40,21 @@ export const KanbanExampleBasic: FC = () => {
   return (
     <Kanban.KanbanProvider onDragEnd={handleDragEnd}>
       {exampleStatuses.map((status) => (
-        <Kanban.KanbanBoard
-          key={status.name}
-          id={status.name}
-          name={status.name}
-          color={status.color}
-        >
-          {features
-            .filter((feature) => feature.status.name === status.name)
-            .map((feature, index) => (
-              <Kanban.KanbanCard
-                key={feature.id}
-                id={feature.id}
-                name={feature.name}
-                parent={status.name}
-                index={index}
-              />
-            ))}
+        <Kanban.KanbanBoard key={status.id} id={status.name}>
+          <Kanban.KanbanHeader name={status.name} color={status.color} />
+          <Kanban.KanbanCards id={status.name}>
+            {features
+              .filter((feature) => feature.status.name === status.name)
+              .map((feature, index) => (
+                <Kanban.KanbanCard
+                  key={feature.id}
+                  id={feature.id}
+                  name={feature.name}
+                  parent={status.name}
+                  index={index}
+                />
+              ))}
+          </Kanban.KanbanCards>
         </Kanban.KanbanBoard>
       ))}
     </Kanban.KanbanProvider>
@@ -93,37 +91,37 @@ export const KanbanExampleCustom: FC = () => {
   return (
     <Kanban.KanbanProvider onDragEnd={handleDragEnd}>
       {exampleStatuses.map((status) => (
-        <Kanban.KanbanBoard
-          key={status.name}
-          id={status.name}
-          name={status.name}
-          color={status.color}
-        >
-          {features
-            .filter((feature) => feature.status.name === status.name)
-            .map((feature, index) => (
-              <Kanban.KanbanCard
-                key={feature.id}
-                id={feature.id}
-                name={feature.name}
-                parent={status.name}
-                index={index}
-              >
-                <div
-                  className="h-2 w-2 shrink-0 rounded-full"
-                  style={{ backgroundColor: feature.status.color }}
-                />
-                <p className="m-0 font-medium text-sm flex-1">{feature.name}</p>
-                {feature.owner && (
-                  <Avatar className="h-4 w-4 shrink-0">
-                    <AvatarImage src={feature.owner.image} />
-                    <AvatarFallback>
-                      {feature.owner.name?.slice(0, 2)}
-                    </AvatarFallback>
-                  </Avatar>
-                )}
-              </Kanban.KanbanCard>
-            ))}
+        <Kanban.KanbanBoard key={status.name} id={status.name}>
+          <Kanban.KanbanHeader name={status.name} color={status.color} />
+          <Kanban.KanbanCards id={status.name}>
+            {features
+              .filter((feature) => feature.status.name === status.name)
+              .map((feature, index) => (
+                <Kanban.KanbanCard
+                  key={feature.id}
+                  id={feature.id}
+                  name={feature.name}
+                  parent={status.name}
+                  index={index}
+                >
+                  <div
+                    className="h-2 w-2 shrink-0 rounded-full"
+                    style={{ backgroundColor: feature.status.color }}
+                  />
+                  <p className="m-0 flex-1 font-medium text-sm">
+                    {feature.name}
+                  </p>
+                  {feature.owner && (
+                    <Avatar className="h-4 w-4 shrink-0">
+                      <AvatarImage src={feature.owner.image} />
+                      <AvatarFallback>
+                        {feature.owner.name?.slice(0, 2)}
+                      </AvatarFallback>
+                    </Avatar>
+                  )}
+                </Kanban.KanbanCard>
+              ))}
+          </Kanban.KanbanCards>
         </Kanban.KanbanBoard>
       ))}
     </Kanban.KanbanProvider>
