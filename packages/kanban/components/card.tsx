@@ -7,6 +7,7 @@ type KanbanCardProps = Pick<Feature, 'id' | 'name'> & {
   index: number;
   parent: string;
   children?: ReactNode;
+  className?: string;
 };
 
 export const KanbanCard: FC<KanbanCardProps> = ({
@@ -15,6 +16,7 @@ export const KanbanCard: FC<KanbanCardProps> = ({
   index,
   parent,
   children,
+  className,
 }) => {
   const { attributes, listeners, setNodeRef, transform, isDragging } =
     useDraggable({
@@ -26,7 +28,8 @@ export const KanbanCard: FC<KanbanCardProps> = ({
     <div
       className={cn(
         'flex cursor-grab items-center gap-2 rounded-md border bg-background p-2 shadow-sm',
-        isDragging && 'cursor-grabbing'
+        isDragging && 'cursor-grabbing',
+        className
       )}
       style={{
         transform: transform
