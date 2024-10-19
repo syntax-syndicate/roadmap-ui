@@ -1,5 +1,6 @@
 import { DndContext, MouseSensor, useSensor } from '@dnd-kit/core';
 import { restrictToHorizontalAxis } from '@dnd-kit/modifiers';
+import { cn } from '@roadmap-ui/shadcn-ui/lib/utils';
 import type { Feature } from '@roadmap-ui/types';
 import { useMouse } from '@uidotdev/usehooks';
 import { addDays, getDate, getDaysInMonth, isSameDay } from 'date-fns';
@@ -88,8 +89,9 @@ export const FeatureItem: FC<
   Feature & {
     onMove?: (id: string, startDate: Date, endDate: Date | null) => void;
     children?: ReactNode;
+    className?: string;
   }
-> = ({ onMove, children, ...feature }) => {
+> = ({ onMove, children, className, ...feature }) => {
   const { scrollX } = useGantt();
   const gantt = useContext(GanttContext);
   const timelineStartDate = new Date(gantt.timelineData.at(0)?.year ?? 0, 0, 1);
@@ -150,7 +152,7 @@ export const FeatureItem: FC<
 
   return (
     <div
-      className="relative flex w-max min-w-full py-0.5"
+      className={cn('relative flex w-max min-w-full py-0.5', className)}
       style={{ height: 'var(--gantt-row-height)' }}
     >
       <div

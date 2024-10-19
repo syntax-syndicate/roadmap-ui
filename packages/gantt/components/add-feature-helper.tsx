@@ -1,3 +1,4 @@
+import { cn } from '@roadmap-ui/shadcn-ui/lib/utils';
 import { useMouse } from '@uidotdev/usehooks';
 import { PlusIcon } from 'lucide-react';
 import { type FC, useContext } from 'react';
@@ -7,9 +8,13 @@ import { getDateByMousePosition } from '../lib/utils';
 
 type AddFeatureHelperProps = {
   top: number;
+  className?: string;
 };
 
-export const AddFeatureHelper: FC<AddFeatureHelperProps> = ({ top }) => {
+export const AddFeatureHelper: FC<AddFeatureHelperProps> = ({
+  top,
+  className,
+}) => {
   const { scrollX } = useGantt();
   const gantt = useContext(GanttContext);
   const [mousePosition, mouseRef] = useMouse<HTMLDivElement>();
@@ -25,7 +30,7 @@ export const AddFeatureHelper: FC<AddFeatureHelperProps> = ({ top }) => {
 
   return (
     <div
-      className="absolute top-0 w-full px-0.5"
+      className={cn('absolute top-0 w-full px-0.5', className)}
       style={{
         marginTop: -gantt.rowHeight / 2,
         transform: `translateY(${top}px)`,

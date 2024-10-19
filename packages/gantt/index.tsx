@@ -4,7 +4,7 @@ export { Provider } from './components/provider';
 export { Sidebar } from './components/sidebar';
 export { Marker } from './components/marker';
 export { Today } from './components/today';
-export { Header } from './components/header/index';
+export { Header } from './components/header';
 export { FeatureList } from './components/feature-list';
 export { CreateMarkerTrigger } from './components/create-marker-trigger';
 export { FeatureItem } from './components/feature-item';

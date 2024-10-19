@@ -1,3 +1,4 @@
+import { cn } from '@roadmap-ui/shadcn-ui/lib/utils';
 import type { Feature } from '@roadmap-ui/types';
 import { addDays, formatDistance, isSameDay } from 'date-fns';
 import type { FC, KeyboardEventHandler, MouseEventHandler } from 'react';
@@ -5,11 +6,13 @@ import type { FC, KeyboardEventHandler, MouseEventHandler } from 'react';
 type SidebarItemProperties = {
   feature: Feature;
   onSelectItem: (id: string) => void;
+  className?: string;
 };
 
 export const SidebarItem: FC<SidebarItemProperties> = ({
   feature,
   onSelectItem,
+  className,
 }) => {
   const tempEndAt =
     feature.endAt && isSameDay(feature.startAt, feature.endAt)
@@ -39,7 +42,10 @@ export const SidebarItem: FC<SidebarItemProperties> = ({
       onKeyDown={handleKeyDown}
       tabIndex={0}
       key={feature.id}
-      className="relative flex items-center gap-2.5 p-2.5 text-xs"
+      className={cn(
+        'relative flex items-center gap-2.5 p-2.5 text-xs',
+        className
+      )}
       style={{
         height: 'var(--gantt-row-height)',
       }}

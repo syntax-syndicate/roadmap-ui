@@ -1,3 +1,4 @@
+import { cn } from '@roadmap-ui/shadcn-ui/lib/utils';
 import { useMouse, useThrottle, useWindowScroll } from '@uidotdev/usehooks';
 import { formatDate } from 'date-fns';
 import { PlusIcon } from 'lucide-react';
@@ -7,10 +8,12 @@ import { getDateByMousePosition } from '../lib/utils';
 
 type CreateMarkerTriggerProps = {
   onCreateMarker: (date: Date) => void;
+  className?: string;
 };
 
 export const CreateMarkerTrigger: FC<CreateMarkerTriggerProps> = ({
   onCreateMarker,
+  className,
 }) => {
   const gantt = useContext(GanttContext);
   const [mousePosition, mouseRef] = useMouse<HTMLDivElement>();
@@ -28,7 +31,10 @@ export const CreateMarkerTrigger: FC<CreateMarkerTriggerProps> = ({
 
   return (
     <div
-      className="group pointer-events-none absolute top-0 left-0 h-full w-full select-none overflow-visible"
+      className={cn(
+        'group pointer-events-none absolute top-0 left-0 h-full w-full select-none overflow-visible',
+        className
+      )}
       ref={mouseRef}
     >
       <div
