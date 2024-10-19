@@ -86,7 +86,7 @@ const getWidth = (
 
 export const FeatureItem: FC<
   Feature & {
-    onMove: (id: string, startDate: Date, endDate: Date | null) => void;
+    onMove?: (id: string, startDate: Date, endDate: Date | null) => void;
     children?: ReactNode;
   }
 > = ({ onMove, children, ...feature }) => {
@@ -130,7 +130,7 @@ export const FeatureItem: FC<
     setEndAt(newEndDate);
   };
 
-  const onDragEnd = () => onMove(feature.id, startAt, endAt);
+  const onDragEnd = () => onMove?.(feature.id, startAt, endAt);
   const handleLeftDragMove = () => {
     const ganttRect = gantt.ref?.current?.getBoundingClientRect();
     const x =
@@ -161,7 +161,7 @@ export const FeatureItem: FC<
           left: Math.round(offset),
         }}
       >
-        {gantt.editable && (
+        {gantt.editable && onMove && (
           <DndContext
             sensors={[mouseSensor]}
             modifiers={[restrictToHorizontalAxis]}
@@ -188,7 +188,7 @@ export const FeatureItem: FC<
             )}
           </FeatureItemCard>
         </DndContext>
-        {gantt.editable && (
+        {gantt.editable && onMove && (
           <DndContext
             sensors={[mouseSensor]}
             modifiers={[restrictToHorizontalAxis]}
