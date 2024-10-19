@@ -12,7 +12,6 @@ import {
   ContextMenuItem,
   ContextMenuTrigger,
 } from '@roadmap-ui/shadcn-ui/components/ui/context-menu';
-import {} from '@roadmap-ui/shadcn-ui/components/ui/hover-card';
 // import { toast } from 'sonner';
 import type { Feature } from '@roadmap-ui/types';
 import { EyeIcon, LinkIcon, TrashIcon } from 'lucide-react';
