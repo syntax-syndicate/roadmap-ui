@@ -15,6 +15,6 @@
     "@roadmap-ui/types": "workspace:*",
     "@roadmap-ui/shadcn-ui": "workspace:*",
     "@tanstack/react-table": "^8.20.5",
-    "lucide-react": "^0.452.0"
+    "lucide-react": "^0.453.0"
   }
 }
