@@ -136,9 +136,6 @@ importers:
 
   packages/calendar:
     dependencies:
-      '@roadmap-ui/shadcn-ui':
-        specifier: workspace:*
-        version: link:../shadcn-ui
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
@@ -146,12 +143,15 @@ importers:
         specifier: ^0.453.0
         version: 0.453.0(react@18.3.1)
       react:
-        specifier: 18.3.1
+        specifier: ^18.3.1
         version: 18.3.1
       zustand:
         specifier: ^5.0.0
         version: 5.0.0(@types/react@18.3.11)(react@18.3.1)(use-sync-external-store@1.2.2(react@18.3.1))
     devDependencies:
+      '@roadmap-ui/shadcn-ui':
+        specifier: workspace:*
+        version: link:../shadcn-ui
       '@roadmap-ui/types':
         specifier: workspace:*
         version: link:../types
@@ -216,13 +216,13 @@ importers:
       '@dnd-kit/core':
         specifier: ^6.1.0
         version: 6.1.0(react-dom@19.0.0-rc-f994737d14-20240522(react@18.3.1))(react@18.3.1)
-      '@roadmap-ui/shadcn-ui':
-        specifier: workspace:*
-        version: link:../shadcn-ui
       react:
         specifier: ^18.3.1
         version: 18.3.1
     devDependencies:
+      '@roadmap-ui/shadcn-ui':
+        specifier: workspace:*
+        version: link:../shadcn-ui
       '@roadmap-ui/types':
         specifier: workspace:*
         version: link:../types
