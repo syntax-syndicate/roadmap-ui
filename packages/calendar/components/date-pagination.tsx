@@ -1,11 +1,9 @@
-import { format } from 'date-fns';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import type { FC } from 'react';
 import { type CalendarState, useCalendar } from '../hooks/use-calendar';
 
-export const CalendarMonth: FC = () => {
+export const CalendarDatePagination: FC = () => {
   const { month, year, setMonth, setYear } = useCalendar();
-  const monthName = format(new Date(year, month), 'MMMM');
 
   const handlePreviousMonth = () => {
     if (month === 0) {
@@ -26,16 +24,13 @@ export const CalendarMonth: FC = () => {
   };
 
   return (
-    <div className="flex items-center justify-between p-3">
-      <p className="font-medium text-sm">{`${monthName}, ${year}`}</p>
-      <div className="flex items-center gap-2">
-        <button type="button" onClick={() => handlePreviousMonth()}>
-          <ChevronLeftIcon size={16} />
-        </button>
-        <button type="button" onClick={() => handleNextMonth()}>
-          <ChevronRightIcon size={16} />
-        </button>
-      </div>
+    <div className="flex items-center gap-2">
+      <button type="button" onClick={() => handlePreviousMonth()}>
+        <ChevronLeftIcon size={16} />
+      </button>
+      <button type="button" onClick={() => handleNextMonth()}>
+        <ChevronRightIcon size={16} />
+      </button>
     </div>
   );
 };

@@ -6,7 +6,10 @@ import type { FC } from 'react';
 
 export const CalendarBasic: FC = () => (
   <Calendar.CalendarProvider>
-    <Calendar.CalendarMonth />
+    <Calendar.CalendarDate>
+      <Calendar.CalendarDateLabel />
+      <Calendar.CalendarDatePagination />
+    </Calendar.CalendarDate>
     <Calendar.CalendarHeader />
     <Calendar.CalendarBody features={exampleFeatures} />
   </Calendar.CalendarProvider>
