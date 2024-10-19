@@ -75,7 +75,7 @@ export const Marker: FC<
           </div>
         </ContextMenuTrigger>
         <ContextMenuContent>
-          {gantt.editable && onRemove ? (
+          {onRemove ? (
             <ContextMenuItem
               className="flex items-center gap-2 text-destructive"
               onClick={handleRemove}

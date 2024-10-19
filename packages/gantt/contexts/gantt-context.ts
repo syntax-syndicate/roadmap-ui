@@ -11,6 +11,5 @@ export const GanttContext = createContext<GanttContextProps>({
   onAddItem: undefined,
   placeholderLength: 2,
   timelineData: [],
-  editable: false,
   ref: null,
 });

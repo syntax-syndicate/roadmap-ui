@@ -163,7 +163,7 @@ export const FeatureItem: FC<
           left: Math.round(offset),
         }}
       >
-        {gantt.editable && onMove && (
+        {onMove && (
           <DndContext
             sensors={[mouseSensor]}
             modifiers={[restrictToHorizontalAxis]}
@@ -190,7 +190,7 @@ export const FeatureItem: FC<
             )}
           </FeatureItemCard>
         </DndContext>
-        {gantt.editable && onMove && (
+        {onMove && (
           <DndContext
             sensors={[mouseSensor]}
             modifiers={[restrictToHorizontalAxis]}

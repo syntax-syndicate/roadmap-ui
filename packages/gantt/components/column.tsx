@@ -38,7 +38,7 @@ export const Column: FC<ColumnProps> = ({ index, isColumnSecondary }) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {!dragging && hovering && gantt.onAddItem && gantt.editable ? (
+      {!dragging && hovering && gantt.onAddItem ? (
         <AddFeatureHelper top={top} />
       ) : null}
     </div>

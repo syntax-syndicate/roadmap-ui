@@ -62,12 +62,7 @@ export const GanttExampleBasic: FC = () => {
     toast.success(`Add feature: ${date.toISOString()}`);
 
   return (
-    <Gantt.Provider
-      editable
-      onAddItem={handleAddFeature}
-      range="monthly"
-      zoom={100}
-    >
+    <Gantt.Provider onAddItem={handleAddFeature} range="monthly" zoom={100}>
       <Gantt.Sidebar>
         {Object.entries(sortedGroupedFeatures).map(([group, features]) => (
           <Gantt.SidebarGroup key={group} name="Features">
@@ -155,12 +150,7 @@ export const GanttExampleCustom: FC = () => {
     toast.success(`Add feature: ${date.toISOString()}`);
 
   return (
-    <Gantt.Provider
-      editable
-      onAddItem={handleAddFeature}
-      range="monthly"
-      zoom={100}
-    >
+    <Gantt.Provider onAddItem={handleAddFeature} range="monthly" zoom={100}>
       <Gantt.Sidebar>
         {Object.entries(sortedGroupedFeatures).map(([group, features]) => (
           <Gantt.SidebarGroup key={group} name="Features">
@@ -279,12 +269,7 @@ export const GanttExampleSimple: FC = () => {
     toast.success(`Add feature: ${date.toISOString()}`);
 
   return (
-    <Gantt.Provider
-      editable
-      onAddItem={handleAddFeature}
-      range="monthly"
-      zoom={100}
-    >
+    <Gantt.Provider onAddItem={handleAddFeature} range="monthly" zoom={100}>
       <Gantt.Timeline>
         <Gantt.Header />
         <Gantt.FeatureList>

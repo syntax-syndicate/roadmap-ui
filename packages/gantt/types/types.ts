@@ -21,6 +21,5 @@ export type GanttContextProps = {
   onAddItem: ((date: Date) => void) | undefined;
   placeholderLength: number;
   timelineData: TimelineData;
-  editable: boolean;
   ref: RefObject<HTMLDivElement> | null;
 };

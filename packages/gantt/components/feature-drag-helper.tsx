@@ -3,8 +3,7 @@ import { cn } from '@roadmap-ui/shadcn-ui/lib/utils';
 import type { Feature } from '@roadmap-ui/types';
 import { format } from 'date-fns';
 import type { FC } from 'react';
-import { useContext, useEffect } from 'react';
-import { GanttContext } from '../contexts/gantt-context';
+import { useEffect } from 'react';
 import { useGantt } from '../hooks/use-gantt';
 
 type FeatureDragHelperProps = {
@@ -18,11 +17,9 @@ export const FeatureDragHelper: FC<FeatureDragHelperProps> = ({
   featureId,
   date,
 }) => {
-  const gantt = useContext(GanttContext);
   const { setDragging } = useGantt();
   const { attributes, listeners, setNodeRef } = useDraggable({
     id: `feature-drag-helper-${featureId}`,
-    disabled: !gantt.editable,
   });
 
   const isPressed = Boolean(attributes['aria-pressed']);

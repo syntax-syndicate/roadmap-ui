@@ -18,7 +18,6 @@ export type ProviderProperties = {
   range?: Range;
   zoom?: number;
   onAddItem?: (date: Date) => void;
-  editable?: boolean;
   children: ReactNode;
   className?: string;
 };
@@ -27,7 +26,6 @@ export const Provider: FC<ProviderProperties> = ({
   zoom = 100,
   range = 'monthly',
   onAddItem,
-  editable = false,
   children,
   className,
 }) => {
@@ -160,7 +158,6 @@ export const Provider: FC<ProviderProperties> = ({
         onAddItem,
         timelineData,
         placeholderLength: 2,
-        editable,
         ref: scrollRef,
       }}
     >
