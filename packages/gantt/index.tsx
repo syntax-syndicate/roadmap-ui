@@ -1,3 +1,5 @@
+'use client';
+
 export { Provider } from './components/provider';
 export { Sidebar } from './components/sidebar';
 export { Marker } from './components/marker';
