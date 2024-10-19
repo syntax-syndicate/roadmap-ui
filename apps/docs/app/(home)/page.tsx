@@ -25,10 +25,10 @@ const HomePage: FC = () => (
           alt=""
           width={48}
           height={48}
-          className="inline-block align-baseline select-none pointer-events-none"
+          className="h-6 md:h-12 w-auto inline-block align-baseline select-none pointer-events-none"
         />{' '}
         React components for building interactive{' '}
-        <RoadmapUiIcon className="-rotate-6 ml-2 inline-block translate-y-1 align-baseline select-none pointer-events-none" />{' '}
+        <RoadmapUiIcon className="h-6 md:h-12 w-auto -rotate-6 ml-2 inline-block translate-y-1 align-baseline select-none pointer-events-none" />{' '}
         roadmaps.
       </h1>
       <p className="mt-6 max-w-lg text-pretty text-center text-lg text-muted-foreground sm:text-xl">
