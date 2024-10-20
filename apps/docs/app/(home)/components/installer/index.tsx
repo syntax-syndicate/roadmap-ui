@@ -75,7 +75,7 @@ export const Installer: FC = () => {
       </DropdownMenu>
       <div className="text-muted-foreground">
         {activeManager.command}{' '}
-        <span className="text-foreground">roadmap-ui</span>
+        <span className="text-foreground">@roadmap-ui/gantt</span>
       </div>
       <Button
         variant="ghost"
