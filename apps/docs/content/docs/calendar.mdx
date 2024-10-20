@@ -36,19 +36,15 @@ This example shows a basic calendar view with a month selector, header, and body
 </div>
 
 ```tsx
-import * as Calendar from '@roadmap-ui/calendar';
-import type { FC } from 'react';
+<Calendar.CalendarProvider>
+  <Calendar.CalendarDate>
+    <Calendar.CalendarDateLabel />
+    <Calendar.CalendarDatePagination />
+  </Calendar.CalendarDate>
+  <Calendar.CalendarHeader />
+  <Calendar.CalendarBody features={[]} />
+</Calendar.CalendarProvider>
 
-export const Calendar: FC = () => (
-  <Calendar.CalendarProvider>
-    <Calendar.CalendarDate>
-      <Calendar.CalendarDateLabel />
-      <Calendar.CalendarDatePagination />
-    </Calendar.CalendarDate>
-    <Calendar.CalendarHeader />
-    <Calendar.CalendarBody features={[]} />
-  </Calendar.CalendarProvider>
-);
 ```
 
 ### Without Month Selector
@@ -60,13 +56,8 @@ If you don't need the month selector, you can remove it by not rendering the `Ca
 </div>
 
 ```tsx
-import * as Calendar from '@roadmap-ui/calendar';
-import type { FC } from 'react';
-
-export const Calendar: FC = () => (
-  <Calendar.CalendarProvider>
-    <Calendar.CalendarHeader />
-    <Calendar.CalendarBody features={[]} />
-  </Calendar.CalendarProvider>
-);
+<Calendar.CalendarProvider>
+  <Calendar.CalendarHeader />
+  <Calendar.CalendarBody features={[]} />
+</Calendar.CalendarProvider>
 ```
