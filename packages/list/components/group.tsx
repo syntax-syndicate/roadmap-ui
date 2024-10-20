@@ -1,5 +1,3 @@
-'use client';
-
 import { useDroppable } from '@dnd-kit/core';
 import { cn } from '@roadmap-ui/shadcn-ui/lib/utils';
 import type { Status } from '@roadmap-ui/types';
@@ -7,6 +5,7 @@ import type { FC, ReactNode } from 'react';
 
 type ListGroupProperties = Status & {
   children: ReactNode;
+  className?: string;
 };
 
 export const ListGroup: FC<ListGroupProperties> = ({
@@ -14,6 +13,7 @@ export const ListGroup: FC<ListGroupProperties> = ({
   name,
   color,
   children,
+  className,
 }) => {
   const { setNodeRef, isOver } = useDroppable({ id });
 
@@ -21,7 +21,8 @@ export const ListGroup: FC<ListGroupProperties> = ({
     <div
       className={cn(
         'bg-secondary transition-colors',
-        isOver && 'bg-foreground/10'
+        isOver && 'bg-foreground/10',
+        className
       )}
     >
       <div className="flex shrink-0 items-center gap-2 bg-foreground/5 p-3">

@@ -7,6 +7,7 @@ type ListItemProps = Pick<Feature, 'id' | 'name'> & {
   readonly index: number;
   readonly parent: string;
   readonly children?: ReactNode;
+  readonly className?: string;
 };
 
 export const ListItem: FC<ListItemProps> = ({
@@ -15,6 +16,7 @@ export const ListItem: FC<ListItemProps> = ({
   index,
   parent,
   children,
+  className,
 }) => {
   const { attributes, listeners, setNodeRef, transform, isDragging } =
     useDraggable({
@@ -26,7 +28,8 @@ export const ListItem: FC<ListItemProps> = ({
     <div
       className={cn(
         'flex cursor-grab items-center gap-2 rounded-md border bg-background p-2 shadow-sm',
-        isDragging && 'cursor-grabbing'
+        isDragging && 'cursor-grabbing',
+        className
       )}
       style={{
         transform: transform
