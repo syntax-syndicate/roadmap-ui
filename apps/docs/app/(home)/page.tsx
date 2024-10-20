@@ -40,7 +40,7 @@ const HomePage: FC = () => (
             alt=""
             width={16}
             height={16}
-            className="inline-block align-baseline select-none pointer-events-none"
+            className="pointer-events-none inline-block select-none align-baseline"
           />{' '}
           Eververse.
         </a>
