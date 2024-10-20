@@ -113,7 +113,7 @@ export const ListExampleCustom: FC = () => {
                   className="h-2 w-2 shrink-0 rounded-full"
                   style={{ backgroundColor: feature.status.color }}
                 />
-                <p className="m-0 font-medium text-sm flex-1">{feature.name}</p>
+                <p className="m-0 flex-1 font-medium text-sm">{feature.name}</p>
                 {feature.owner && (
                   <Avatar className="h-4 w-4 shrink-0">
                     <AvatarImage src={feature.owner.image} />
