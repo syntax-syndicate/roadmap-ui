@@ -1,12 +1,21 @@
 {
   "name": "@roadmap-ui/table",
   "version": "0.0.1",
-  "private": true,
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
+  "files": ["dist"],
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "private": false,
   "devDependencies": {
     "@roadmap-ui/shadcn-ui": "workspace:*",
     "@roadmap-ui/types": "workspace:*",
     "@roadmap-ui/typescript-config": "workspace:*",
     "@types/react": "^18.3.11",
+    "tsup": "^8.3.0",
     "typescript": "^5.6.3"
   },
   "peerDependencies": {

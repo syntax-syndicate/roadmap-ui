@@ -6,6 +6,7 @@
     "@roadmap-ui/types": "workspace:*",
     "@roadmap-ui/typescript-config": "workspace:*",
     "@types/react": "^18.3.11",
+    "tsup": "^8.3.0",
     "typescript": "^5.6.3"
   },
   "peerDependencies": {

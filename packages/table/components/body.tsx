@@ -1,5 +1,3 @@
-'use client';
-
 import {
   TableBody as TableBodyRaw,
   TableCell,

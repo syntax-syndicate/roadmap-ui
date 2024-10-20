@@ -1,3 +1,5 @@
+'use client';
+
 export { TableProvider } from './components/provider';
 export { TableBody } from './components/body';
 export { TableHeader } from './components/header';

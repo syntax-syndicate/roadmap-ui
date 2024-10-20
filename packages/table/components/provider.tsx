@@ -27,6 +27,7 @@ export function TableProvider<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     onSortingChange: (updater) => {
+      // @ts-expect-error updater is a function that returns a sorting object
       const newSorting = updater(sorting);
 
       setSorting(newSorting);
@@ -40,8 +41,8 @@ export function TableProvider<TData, TValue>({
     <TableContext.Provider
       value={{
         data,
-        columns,
-        table,
+        columns: columns as never,
+        table: table as never,
       }}
     >
       <Table>{children}</Table>
