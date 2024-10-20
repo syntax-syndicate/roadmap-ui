@@ -102,7 +102,7 @@ This example shows a basic Gantt chart with a sidebar, timeline, header, and fea
 
 ### Complex Example
 
-This example shows a more complex Gantt chart with a sidebar, timeline, header, and features. It also uses Shadcn UI for the context menu and hover card. Try hovering over the features to see the hover card, or right-click an item to open the context menu. It also renders the owner of the feature in the hover card.
+This example shows a more complex Gantt chart with a sidebar, timeline, header, and features. It also uses Shadcn UI for the context menu, and groups the features by their "group" property. Try right-clicking an item to open the context menu.
 
 <div className="not-prose w-full bg-white border rounded-xl overflow-hidden" style={{ height: '32rem' }}>
   <Gantt.Custom />
@@ -116,7 +116,7 @@ This example shows a more complex Gantt chart with a sidebar, timeline, header, 
 >
   <Gantt.Sidebar>
     {Object.entries(groups).map(([group, features]) => (
-      <Gantt.SidebarGroup key={group} name="Features">
+      <Gantt.SidebarGroup key={group} name={group}>
         {features.map((feature) => (
           <Gantt.SidebarItem
             key={feature.id}

@@ -14,6 +14,7 @@ import {
 } from '@roadmap-ui/shadcn-ui/components/ui/context-menu';
 // import { toast } from 'sonner';
 import type { Feature } from '@roadmap-ui/types';
+import groupBy from 'lodash.groupBy';
 import { EyeIcon, LinkIcon, TrashIcon } from 'lucide-react';
 import { type FC, useState } from 'react';
 import { exampleFeatures, exampleMarkers } from '../../lib/content';
@@ -107,9 +108,10 @@ export const GanttExampleBasic: FC = () => {
 export const GanttExampleCustom: FC = () => {
   const [features, setFeatures] = useState(exampleFeatures);
 
-  const groupedFeatures: Record<string, typeof exampleFeatures> = {
-    features,
-  };
+  const groupedFeatures: Record<string, typeof exampleFeatures> = groupBy(
+    exampleFeatures,
+    'group.name'
+  );
 
   const sortedGroupedFeatures = Object.fromEntries(
     Object.entries(groupedFeatures).sort(([nameA], [nameB]) =>
@@ -152,7 +154,7 @@ export const GanttExampleCustom: FC = () => {
     <Gantt.Provider onAddItem={handleAddFeature} range="monthly" zoom={100}>
       <Gantt.Sidebar>
         {Object.entries(sortedGroupedFeatures).map(([group, features]) => (
-          <Gantt.SidebarGroup key={group} name="Features">
+          <Gantt.SidebarGroup key={group} name={group}>
             {features.map((feature) => (
               <Gantt.SidebarItem
                 key={feature.id}
