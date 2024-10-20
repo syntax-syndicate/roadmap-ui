@@ -12,16 +12,12 @@ import {
   ContextMenuItem,
   ContextMenuTrigger,
 } from '@roadmap-ui/shadcn-ui/components/ui/context-menu';
-// import { toast } from 'sonner';
 import type { Feature } from '@roadmap-ui/types';
 import groupBy from 'lodash.groupBy';
 import { EyeIcon, LinkIcon, TrashIcon } from 'lucide-react';
 import { type FC, useState } from 'react';
+import { toast } from 'sonner';
 import { exampleFeatures, exampleMarkers } from '../../lib/content';
-
-const toast = {
-  success: (message: string) => console.log(message),
-};
 
 export const GanttExampleBasic: FC = () => {
   const [features, setFeatures] = useState(exampleFeatures);
