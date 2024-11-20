@@ -97,6 +97,14 @@ export const TableExample = () => {
           dateStyle: 'medium',
         }).format(row.original.endAt),
     },
+    {
+      id: 'release',
+      accessorFn: (row) => row.release.id,
+      header: ({ column }) => (
+        <TableColumnHeader column={column} title="Release" />
+      ),
+      cell: ({ row }) => row.original.release.name,
+    },
   ];
 
   return (
