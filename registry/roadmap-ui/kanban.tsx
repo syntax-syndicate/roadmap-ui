@@ -9,6 +9,10 @@ import {
   useDroppable,
 } from '@dnd-kit/core';
 import type { DragEndEvent } from '@dnd-kit/core';
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
 import type { ReactNode } from 'react';
 
 export type Status = {
@@ -31,7 +35,7 @@ export type KanbanBoardProps = {
   className?: string;
 };
 
-export const KanbanBoard = ({ id, children, className }: KanbanBoardProps) => {
+const KanbanBoardInner = ({ id, children, className }: KanbanBoardProps) => {
   const { isOver, setNodeRef } = useDroppable({ id });
 
   return (
@@ -47,6 +51,12 @@ export const KanbanBoard = ({ id, children, className }: KanbanBoardProps) => {
     </div>
   );
 };
+
+export const KanbanBoard = ({ id, children, className }: KanbanBoardProps) => (
+  <SortableContext items={items} strategy={verticalListSortingStrategy}>
+    <KanbanBoardInner>{children}</KanbanBoardInner>
+  </SortableContext>
+);
 
 export type KanbanCardProps = Pick<Feature, 'id' | 'name'> & {
   index: number;
