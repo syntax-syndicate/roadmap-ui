@@ -46,7 +46,7 @@ export const ui: Registry = [
   {
     name: 'kanban',
     type: 'registry:component',
-    registryDependencies: [],
+    registryDependencies: ['card'],
     dependencies: ['@dnd-kit/core'],
     devDependencies: [],
     files: [

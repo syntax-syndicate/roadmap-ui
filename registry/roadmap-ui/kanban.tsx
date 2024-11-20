@@ -1,5 +1,6 @@
 'use client';
 
+import { Card } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import {
   DndContext,
@@ -69,9 +70,9 @@ export const KanbanCard = ({
     });
 
   return (
-    <div
+    <Card
       className={cn(
-        'flex cursor-grab flex-col gap-2 rounded-md border bg-background p-2 shadow-sm',
+        'rounded-md p-3 shadow-sm',
         isDragging && 'cursor-grabbing',
         className
       )}
@@ -85,7 +86,7 @@ export const KanbanCard = ({
       ref={setNodeRef}
     >
       {children ?? <p className="m-0 font-medium text-sm">{name}</p>}
-    </div>
+    </Card>
   );
 };
 
