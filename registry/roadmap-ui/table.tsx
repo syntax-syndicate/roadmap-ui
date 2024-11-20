@@ -1,35 +1,38 @@
-import { Button } from '@roadmap-ui/shadcn-ui/components/ui/button';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@roadmap-ui/shadcn-ui/components/ui/dropdown-menu';
+} from '@/components/ui/dropdown-menu';
 import {
   TableBody as TableBodyRaw,
-  TableCell,
-} from '@roadmap-ui/shadcn-ui/components/ui/table';
-import {
-  TableHead,
+  TableCell as TableCellRaw,
+  TableHead as TableHeadRaw,
   TableHeader as TableHeaderRaw,
-  TableRow,
-} from '@roadmap-ui/shadcn-ui/components/ui/table';
-import { Table } from '@roadmap-ui/shadcn-ui/components/ui/table';
-import { cn } from '@roadmap-ui/shadcn-ui/lib/utils';
-import type { Column } from '@tanstack/react-table';
-import { flexRender } from '@tanstack/react-table';
+  Table as TableRaw,
+  TableRow as TableRowRaw,
+} from '@/components/ui/table';
+import { cn } from '@/lib/utils';
+import type {
+  Cell,
+  Column,
+  ColumnDef,
+  Header,
+  HeaderGroup,
+  Row,
+  SortingState,
+  Table,
+} from '@tanstack/react-table';
 import {
+  flexRender,
   getCoreRowModel,
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import type { ColumnDef, Table } from '@tanstack/react-table';
-import type { SortingState } from '@tanstack/react-table';
 import { ArrowDownIcon, ArrowUpIcon, ChevronsUpDownIcon } from 'lucide-react';
-import type { HTMLAttributes } from 'react';
-import { type FC, useContext } from 'react';
-import type { ReactNode } from 'react';
-import { createContext } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
+import { createContext, useContext } from 'react';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
@@ -55,16 +58,18 @@ export const TableContext = createContext<{
   table: null,
 });
 
-type TableProviderProps<TData, TValue> = {
+export type TableProviderProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   children: ReactNode;
+  className?: string;
 };
 
 export function TableProvider<TData, TValue>({
   columns,
   data,
   children,
+  className,
 }: TableProviderProps<TData, TValue>) {
   const { sorting, setSorting } = useTable();
   const table = useReactTable({
@@ -91,35 +96,54 @@ export function TableProvider<TData, TValue>({
         table: table as never,
       }}
     >
-      <Table>{children}</Table>
+      <TableRaw className={className}>{children}</TableRaw>
     </TableContext.Provider>
   );
 }
 
-export const TableHeader: FC = () => {
+export type TableHeadProps = {
+  header: Header<unknown, unknown>;
+  className?: string;
+};
+
+export const TableHead = ({ header, className }: TableHeadProps) => (
+  <TableHeadRaw key={header.id} className={className}>
+    {header.isPlaceholder
+      ? null
+      : flexRender(header.column.columnDef.header, header.getContext())}
+  </TableHeadRaw>
+);
+
+export type TableHeaderGroupProps = {
+  headerGroup: HeaderGroup<unknown>;
+  children: (props: { header: Header<unknown, unknown> }) => ReactNode;
+};
+
+export const TableHeaderGroup = ({
+  headerGroup,
+  children,
+}: TableHeaderGroupProps) => (
+  <TableRowRaw key={headerGroup.id}>
+    {headerGroup.headers.map((header) => children({ header }))}
+  </TableRowRaw>
+);
+
+export type TableHeaderProps = {
+  className?: string;
+  children: (props: { headerGroup: HeaderGroup<unknown> }) => ReactNode;
+};
+
+export const TableHeader = ({ className, children }: TableHeaderProps) => {
   const { table } = useContext(TableContext);
 
   return (
-    <TableHeaderRaw>
-      {table?.getHeaderGroups().map((headerGroup) => (
-        <TableRow key={headerGroup.id}>
-          {headerGroup.headers.map((header) => (
-            <TableHead key={header.id}>
-              {header.isPlaceholder
-                ? null
-                : flexRender(
-                    header.column.columnDef.header,
-                    header.getContext()
-                  )}
-            </TableHead>
-          ))}
-        </TableRow>
-      ))}
+    <TableHeaderRaw className={className}>
+      {table?.getHeaderGroups().map((headerGroup) => children({ headerGroup }))}
     </TableHeaderRaw>
   );
 };
 
-interface TableColumnHeaderProps<TData, TValue>
+export interface TableColumnHeaderProps<TData, TValue>
   extends HTMLAttributes<HTMLDivElement> {
   column: Column<TData, TValue>;
   title: string;
@@ -168,28 +192,52 @@ export function TableColumnHeader<TData, TValue>({
   );
 }
 
-export const TableBody: FC = () => {
+export type TableCellProps = {
+  cell: Cell<unknown, unknown>;
+  className?: string;
+};
+
+export const TableCell = ({ cell, className }: TableCellProps) => (
+  <TableCellRaw className={className}>
+    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+  </TableCellRaw>
+);
+
+export type TableRowProps = {
+  row: Row<unknown>;
+  children: (props: { cell: Cell<unknown, unknown> }) => ReactNode;
+  className?: string;
+};
+
+export const TableRow = ({ row, children, className }: TableRowProps) => (
+  <TableRowRaw
+    key={row.id}
+    data-state={row.getIsSelected() && 'selected'}
+    className={className}
+  >
+    {row.getVisibleCells().map((cell) => children({ cell }))}
+  </TableRowRaw>
+);
+
+export type TableBodyProps = {
+  children: (props: { row: Row<unknown> }) => ReactNode;
+  className?: string;
+};
+
+export const TableBody = ({ children, className }: TableBodyProps) => {
   const { columns, table } = useContext(TableContext);
   const rows = table?.getRowModel().rows;
 
   return (
-    <TableBodyRaw>
+    <TableBodyRaw className={className}>
       {rows?.length ? (
-        rows.map((row) => (
-          <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
-            {row.getVisibleCells().map((cell) => (
-              <TableCell key={cell.id}>
-                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-              </TableCell>
-            ))}
-          </TableRow>
-        ))
+        rows.map((row) => children({ row }))
       ) : (
-        <TableRow>
-          <TableCell colSpan={columns.length} className="h-24 text-center">
+        <TableRowRaw>
+          <TableCellRaw colSpan={columns.length} className="h-24 text-center">
             No results.
-          </TableCell>
-        </TableRow>
+          </TableCellRaw>
+        </TableRowRaw>
       )}
     </TableBodyRaw>
   );

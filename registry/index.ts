@@ -69,4 +69,17 @@ export const ui: Registry = [
       },
     ],
   },
+  {
+    name: 'table',
+    type: 'registry:component',
+    registryDependencies: ['button', 'dropdown-menu', 'table'],
+    dependencies: ['@tanstack/react-table', 'lucide-react', 'zustand'],
+    devDependencies: [],
+    files: [
+      {
+        path: 'roadmap-ui/table.tsx',
+        type: 'registry:component',
+      },
+    ],
+  },
 ];
