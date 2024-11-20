@@ -79,6 +79,20 @@ export const monthsForLocale = (
   );
 };
 
+export const daysForLocale = (locale = 'en-US') => {
+  const weekdays: string[] = [];
+  const baseDate = new Date(2024, 0, 7); // Starting with a Sunday
+
+  for (let i = 0; i < 7; i++) {
+    weekdays.push(
+      new Intl.DateTimeFormat(locale, { weekday: 'short' }).format(baseDate)
+    );
+    baseDate.setDate(baseDate.getDate() + 1);
+  }
+
+  return weekdays;
+};
+
 const Combobox = ({
   value,
   setValue,
@@ -149,18 +163,6 @@ const OutOfBoundsDay = ({ day }: OutOfBoundsDayProps) => (
     {day}
   </div>
 );
-
-export const daysOfWeek = new Intl.DateTimeFormat(undefined, {
-  weekday: 'short',
-})
-  .formatToParts(new Date(2024, 0, 7))
-  .find((part) => part.type === 'weekday')?.value
-  ? Array.from({ length: 7 }, (_, i) =>
-      new Intl.DateTimeFormat(undefined, { weekday: 'short' }).format(
-        new Date(2024, 0, i + 7)
-      )
-    )
-  : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 export type CalendarBodyProps = {
   features: Feature[];
@@ -375,7 +377,7 @@ export type CalendarHeaderProps = {
 
 export const CalendarHeader = ({ className }: CalendarHeaderProps) => (
   <div className={cn('grid flex-grow grid-cols-7', className)}>
-    {daysOfWeek.map((day) => (
+    {daysForLocale().map((day) => (
       <div key={day} className="p-3 text-right text-muted-foreground text-xs">
         {day}
       </div>
