@@ -63,9 +63,21 @@ export const generateMetadata = async ({ params }: PageProps) => {
     notFound();
   }
 
+  const components = ['calendar', 'gantt', 'kanban', 'list', 'table'];
+
   return {
     title: page.data.title,
     description: page.data.description,
+    openGraph: {
+      images:
+        slug && components.includes(slug[0])
+          ? [
+              {
+                url: `/og/${slug[0]}.png`,
+              },
+            ]
+          : undefined,
+    },
   } satisfies Metadata;
 };
 
