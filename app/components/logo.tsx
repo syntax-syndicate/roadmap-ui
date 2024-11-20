@@ -7,11 +7,11 @@ export const Logo: FC = () => (
     <Image
       src="/logo.png"
       alt="Roadmap UI"
-      width={24}
-      height={24}
-      className="dark:hidden"
+      width={20}
+      height={20}
+      className="h-5 w-5 dark:hidden"
     />
-    <SquareChartGanttIcon className="hidden h-4 w-4 dark:block" />
+    <SquareChartGanttIcon className="hidden h-5 w-5 dark:block" />
     <span className="font-semibold">Roadmap UI</span>
   </div>
 );
