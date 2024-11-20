@@ -25,6 +25,34 @@ type Feature = {
   status: Status;
 };
 
+type ListHeaderProps =
+  | {
+      children: ReactNode;
+    }
+  | {
+      name: Status['name'];
+      color: Status['color'];
+      className?: string;
+    };
+
+const ListHeader = (props: ListHeaderProps) =>
+  'children' in props ? (
+    props.children
+  ) : (
+    <div
+      className={cn(
+        'flex shrink-0 items-center gap-2 bg-foreground/5 p-3',
+        props.className
+      )}
+    >
+      <div
+        className="h-2 w-2 rounded-full"
+        style={{ backgroundColor: props.color }}
+      />
+      <p className="m-0 font-semibold text-sm">{props.name}</p>
+    </div>
+  );
+
 export type ListGroupProps = Status & {
   children: ReactNode;
   className?: string;
@@ -47,13 +75,7 @@ export const ListGroup = ({
         className
       )}
     >
-      <div className="flex shrink-0 items-center gap-2 bg-foreground/5 p-3">
-        <div
-          className="h-2 w-2 rounded-full"
-          style={{ backgroundColor: color }}
-        />
-        <p className="m-0 font-semibold text-sm">{name}</p>
-      </div>
+      <ListHeader name={name} color={color} />
       <div className="flex flex-1 flex-col gap-2 p-3" ref={setNodeRef}>
         {children}
       </div>
