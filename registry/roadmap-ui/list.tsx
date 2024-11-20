@@ -25,7 +25,18 @@ type Feature = {
   status: Status;
 };
 
-type ListHeaderProps =
+export type ListItemsProps = {
+  children: ReactNode;
+  className?: string;
+};
+
+export const ListItems = ({ children, className }: ListItemsProps) => (
+  <div className={cn('flex flex-1 flex-col gap-2 p-3', className)}>
+    {children}
+  </div>
+);
+
+export type ListHeaderProps =
   | {
       children: ReactNode;
     }
@@ -35,7 +46,7 @@ type ListHeaderProps =
       className?: string;
     };
 
-const ListHeader = (props: ListHeaderProps) =>
+export const ListHeader = (props: ListHeaderProps) =>
   'children' in props ? (
     props.children
   ) : (
@@ -53,18 +64,13 @@ const ListHeader = (props: ListHeaderProps) =>
     </div>
   );
 
-export type ListGroupProps = Status & {
+export type ListGroupProps = {
+  id: Status['id'];
   children: ReactNode;
   className?: string;
 };
 
-export const ListGroup = ({
-  id,
-  name,
-  color,
-  children,
-  className,
-}: ListGroupProps) => {
+export const ListGroup = ({ id, children, className }: ListGroupProps) => {
   const { setNodeRef, isOver } = useDroppable({ id });
 
   return (
@@ -74,11 +80,9 @@ export const ListGroup = ({
         isOver && 'bg-foreground/10',
         className
       )}
+      ref={setNodeRef}
     >
-      <ListHeader name={name} color={color} />
-      <div className="flex flex-1 flex-col gap-2 p-3" ref={setNodeRef}>
-        {children}
-      </div>
+      {children}
     </div>
   );
 };

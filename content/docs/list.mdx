@@ -28,7 +28,13 @@ npx roadmap-ui add list
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { exampleFeatures, exampleStatuses } from '@/lib/content';
-import { ListGroup, ListItem, ListProvider } from '@/components/roadmap-ui/list';
+import {
+  ListGroup,
+  ListHeader,
+  ListItem,
+  ListItems,
+  ListProvider,
+} from '@/components/roadmap-ui/list';
 import type { DragEndEvent } from '@dnd-kit/core';
 import { type FC, useState } from 'react';
 
@@ -62,37 +68,37 @@ export const ListExample: FC = () => {
   return (
     <ListProvider onDragEnd={handleDragEnd}>
       {exampleStatuses.map((status) => (
-        <ListGroup
-          key={status.name}
-          id={status.name}
-          name={status.name}
-          color={status.color}
-        >
-          {features
-            .filter((feature) => feature.status.name === status.name)
-            .map((feature, index) => (
-              <ListItem
-                key={feature.id}
-                id={feature.id}
-                name={feature.name}
-                parent={feature.status.name}
-                index={index}
-              >
-                <div
-                  className="h-2 w-2 shrink-0 rounded-full"
-                  style={{ backgroundColor: feature.status.color }}
-                />
-                <p className="m-0 flex-1 font-medium text-sm">{feature.name}</p>
-                {feature.owner && (
-                  <Avatar className="h-4 w-4 shrink-0">
-                    <AvatarImage src={feature.owner.image} />
-                    <AvatarFallback>
-                      {feature.owner.name?.slice(0, 2)}
-                    </AvatarFallback>
-                  </Avatar>
-                )}
-              </ListItem>
-            ))}
+        <ListGroup key={status.name} id={status.name}>
+          <ListHeader name={status.name} color={status.color} />
+          <ListItems>
+            {features
+              .filter((feature) => feature.status.name === status.name)
+              .map((feature, index) => (
+                <ListItem
+                  key={feature.id}
+                  id={feature.id}
+                  name={feature.name}
+                  parent={feature.status.name}
+                  index={index}
+                >
+                  <div
+                    className="h-2 w-2 shrink-0 rounded-full"
+                    style={{ backgroundColor: feature.status.color }}
+                  />
+                  <p className="m-0 flex-1 font-medium text-sm">
+                    {feature.name}
+                  </p>
+                  {feature.owner && (
+                    <Avatar className="h-4 w-4 shrink-0">
+                      <AvatarImage src={feature.owner.image} />
+                      <AvatarFallback>
+                        {feature.owner.name?.slice(0, 2)}
+                      </AvatarFallback>
+                    </Avatar>
+                  )}
+                </ListItem>
+              ))}
+          </ListItems>
         </ListGroup>
       ))}
     </ListProvider>
