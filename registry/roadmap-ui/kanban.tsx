@@ -4,13 +4,19 @@ import { Card } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import {
   DndContext,
+  KeyboardSensor,
+  PointerSensor,
   rectIntersection,
   useDraggable,
   useDroppable,
+  useSensor,
+  useSensors,
 } from '@dnd-kit/core';
 import type { DragEndEvent } from '@dnd-kit/core';
 import {
   SortableContext,
+  arrayMove,
+  sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import type { ReactNode } from 'react';
@@ -31,11 +37,19 @@ export type Feature = {
 
 export type KanbanBoardProps = {
   id: Status['id'];
-  children: ReactNode;
+  children: (props: {
+    feature: Feature;
+  }) => ReactNode;
   className?: string;
+  items: string[];
 };
 
-const KanbanBoardInner = ({ id, children, className }: KanbanBoardProps) => {
+const KanbanBoardInner = ({
+  id,
+  items,
+  children,
+  className,
+}: KanbanBoardProps) => {
   const { isOver, setNodeRef } = useDroppable({ id });
 
   return (
@@ -47,14 +61,14 @@ const KanbanBoardInner = ({ id, children, className }: KanbanBoardProps) => {
       )}
       ref={setNodeRef}
     >
-      {children}
+      {items.map((feature) => children({ feature }))}
     </div>
   );
 };
 
-export const KanbanBoard = ({ id, children, className }: KanbanBoardProps) => (
-  <SortableContext items={items} strategy={verticalListSortingStrategy}>
-    <KanbanBoardInner>{children}</KanbanBoardInner>
+export const KanbanBoard = ({ items, ...props }: KanbanBoardProps) => (
+  <SortableContext items={[]} strategy={verticalListSortingStrategy}>
+    <KanbanBoardInner {...props} />
   </SortableContext>
 );
 
@@ -142,12 +156,41 @@ export const KanbanProvider = ({
   children,
   onDragEnd,
   className,
-}: KanbanProviderProps) => (
-  <DndContext collisionDetection={rectIntersection} onDragEnd={onDragEnd}>
-    <div
-      className={cn('grid w-full auto-cols-fr grid-flow-col gap-4', className)}
+}: KanbanProviderProps) => {
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (over && active.id !== over.id) {
+      setItems((items) => {
+        const oldIndex = items.indexOf(active.id);
+        const newIndex = items.indexOf(over.id);
+
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
+  };
+
+  return (
+    <DndContext
+      collisionDetection={rectIntersection}
+      onDragEnd={onDragEnd}
+      sensors={sensors}
     >
-      {children}
-    </div>
-  </DndContext>
-);
+      <div
+        className={cn(
+          'grid w-full auto-cols-fr grid-flow-col gap-4',
+          className
+        )}
+      >
+        {children}
+      </div>
+    </DndContext>
+  );
+};
