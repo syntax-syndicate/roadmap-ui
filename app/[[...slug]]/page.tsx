@@ -65,20 +65,24 @@ export const generateMetadata = async ({ params }: PageProps) => {
 
   const components = ['calendar', 'gantt', 'kanban', 'list', 'table'];
 
-  return {
+  const metadata: Metadata = {
     title: page.data.title,
     description: page.data.description,
-    openGraph: {
-      images:
-        slug && components.includes(slug[0])
-          ? [
-              {
-                url: `/og/${slug[0]}.png`,
-              },
-            ]
-          : undefined,
-    },
-  } satisfies Metadata;
+  };
+
+  if (slug && components.includes(slug[0])) {
+    metadata.openGraph = {
+      images: [
+        {
+          url: `/og/${slug[0]}.png`,
+          width: 1200,
+          height: 630,
+        },
+      ],
+    };
+  }
+
+  return metadata;
 };
 
 export default Page;
