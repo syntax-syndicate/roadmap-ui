@@ -18,7 +18,7 @@ import { cn } from '@/lib/utils';
 import { getDay, getDaysInMonth, isSameDay } from 'date-fns';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import { Check, ChevronsUpDown } from 'lucide-react';
-import { type ReactNode, useState } from 'react';
+import { type ReactNode, createContext, useContext, useState } from 'react';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
@@ -37,6 +37,14 @@ export const useCalendar = create<CalendarState>()(
     setYear: (year: CalendarState['year']) => set(() => ({ year })),
   }))
 );
+
+type CalendarContextProps = {
+  locale: Intl.LocalesArgument;
+};
+
+const CalendarContext = createContext<CalendarContextProps>({
+  locale: 'en-US',
+});
 
 export type Status = {
   id: string;
@@ -68,7 +76,7 @@ type ComboboxProps = {
 };
 
 export const monthsForLocale = (
-  localeName = 'en-US',
+  localeName: Intl.LocalesArgument,
   monthFormat: Intl.DateTimeFormatOptions['month'] = 'long'
 ) => {
   const format = new Intl.DateTimeFormat(localeName, { month: monthFormat })
@@ -79,7 +87,7 @@ export const monthsForLocale = (
   );
 };
 
-export const daysForLocale = (locale = 'en-US') => {
+export const daysForLocale = (locale: Intl.LocalesArgument) => {
   const weekdays: string[] = [];
   const baseDate = new Date(2024, 0, 7); // Starting with a Sunday
 
@@ -272,6 +280,7 @@ export const CalendarMonthPicker = ({
   className,
 }: CalendarMonthPickerProps) => {
   const { month, setMonth } = useCalendar();
+  const { locale } = useContext(CalendarContext);
 
   return (
     <Combobox
@@ -280,7 +289,7 @@ export const CalendarMonthPicker = ({
       setValue={(value) =>
         setMonth(Number.parseInt(value) as CalendarState['month'])
       }
-      data={monthsForLocale().map((month, index) => ({
+      data={monthsForLocale(locale).map((month, index) => ({
         value: index.toString(),
         label: month,
       }))}
@@ -375,15 +384,19 @@ export type CalendarHeaderProps = {
   className?: string;
 };
 
-export const CalendarHeader = ({ className }: CalendarHeaderProps) => (
-  <div className={cn('grid flex-grow grid-cols-7', className)}>
-    {daysForLocale().map((day) => (
-      <div key={day} className="p-3 text-right text-muted-foreground text-xs">
-        {day}
-      </div>
-    ))}
-  </div>
-);
+export const CalendarHeader = ({ className }: CalendarHeaderProps) => {
+  const { locale } = useContext(CalendarContext);
+
+  return (
+    <div className={cn('grid flex-grow grid-cols-7', className)}>
+      {daysForLocale(locale).map((day) => (
+        <div key={day} className="p-3 text-right text-muted-foreground text-xs">
+          {day}
+        </div>
+      ))}
+    </div>
+  );
+};
 
 export type CalendarItemProps = {
   feature: Feature;
@@ -403,13 +416,17 @@ export const CalendarItem = ({ feature, className }: CalendarItemProps) => (
 );
 
 export type CalendarProviderProps = {
+  locale?: Intl.LocalesArgument;
   children: ReactNode;
   className?: string;
 };
 
 export const CalendarProvider = ({
+  locale,
   children,
   className,
 }: CalendarProviderProps) => (
-  <div className={cn('relative flex flex-col', className)}>{children}</div>
+  <CalendarContext.Provider value={{ locale }}>
+    <div className={cn('relative flex flex-col', className)}>{children}</div>
+  </CalendarContext.Provider>
 );
