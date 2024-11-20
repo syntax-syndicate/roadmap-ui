@@ -52,10 +52,6 @@ export type Feature = {
   status: Status;
 };
 
-export type OutOfBoundsDayProps = {
-  day: number;
-};
-
 type ComboboxProps = {
   value: string;
   setValue: (value: string) => void;
@@ -144,13 +140,27 @@ const Combobox = ({
   );
 };
 
-export const OutOfBoundsDay = ({ day }: OutOfBoundsDayProps) => (
+type OutOfBoundsDayProps = {
+  day: number;
+};
+
+const OutOfBoundsDay = ({ day }: OutOfBoundsDayProps) => (
   <div className="relative h-full w-full bg-secondary p-1 text-muted-foreground text-xs">
     {day}
   </div>
 );
 
-export const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+export const daysOfWeek = new Intl.DateTimeFormat(undefined, {
+  weekday: 'short',
+})
+  .formatToParts(new Date(2024, 0, 7))
+  .find((part) => part.type === 'weekday')?.value
+  ? Array.from({ length: 7 }, (_, i) =>
+      new Intl.DateTimeFormat(undefined, { weekday: 'short' }).format(
+        new Date(2024, 0, i + 7)
+      )
+    )
+  : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 export type CalendarBodyProps = {
   features: Feature[];
