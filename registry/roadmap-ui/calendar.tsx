@@ -189,14 +189,14 @@ export const CalendarBody = ({ features, children }: CalendarBodyProps) => {
     days.push(
       <div
         key={day}
-        className="relative h-full w-full p-1 text-muted-foreground text-xs flex flex-col gap-1"
+        className="relative flex h-full w-full flex-col gap-1 p-1 text-muted-foreground text-xs"
       >
         {day}
         <div>
           {featuresForDay.slice(0, 3).map((feature) => children({ feature }))}
         </div>
         {featuresForDay.length > 3 && (
-          <span className="text-xs text-muted-foreground block">
+          <span className="block text-muted-foreground text-xs">
             +{featuresForDay.length - 3} more
           </span>
         )}

@@ -2,11 +2,7 @@
   "name": "list",
   "type": "registry:component",
   "registryDependencies": [],
-  "dependencies": [
-    "@dnd-kit/core",
-    "@dnd-kit/modifiers",
-    "lucide-react"
-  ],
+  "dependencies": ["@dnd-kit/core", "@dnd-kit/modifiers", "lucide-react"],
   "devDependencies": [],
   "files": [
     {

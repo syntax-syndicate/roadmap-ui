@@ -1143,7 +1143,7 @@ export const GanttProvider: FC<GanttProviderProps> = ({
         setScrollX(scrollRef.current.scrollLeft);
       } else if (scrollLeft + clientWidth >= scrollWidth) {
         // Extend timelineData to the future
-        const lastYear = timelineData[timelineData.length - 1]?.year;
+        const lastYear = timelineData.at(-1)?.year;
 
         if (!lastYear) {
           return;

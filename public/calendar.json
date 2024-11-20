@@ -1,16 +1,8 @@
 {
   "name": "calendar",
   "type": "registry:component",
-  "registryDependencies": [
-    "button",
-    "command",
-    "popover"
-  ],
-  "dependencies": [
-    "date-fns",
-    "lucide-react",
-    "zustand"
-  ],
+  "registryDependencies": ["button", "command", "popover"],
+  "dependencies": ["date-fns", "lucide-react", "zustand"],
   "devDependencies": [],
   "files": [
     {

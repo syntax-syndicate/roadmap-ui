@@ -97,10 +97,10 @@ const columns: ColumnDef<(typeof exampleFeatures)[number]>[] = [
             width={24}
             height={24}
             unoptimized
-            className="rounded-full w-6 h-6"
+            className="h-6 w-6 rounded-full"
           />
           <div
-            className="w-2 h-2 ring-2 ring-background rounded-full absolute bottom-0 right-0"
+            className="absolute right-0 bottom-0 h-2 w-2 rounded-full ring-2 ring-background"
             style={{
               backgroundColor: row.original.status.color,
             }}

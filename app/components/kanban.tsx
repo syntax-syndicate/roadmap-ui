@@ -62,7 +62,7 @@ export const KanbanExample: FC = () => {
                       <p className="m-0 flex-1 font-medium text-sm">
                         {feature.name}
                       </p>
-                      <p className="m-0 text-xs text-muted-foreground">
+                      <p className="m-0 text-muted-foreground text-xs">
                         {feature.initiative.name}
                       </p>
                     </div>
@@ -75,7 +75,7 @@ export const KanbanExample: FC = () => {
                       </Avatar>
                     )}
                   </div>
-                  <p className="m-0text-xs text-muted-foreground">
+                  <p className="m-0 text-muted-foreground text-xs">
                     {format(feature.startAt, 'MMM d')} -{' '}
                     {format(feature.endAt, 'MMM d, yyyy')}
                   </p>

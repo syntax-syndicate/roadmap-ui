@@ -2,9 +2,7 @@
   "name": "kanban",
   "type": "registry:component",
   "registryDependencies": [],
-  "dependencies": [
-    "@dnd-kit/core"
-  ],
+  "dependencies": ["@dnd-kit/core"],
   "devDependencies": [],
   "files": [
     {

@@ -1,10 +1,7 @@
 {
   "name": "gantt",
   "type": "registry:component",
-  "registryDependencies": [
-    "card",
-    "context-menu"
-  ],
+  "registryDependencies": ["card", "context-menu"],
   "dependencies": [
     "@dnd-kit/core",
     "@dnd-kit/modifiers",
@@ -14,9 +11,7 @@
     "lucide-react",
     "zustand"
   ],
-  "devDependencies": [
-    "@types/lodash.throttle"
-  ],
+  "devDependencies": ["@types/lodash.throttle"],
   "files": [
     {
       "type": "registry:component",
