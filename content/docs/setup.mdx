@@ -13,10 +13,16 @@ Before installing Roadmap UI, make sure you have the following prerequisites:
 
 ## Installation
 
-You can install Roadmap UI components using the `shadcn` CLI:
+You can install Roadmap UI components using the `roadmap-ui` CLI, for example:
 
 ```sh title="Terminal"
-npx shadcn@latest add https://www.roadmap-ui.com/gantt.json
+npx roadmap-ui add gantt
+```
+
+Alternatively, you can use the `shadcn` CLI and target the component JSON file, like so:
+
+```sh title="Terminal"
+npx shadcn@latest add https://roadmap-ui.com/gantt.json
 ```
 
 This will install the Roadmap UI components into your project at `@/components/roadmap-ui` (or the relevant folder you specified in the `components.json` file).
