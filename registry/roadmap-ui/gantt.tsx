@@ -972,10 +972,7 @@ export const GanttFeatureListGroup: FC<GanttFeatureListGroupProps> = ({
   children,
   className,
 }) => (
-  <div
-    className={cn('divide-y divide-transparent', className)}
-    style={{ paddingTop: 'var(--gantt-row-height)' }}
-  >
+  <div className={className} style={{ paddingTop: 'var(--gantt-row-height)' }}>
     {children}
   </div>
 );
