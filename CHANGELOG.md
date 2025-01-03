@@ -1,3 +1,36 @@
+# v1.0.3 (Fri Jan 03 2025)
+
+:tada: This release contains work from a new contributor! :tada:
+
+Thank you, Enrique Niebles ([@esacon](https://github.com/esacon)), for all your work!
+
+#### 🐛 Bug Fix
+
+- Fix: Add support for customizable startDay in Calendar components [#29](https://github.com/haydenbleasel/roadmap-ui/pull/29) ([@esacon](https://github.com/esacon))
+
+#### ⚠️ Pushed to `main`
+
+- Update pnpm-lock.yaml ([@haydenbleasel](https://github.com/haydenbleasel))
+- Update init.mjs ([@haydenbleasel](https://github.com/haydenbleasel))
+- Migrate to .mjs ([@haydenbleasel](https://github.com/haydenbleasel))
+- Resolves #20 ([@haydenbleasel](https://github.com/haydenbleasel))
+
+#### 🔩 Dependency Updates
+
+- Bump tailwind-merge from 2.5.4 to 2.5.5 [#27](https://github.com/haydenbleasel/roadmap-ui/pull/27) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump fumadocs-core from 14.4.2 to 14.5.5 [#28](https://github.com/haydenbleasel/roadmap-ui/pull/28) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump shiki from 1.23.1 to 1.24.0 [#24](https://github.com/haydenbleasel/roadmap-ui/pull/24) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump class-variance-authority from 0.7.0 to 0.7.1 [#25](https://github.com/haydenbleasel/roadmap-ui/pull/25) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump lucide-react from 0.460.0 to 0.462.0 [#26](https://github.com/haydenbleasel/roadmap-ui/pull/26) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Enrique Niebles ([@esacon](https://github.com/esacon))
+- Hayden Bleasel ([@haydenbleasel](https://github.com/haydenbleasel))
+
+---
+
 # v1.0.2 (Mon Dec 02 2024)
 
 :tada: This release contains work from new contributors! :tada:
