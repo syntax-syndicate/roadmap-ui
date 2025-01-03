@@ -18,7 +18,7 @@ if (!components.includes(args[1].trim())) {
 try {
   const component = args[1];
 
-  execSync(`npx shadcn@latest add ${url}/${component}.json`, {
+  execSync(`npx -y shadcn@latest add ${url}/${component}.json`, {
     stdio: 'inherit',
   });
 } catch (error) {
