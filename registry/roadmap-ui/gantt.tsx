@@ -114,7 +114,7 @@ export type GanttContextProps = {
   onAddItem: ((date: Date) => void) | undefined;
   placeholderLength: number;
   timelineData: TimelineData;
-  ref: RefObject<HTMLDivElement> | null;
+  ref: RefObject<HTMLDivElement | null> | null;
 };
 
 const getsDaysIn = (range: Range) => {
